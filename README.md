@@ -1,0 +1,1 @@
+Resource gathering game for testing Godot and personal education.
