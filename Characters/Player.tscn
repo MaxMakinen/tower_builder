@@ -209,3 +209,7 @@ autoplay = "IdleDown"
 zoom = Vector2(2, 2)
 
 [node name="State_machine" parent="." instance=ExtResource("3_obw4k")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
