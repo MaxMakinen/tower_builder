@@ -6,14 +6,13 @@ extends Node
 # Emitted when transitioning to a new state.
 signal transitioned(state_name)
 
+
 # Path to the initial active state. We export it to be able to pick the initial state in the inspector.
 #@export var initial_state := NodePath()
 @export var initial_state := NodePath("Idle")
 
 # The current active state. At the start of the game, we get the `initial_state`.
 @onready var state: State = get_node("Idle")
-
-
 
 func _ready() -> void:
 	await owner.ready
@@ -24,19 +23,15 @@ func _ready() -> void:
 		child.animation = get_node("AnimatedSprite2D")
 	state.enter()
 
-
 # The state machine subscribes to node callbacks and delegates them to the state objects.
 func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
-
 func _process(delta: float) -> void:
 	state.update(delta)
 
-
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
-
 
 # This function calls the current state's exit() function, then changes the active state,
 # and calls its enter function.
