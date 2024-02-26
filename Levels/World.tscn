@@ -8,5 +8,5 @@
 [node name="Forest" parent="." instance=ExtResource("1_syqqw")]
 position = Vector2(13, 2)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_wednm")]
+[node name="Player" parent="." instance=ExtResource("2_wednm")]
 position = Vector2(501, 163)

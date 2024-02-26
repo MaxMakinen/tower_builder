@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b58owa2ykccsv"]
+
+[ext_resource type="Script" path="res://State_machine/StateMachine.gd" id="1_na4kr"]
+[ext_resource type="Script" path="res://State_machine/Movement.gd" id="2_xt4th"]
+[ext_resource type="Script" path="res://State_machine/Action.gd" id="3_2u378"]
+[ext_resource type="Script" path="res://State_machine/Idle.gd" id="3_gyf0j"]
+
+[node name="State_machine" type="Node"]
+script = ExtResource("1_na4kr")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("2_xt4th")
+
+[node name="Action" type="Node" parent="."]
+script = ExtResource("3_2u378")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("3_gyf0j")
