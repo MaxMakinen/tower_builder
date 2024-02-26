@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://t7lrh8hhckqr"]
+
+[ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
+[ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
+
+[node name="World" type="Node2D"]
+
+[node name="Forest" parent="." instance=ExtResource("1_syqqw")]
+position = Vector2(13, 2)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_wednm")]
+position = Vector2(501, 163)
