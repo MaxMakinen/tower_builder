@@ -6,19 +6,19 @@ class_name PersistentState
 @export var speed = 100.0
 @export var accel = 10.0
 var direction
-var facing
+@onready var facing = Vector2(0, 1)
 
 # Variables for state manager
 var state
 #var state_machine = preload("res://State_machine/StateMachine.tscn")
-var animation
+@onready var animation = get_node("AnimationPlayer")
 var state_machine = StateMachine.new()
 
 func _ready():
-	animation = get_node("AnimatedSprite2D")
-	facing = Vector2(0, 1)
+	#animation = get_node("AnimatedSprite2D")
 #	state_machine = state_machine_scn.new()
 #	change_state("Idle")
+	pass
 
 func _physics_process(delta):
 	# Directions like "left" etc. need to be added to input map
