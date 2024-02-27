@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0cwspakcxxok"]
+[gd_scene load_steps=18 format=3 uid="uid://c0cwspakcxxok"]
 
 [ext_resource type="Script" path="res://Characters/Player.gd" id="1_k6q6l"]
 [ext_resource type="Texture2D" uid="uid://drulgntgrdxdv" path="res://Assets/Free RGW Sprites/32x32/Character_001.png" id="3_gkaov"]
 [ext_resource type="PackedScene" uid="uid://b58owa2ykccsv" path="res://State_machine/StateMachine.tscn" id="3_obw4k"]
+[ext_resource type="Texture2D" uid="uid://db73depc0bi7i" path="res://Assets/Willibab's Simple Weapon Icons/Hand_axe.png" id="4_ampx0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4eia"]
 radius = 5.0
@@ -57,6 +58,42 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_gkaov")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HandEquip/EquipSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.347, 0.347)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HandEquip/EquipSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HandEquip/EquipSprite:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_an4ae"]
@@ -487,6 +524,95 @@ tracks/3/keys = {
 "values": [8]
 }
 
+[sub_resource type="Animation" id="Animation_pg7in"]
+resource_name = "SwingDown"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerBody:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_gkaov")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerBody:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerBody:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerBody:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HandEquip/EquipSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(-0.347, 0.347)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HandEquip/EquipSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-9, 0), Vector2(-10, 4), Vector2(-4, 9)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HandEquip/EquipSprite:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, -0.793696, -2.35619]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y7s4v"]
 _data = {
 "IdleDown": SubResource("Animation_r7sem"),
@@ -494,6 +620,7 @@ _data = {
 "IdleRight": SubResource("Animation_v60l2"),
 "IdleUp": SubResource("Animation_rpds2"),
 "RESET": SubResource("Animation_te48r"),
+"SwingDown": SubResource("Animation_pg7in"),
 "WalkDown": SubResource("Animation_an4ae"),
 "WalkLeft": SubResource("Animation_q6eep"),
 "WalkRight": SubResource("Animation_agt28"),
@@ -501,6 +628,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_na5yq"]
+size = Vector2(14.4186, 14.4186)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -4)
@@ -529,12 +657,16 @@ libraries = {
 [node name="State_machine" parent="." instance=ExtResource("3_obw4k")]
 
 [node name="HandEquip" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 4)
 
 [node name="EquipSprite" type="Sprite2D" parent="HandEquip"]
+position = Vector2(-9, 0)
+scale = Vector2(-0.347, 0.347)
+texture = ExtResource("4_ampx0")
 
 [node name="Area2D" type="Area2D" parent="HandEquip/EquipSprite"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandEquip/EquipSprite/Area2D"]
+position = Vector2(5.40697, -2.52325)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_na5yq")
