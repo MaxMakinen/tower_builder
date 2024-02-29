@@ -10,7 +10,7 @@ func enter(_msg := {}) -> void:
 
 func update(delta: float) -> void:
 	_check_facing()
-	owner.animation.play(anim + dir + "New")
+	owner.animation.play(anim + dir)
 	if owner.direction.length() > 0:
 		state_machine.transition_to("Movement")
 

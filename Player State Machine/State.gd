@@ -7,8 +7,8 @@ extends Node
 # state and the state machine objects, but we found it to be most efficient for our needs.
 # The state machine node will set it.
 var state_machine = null
-@onready var animation = get_node("../AnimatedSprite2D")
-
+#@onready var animation = get_node("../AnimatedSprite2D")
+#@onready var action_animation = get_node("../MagicAction/MagicEffect")
 
 # Virtual function. Receives events from the `_unhandled_input()` callback.
 func handle_input(_event: InputEvent) -> void:

@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=5 format=3 uid="uid://t7lrh8hhckqr"]
 
+[ext_resource type="PackedScene" uid="uid://b1dwq5fesjgag" path="res://UI/UI.tscn" id="1_ergdv"]
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
 [ext_resource type="PackedScene" uid="uid://b7tylguk8ohjn" path="res://Resource nodes/ResourceNode.tscn" id="3_p1xut"]
 
 [node name="World" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_ergdv")]
 
 [node name="Forest" parent="." instance=ExtResource("1_syqqw")]
 position = Vector2(13, 2)

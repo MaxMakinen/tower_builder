@@ -20,7 +20,7 @@ func _ready() -> void:
 	for child in get_children():
 		child.state_machine = self
 		child.owner = owner
-		child.animation = get_node("AnimatedSprite2D")
+		#child.animation = get_node("AnimatedSprite2D")
 	state.enter()
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
