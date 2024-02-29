@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7tylguk8ohjn"]
+[gd_scene load_steps=13 format=3 uid="uid://b7tylguk8ohjn"]
 
 [ext_resource type="Script" path="res://Resource nodes/ResourceNode.gd" id="1_k1g2g"]
 [ext_resource type="Texture2D" uid="uid://dygt0gi11fmcg" path="res://Assets/[FX] Mining Nodes/32x32/B_Nodes7.png" id="1_q3tjj"]
 [ext_resource type="Texture2D" uid="uid://bc84nqfcs02ho" path="res://Assets/[FX] Mining Nodes/32x32/B_Nodes8.png" id="2_remt5"]
 [ext_resource type="Texture2D" uid="uid://dp6whl0sgjnwi" path="res://Assets/[FX] Mining Nodes/32x32/B_Nodes9.png" id="3_bnwpi"]
+[ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="5_358ik"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5gw5t"]
 animations = [{
@@ -35,6 +36,47 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2wtm"]
 radius = 8.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d37nv"]
+atlas = ExtResource("5_358ik")
+region = Rect2(480, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r481"]
+atlas = ExtResource("5_358ik")
+region = Rect2(528, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84vug"]
+atlas = ExtResource("5_358ik")
+region = Rect2(576, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anxpm"]
+atlas = ExtResource("5_358ik")
+region = Rect2(624, 432, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7lona"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d37nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r481")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84vug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anxpm")
+}],
+"loop": true,
+"name": &"PlayerMined",
+"speed": 5.0
+}]
+
 [node name="ResourceNode" type="StaticBody2D"]
 script = ExtResource("1_k1g2g")
 
@@ -48,3 +90,13 @@ autoplay = "Full"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
 shape = SubResource("CircleShape2D_o2wtm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.654902)
+rotation = -0.785398
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_7lona")
+animation = &"Idle"
+autoplay = "Idle"
