@@ -14,6 +14,10 @@ func update(delta: float) -> void:
 	if owner.direction.length() > 0:
 		state_machine.transition_to("Movement")
 
+func handle_input(_event: InputEvent) -> void:
+	if _event.is_action_pressed("action"):
+		state_machine.transition_to("Action")
+
 func _check_facing() -> void:
 	if owner.facing.y < 0:
 		dir = "Up"
