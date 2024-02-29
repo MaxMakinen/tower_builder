@@ -2588,9 +2588,6 @@ script = ExtResource("1_k6q6l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_t4eia")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
 [node name="PlayerBody" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
