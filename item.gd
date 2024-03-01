@@ -10,6 +10,8 @@ const MAX_SPEED := 50.0
 const ACCELERATION := 0.5
 var speed := 0.0
 var is_being_picked_up := false
+var is_being_spawned := false
+
 
 var frame := 0
 var type_list := {
@@ -25,6 +27,16 @@ var type_list := {
 func _ready():
 	item.set_frame(frame)
 	shadow.set_frame(frame)
+	if is_being_spawned == true:
+		var spawn_direction = _randomize_spawn_direction()
+		var spawn_point = spawn_direction * 20
+		var tween = get_tree().create_tween()
+		tween.tween_property(
+			self, "position", position + spawn_point, 0.25
+		).set_ease(Tween.EASE_IN_OUT)
+		is_being_spawned = false
+		await tween.finished
+
 
 
 func _physics_process(delta):
@@ -51,3 +63,18 @@ func _on_mouse_entered():
 func set_type(type: String):
 	if type in type_list:
 		frame = type_list[type]
+	else:
+		print("Item " + type + " not in type_list")
+
+
+func spawn_in():
+	is_being_spawned = true
+
+
+func _randomize_spawn_direction() -> Vector2:
+	var rng = RandomNumberGenerator.new()
+	var randX = rng.randf_range(-1, 1)
+	var randY = rng.randf_range(-1, 1)
+	var direction = Vector2(randX, randY)
+	return direction.normalized()
+
