@@ -48,7 +48,6 @@ func _physics_process(delta):
 		velocity = global_position.direction_to(player.global_position) * speed
 		
 	var collision = move_and_collide(velocity)
-	
 	if collision:
 		_handle_picked_up()
 
