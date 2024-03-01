@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bhwwqpsq4uit6"
-path="res://.godot/imported/unifont.ttf-d692524adad2f61a1e914d4cbf3f50ee.fontdata"
+uid="uid://cnrntny6vvh8t"
+path="res://.godot/imported/Terminus.ttf-6b189292b443880d813f7c3cbc0dfebd.fontdata"
 
 [deps]
 
-source_file="res://Fonts/unifont.ttf"
-dest_files=["res://.godot/imported/unifont.ttf-d692524adad2f61a1e914d4cbf3f50ee.fontdata"]
+source_file="res://Assets/Fonts/Terminus.ttf"
+dest_files=["res://.godot/imported/Terminus.ttf-6b189292b443880d813f7c3cbc0dfebd.fontdata"]
 
 [params]
 

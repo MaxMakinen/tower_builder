@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b61ct7pq2o716"
-path="res://.godot/imported/VecTerminus12Medium.otf-613724f2205af1c08178c68fd671f743.fontdata"
+uid="uid://bhwwqpsq4uit6"
+path="res://.godot/imported/unifont.ttf-5c2a7a0496285f8f273c4ed4253be271.fontdata"
 
 [deps]
 
-source_file="res://Fonts/VecTerminus12Medium.otf"
-dest_files=["res://.godot/imported/VecTerminus12Medium.otf-613724f2205af1c08178c68fd671f743.fontdata"]
+source_file="res://Assets/Fonts/unifont.ttf"
+dest_files=["res://.godot/imported/unifont.ttf-5c2a7a0496285f8f273c4ed4253be271.fontdata"]
 
 [params]
 

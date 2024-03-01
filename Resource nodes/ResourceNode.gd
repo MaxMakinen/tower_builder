@@ -8,6 +8,7 @@ var 		being_mined := false
 @export		var amount: int = 10
 @export		var harvest_time: float = 1.0
 @onready var harvest_timer = $HarvestTimer
+@onready var damage_numbers_origin = $DamageNumbersOrigin
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,4 +48,5 @@ func _on_harvest_timer_timeout() -> void:
 	if type not in Game.inventory:
 		Game.inventory[type] = 0
 	Game.inventory[type] += amount
+	DamageNumbers.display_number(amount, damage_numbers_origin.global_position)
 	being_mined = false

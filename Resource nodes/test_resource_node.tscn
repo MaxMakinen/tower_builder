@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://gkh7og6gkhf8"]
+
+[ext_resource type="Script" path="res://Resource nodes/test_resource_node.gd" id="1_dqs4e"]
+[ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="1_j6e0s"]
+[ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_atl1j"]
+[ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="3_auin1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhkjc"]
+atlas = ExtResource("3_atl1j")
+region = Rect2(480, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d37nv"]
+atlas = ExtResource("3_atl1j")
+region = Rect2(480, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r481"]
+atlas = ExtResource("3_atl1j")
+region = Rect2(528, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84vug"]
+atlas = ExtResource("3_atl1j")
+region = Rect2(576, 432, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anxpm"]
+atlas = ExtResource("3_atl1j")
+region = Rect2(624, 432, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2prdr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhkjc")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d37nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r481")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84vug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anxpm")
+}],
+"loop": true,
+"name": &"PlayerMined",
+"speed": 25.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klmbj"]
+radius = 13.0384
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4xkd0"]
+radius = 30.0167
+
+[node name="TestResourceNode" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_dqs4e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j6e0s")
+hframes = 16
+vframes = 18
+
+[node name="Effects" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.654902)
+rotation = -0.785398
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_2prdr")
+animation = &"PlayerMined"
+autoplay = "Idle"
+frame = 3
+frame_progress = 0.938884
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_klmbj")
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_auin1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+visible = false
+shape = SubResource("CircleShape2D_4xkd0")
+
+[node name="HarvestTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="NumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -20)
+
+[connection signal="timeout" from="HarvestTimer" to="." method="_on_harvest_timer_timeout"]

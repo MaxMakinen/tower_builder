@@ -30,6 +30,7 @@ func _on_area_2d_body_entered(body):
 		
 
 func _on_area_2d_body_exited(body):
-	found_target = false
-	print("Lost node")
+	if (body is ResourceNode):
+		found_target = false
+		print("Lost node")
 

@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Game="*res://Global/Game.gd"
+DamageNumbers="*res://Global/DamageNumbers.gd"
+InteractionManager="*res://Interaction/InteractionManager.tscn"
 
 [editor]
 
@@ -68,7 +70,9 @@ action={
 
 [layer_names]
 
-2d_physics/layer_2="Interactions"
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Item"
 
 [rendering]
 

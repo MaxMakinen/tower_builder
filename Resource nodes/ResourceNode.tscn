@@ -112,5 +112,9 @@ autoplay = "Idle"
 [node name="HarvestTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -10)
+
 [connection signal="animation_finished" from="Effects" to="." method="_on_effects_animation_finished"]
 [connection signal="timeout" from="HarvestTimer" to="." method="_on_harvest_timer_timeout"]
