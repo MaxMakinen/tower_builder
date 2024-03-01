@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var item = $Sprites/Item
 @onready var animation = $AnimationPlayer
 
+@export_enum("Stone", "Wood", "Ore_copper", "Metal_copper", "Ingot_copper", "Coal") var type: String = "Wood"
+
 const MAX_SPEED := 50.0
 const ACCELERATION := 0.5
 var speed := 0.0
@@ -13,7 +15,6 @@ var is_being_picked_up := false
 var is_being_spawned := false
 
 
-var frame := 0
 var type_list := {
 	"Stone": 12,
 	"Wood": 0,
@@ -25,8 +26,8 @@ var type_list := {
 
 
 func _ready():
-	item.set_frame(frame)
-	shadow.set_frame(frame)
+	item.set_frame(type_list[type])
+	shadow.set_frame(type_list[type])
 	if is_being_spawned == true:
 		var spawn_direction = _randomize_spawn_direction()
 		var spawn_point = spawn_direction * 20
@@ -53,6 +54,10 @@ func _physics_process(delta):
 
 
 func _handle_picked_up():
+	if type not in Game.inventory:
+		Game.inventory[type] = 0
+	Game.inventory[type] += 1
+	
 	queue_free()
 
 
@@ -60,9 +65,9 @@ func _on_mouse_entered():
 	is_being_picked_up = true
 
 
-func set_type(type: String):
-	if type in type_list:
-		frame = type_list[type]
+func set_type(new_type: String):
+	if new_type in type_list:
+		type = new_type
 	else:
 		print("Item " + type + " not in type_list")
 
