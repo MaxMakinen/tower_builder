@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
 [ext_resource type="PackedScene" uid="uid://gkh7og6gkhf8" path="res://Resource nodes/test_resource_node.tscn" id="5_2odjp"]
-[ext_resource type="PackedScene" uid="uid://fanfb7awf8" path="res://item.tscn" id="6_ftpa4"]
+[ext_resource type="PackedScene" uid="uid://fanfb7awf8" path="res://Item/item.tscn" id="6_ftpa4"]
 
 [node name="World" type="Node2D"]
 

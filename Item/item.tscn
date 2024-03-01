@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://fanfb7awf8"]
 
-[ext_resource type="Script" path="res://item.gd" id="1_b821p"]
+[ext_resource type="Script" path="res://Item/item.gd" id="1_b821p"]
 [ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="1_glnnu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0j23"]
