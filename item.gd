@@ -57,7 +57,6 @@ func _handle_picked_up():
 	if type not in Game.inventory:
 		Game.inventory[type] = 0
 	Game.inventory[type] += 1
-	
 	queue_free()
 
 
