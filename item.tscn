@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://fanfb7awf8"]
+
+[ext_resource type="Script" path="res://item.gd" id="1_b821p"]
+[ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="1_glnnu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0j23"]
+
+[node name="Item" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+input_pickable = true
+script = ExtResource("1_b821p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r0j23")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("1_glnnu")
+hframes = 11
+vframes = 11
+frame = 12
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -18,9 +18,9 @@ func display_number(value: int, position: Vector2, _is_critical: bool = false):
 	#number.set_texture_filter(1)
 	#number.scale = Vector2(0.2, 0.2) # Vector2
 	
-	#number.label_settings.font = load("res://Assets/Fonts/Terminus.ttf")
+	number.label_settings.font = load("res://Assets/Fonts/Terminus.ttf")
 	number.label_settings.font_color = color
-	number.label_settings.font_size = 10
+	number.label_settings.set_font_size(12)
 	
 	number.label_settings.outline_color = "#000"
 	number.label_settings.outline_size = 1

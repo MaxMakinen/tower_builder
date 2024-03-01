@@ -17,11 +17,11 @@ func enter(_msg := {}) -> void:
 
 func exit() -> void:
 	owner.action_animation.play("Idle")
-	pass
+
 
 func update(_delta: float) -> void:
 	owner.magic_action.mine()
-	pass
+
 #	if owner.action_animation.is_playing() == true or owner.animation.is_playing() == true:
 #		owner.velocity = Vector2.ZERO
 #		owner.direction = Vector2.ZERO
