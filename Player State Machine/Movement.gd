@@ -8,7 +8,7 @@ func enter(_msg := {}) -> void:
 	pass
 	#_check_facing()
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	_check_facing()
 	owner.animation.play(anim + dir)
 	if owner.direction.length() <= 0 and owner.velocity.length() <= 0:

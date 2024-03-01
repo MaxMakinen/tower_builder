@@ -22,7 +22,7 @@ func _ready():
 #	change_state("Idle")
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Directions like "left" etc. need to be added to input map
 	# Upper is copied from source, bottom dir is guessing what might work
 	#var direction: Vector2 = Input.get_vector("left", "right", "up", "down")

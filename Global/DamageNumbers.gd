@@ -2,7 +2,7 @@ extends Node
 
 
 
-func display_number(value: int, position: Vector2, is_critical: bool = false):
+func display_number(value: int, position: Vector2, _is_critical: bool = false):
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(value)
@@ -10,7 +10,7 @@ func display_number(value: int, position: Vector2, is_critical: bool = false):
 	number.label_settings = LabelSettings.new()
 	
 	var color = "#FFF"
-	if is_critical == true:
+	if _is_critical == true:
 		color = "#B22"
 	if value == 0:
 		color = "#FFF8"

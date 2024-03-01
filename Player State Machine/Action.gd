@@ -19,7 +19,7 @@ func exit() -> void:
 	owner.action_animation.play("Idle")
 	pass
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	owner.magic_action.mine()
 	pass
 #	if owner.action_animation.is_playing() == true or owner.animation.is_playing() == true:

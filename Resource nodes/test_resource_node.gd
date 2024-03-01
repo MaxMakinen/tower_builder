@@ -23,11 +23,6 @@ func _on_interact():
 	print("Interaction success")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_harvest_timer_timeout():
 	interactable = true
 	if type not in Game.inventory:
