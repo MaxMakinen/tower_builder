@@ -5,8 +5,14 @@ extends CharacterBody2D
 @onready var shadow = $Sprites/Shadow
 @onready var item = $Sprites/Item
 @onready var animation = $AnimationPlayer
-var frame = 46
-var type_list = {
+
+const MAX_SPEED := 50.0
+const ACCELERATION := 0.5
+var speed := 0.0
+var is_being_picked_up := false
+
+var frame := 0
+var type_list := {
 	"Stone": 12,
 	"Wood": 0,
 	"Ore_copper": 35,
@@ -15,11 +21,6 @@ var type_list = {
 	"Coal": 4
 }
 
-const MAX_SPEED := 50.0
-const ACCELERATION := 0.5
-
-var speed := 0.0
-var is_being_picked_up := false
 
 func _ready():
 	item.set_frame(frame)
@@ -46,5 +47,7 @@ func _handle_picked_up():
 func _on_mouse_entered():
 	is_being_picked_up = true
 
+
 func set_type(type: String):
-	frame = type_list[type]
+	if type in type_list:
+		frame = type_list[type]
