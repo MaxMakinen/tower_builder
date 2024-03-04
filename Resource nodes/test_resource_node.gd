@@ -9,7 +9,7 @@ extends StaticBody2D
 
 var interactable: bool = true
 var harvest_time: float = 0.5
-var item = preload("res://item.tscn")
+var item = preload("res://Item/item.tscn")
 
 
 # Called when the node enters the scene tree for the first time.

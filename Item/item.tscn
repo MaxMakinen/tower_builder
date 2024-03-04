@@ -168,7 +168,6 @@ frame = 46
 modulate = Color(0.0980392, 0.0980392, 0.0980392, 0.466667)
 show_behind_parent = true
 position = Vector2(0, 1.02478)
-scale = Vector2(1, 1)
 texture = ExtResource("1_glnnu")
 hframes = 11
 vframes = 11
