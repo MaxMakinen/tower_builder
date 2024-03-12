@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-
 @onready var interaction_area: InteractionArea = $InteractionArea
 @onready var harvest_timer = $HarvestTimer
 @onready var effect_animation = $Effects
