@@ -6,9 +6,9 @@ var dir: String
 var event
 
 func enter(_msg := {}) -> void:
-	owner.speed = 0
-	owner.velocity = Vector2.ZERO
-	owner.direction = Vector2.ZERO
+	#owner.speed = 0
+	#owner.velocity = Vector2.ZERO
+	#owner.direction = Vector2.ZERO
 	_check_facing()
 	owner.animation.play(anim + dir)
 	
@@ -16,11 +16,13 @@ func enter(_msg := {}) -> void:
 
 
 func exit() -> void:
-	owner.action_animation.play("Idle")
+	#owner.action_animation.play("Idle")
+	pass
 
 
 func update(_delta: float) -> void:
-	owner.magic_action.mine()
+	pass
+	#owner.magic_action.mine()
 
 #	if owner.action_animation.is_playing() == true or owner.animation.is_playing() == true:
 #		owner.velocity = Vector2.ZERO
@@ -36,10 +38,11 @@ func update(_delta: float) -> void:
 #		#state_machine.transition_to("Movement")
 
 func handle_input(_event: InputEvent) -> void:
-	if _event.is_action_released("action"):
-		owner.speed = 100
-		owner.magic_action.finished()
-		state_machine.transition_to("Idle")
+	state_machine.transition_to("Idle")
+#	if _event.is_action_released("action"):
+#		owner.speed = 100
+#		owner.magic_action.finished()
+#		state_machine.transition_to("Idle")
 #	if owner.action_animation.is_playing() == false:
 #		if _event.is_action_released("action"):
 #			state_machine.transition_to("Idle")

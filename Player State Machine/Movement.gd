@@ -16,8 +16,9 @@ func update(_delta: float) -> void:
 	pass
 
 func handle_input(_event: InputEvent) -> void:
-	if _event.is_action_pressed("action"):
-		state_machine.transition_to("Action")
+	pass
+#	if _event.is_action_pressed("action"):
+#		state_machine.transition_to("Action")
 
 func _check_facing() -> void:
 	if owner.facing.y < 0:

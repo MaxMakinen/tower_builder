@@ -7,8 +7,6 @@ extends CharacterBody2D
 @onready var animation = $AnimationPlayer
 @export var resource: ItemResource
 
-@export_enum("Stone", "Wood", "Ore", "Metal", "Ingot", "Coal") var type: String = "Wood"
-
 const MAX_SPEED := 50.0
 const ACCELERATION := 0.5
 var speed := 0.0
@@ -45,9 +43,7 @@ func _physics_process(delta):
 
 
 func _handle_picked_up():
-	if type not in Game.inventory:
-		Game.inventory[type] = 0
-	Game.inventory[type] += 1
+	player.add_to_inventory(resource)
 	queue_free()
 
 
@@ -68,8 +64,7 @@ func _randomize_spawn_direction() -> Vector2:
 	return direction.normalized()
 
 
-func initialize(new_type: String, new_resource: ItemResource, new_position: Vector2):
-	type = new_type
+func initialize(new_resource: ItemResource, new_position: Vector2):
 	resource = new_resource
 	self.global_position = new_position
 
