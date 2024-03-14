@@ -65,9 +65,19 @@ func _handle_picked_up():
 func _on_mouse_entered():
 	is_being_picked_up = true
 
+
 func _set_texture():
 	item.texture = resource.texture
 	shadow.texture = resource.texture
+
+
+func _randomize_spawn_direction() -> Vector2:
+	var rng = RandomNumberGenerator.new()
+	var randX = rng.randf_range(-1, 1)
+	var randY = rng.randf_range(0, 1)
+	var direction = Vector2(randX, randY)
+	return direction.normalized()
+
 
 func initialize(new_type: String, new_resource: ItemResource, new_position: Vector2):
 	if new_type in type_list:
@@ -81,11 +91,4 @@ func initialize(new_type: String, new_resource: ItemResource, new_position: Vect
 func spawn_in():
 	is_being_spawned = true
 
-
-func _randomize_spawn_direction() -> Vector2:
-	var rng = RandomNumberGenerator.new()
-	var randX = rng.randf_range(-1, 1)
-	var randY = rng.randf_range(0, 1)
-	var direction = Vector2(randX, randY)
-	return direction.normalized()
 
