@@ -29,8 +29,8 @@ var type_list := {
 func _ready():
 	#if resource:
 	_set_texture()
-	item.set_frame(type_list[type])
-	shadow.set_frame(type_list[type])
+	item.set_frame(resource.frame)
+	shadow.set_frame(resource.frame)
 	if is_being_spawned == true:
 		var spawn_direction = _randomize_spawn_direction()
 		var spawn_point = spawn_direction * 20
@@ -80,12 +80,9 @@ func _randomize_spawn_direction() -> Vector2:
 
 
 func initialize(new_type: String, new_resource: ItemResource, new_position: Vector2):
-	if new_type in type_list:
-		type = new_type
-		resource = new_resource
-		self.global_position = new_position
-	else:
-		print("Item " + type + " not in type_list")
+	type = new_type
+	resource = new_resource
+	self.global_position = new_position
 
 
 func spawn_in():
