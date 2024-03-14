@@ -16,18 +16,7 @@ var is_being_picked_up := false
 var is_being_spawned := false
 
 
-var type_list := {
-	"Stone": 12,
-	"Wood": 0,
-	"Ore": 35,
-	"Metal": 46,
-	"Ingot": 57,
-	"Coal": 4
-}
-
-
 func _ready():
-	#if resource:
 	_set_texture()
 	item.set_frame(resource.frame)
 	shadow.set_frame(resource.frame)
@@ -87,5 +76,4 @@ func initialize(new_type: String, new_resource: ItemResource, new_position: Vect
 
 func spawn_in():
 	is_being_spawned = true
-
 
