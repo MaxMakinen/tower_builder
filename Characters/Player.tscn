@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://c0cwspakcxxok"]
+[gd_scene load_steps=46 format=3 uid="uid://c0cwspakcxxok"]
 
 [ext_resource type="Script" path="res://Characters/Player.gd" id="1_k6q6l"]
 [ext_resource type="Texture2D" uid="uid://daiyrsyyiy1vu" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/1out/char_a_p1_1out_pfpn_v04.png" id="3_20o8w"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bmddjfh8fkua5" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/5hat/char_a_p1_5hat_pnty_v04.png" id="4_u0jp0"]
 [ext_resource type="Script" path="res://Characters/MagicAction.gd" id="8_4c0ep"]
 [ext_resource type="Texture2D" uid="uid://bxra5ajf5wlot" path="res://Assets/Magic Spell Effects All 1/Magic Spell/All 1/72.png" id="8_c81wa"]
+[ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/inventory_UI.tscn" id="10_ige18"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4eia"]
 radius = 4.0
@@ -2388,6 +2389,12 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_03ti6")
 animation = &"Action"
 autoplay = "Idle"
+
+[node name="Control" parent="." instance=ExtResource("10_ige18")]
+offset_left = -52.0
+offset_top = -79.0
+offset_right = 52.0
+offset_bottom = -23.0
 
 [connection signal="body_entered" from="MagicAction/Area2D" to="MagicAction" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="MagicAction/Area2D" to="MagicAction" method="_on_area_2d_body_exited"]

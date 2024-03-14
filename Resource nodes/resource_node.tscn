@@ -1,28 +1,28 @@
 [gd_scene load_steps=13 format=3 uid="uid://gkh7og6gkhf8"]
 
-[ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_dqs4e"]
-[ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="1_j6e0s"]
-[ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_atl1j"]
-[ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="3_auin1"]
+[ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_j1teo"]
+[ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="2_6tjj1"]
+[ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_knls8"]
+[ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="4_aqrxi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhkjc"]
-atlas = ExtResource("3_atl1j")
+atlas = ExtResource("3_knls8")
 region = Rect2(480, 432, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d37nv"]
-atlas = ExtResource("3_atl1j")
+atlas = ExtResource("3_knls8")
 region = Rect2(480, 432, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r481"]
-atlas = ExtResource("3_atl1j")
+atlas = ExtResource("3_knls8")
 region = Rect2(528, 432, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84vug"]
-atlas = ExtResource("3_atl1j")
+atlas = ExtResource("3_knls8")
 region = Rect2(576, 432, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_anxpm"]
-atlas = ExtResource("3_atl1j")
+atlas = ExtResource("3_knls8")
 region = Rect2(624, 432, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2prdr"]
@@ -61,10 +61,10 @@ radius = 30.0167
 
 [node name="TestResourceNode" type="StaticBody2D"]
 collision_mask = 0
-script = ExtResource("1_dqs4e")
+script = ExtResource("1_j1teo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_j6e0s")
+texture = ExtResource("2_6tjj1")
 region_rect = Rect2(306.051, 287.54, 29.053, 46.7551)
 
 [node name="Effects" type="AnimatedSprite2D" parent="."]
@@ -83,7 +83,7 @@ visible = false
 position = Vector2(2, 0)
 shape = SubResource("CircleShape2D_klmbj")
 
-[node name="InteractionArea" parent="." instance=ExtResource("3_auin1")]
+[node name="InteractionArea" parent="." instance=ExtResource("4_aqrxi")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 visible = false

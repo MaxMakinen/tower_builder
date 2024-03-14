@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://dj47x0fv27j0j"]
 
-[ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_yweyy"]
+[ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_ehq0h"]
 [ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="2_tylaq"]
 [ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="2_w3oyx"]
 [ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_juigd"]
@@ -62,7 +62,7 @@ radius = 30.0167
 
 [node name="StoneResourceNode" type="StaticBody2D"]
 collision_mask = 0
-script = ExtResource("1_yweyy")
+script = ExtResource("1_ehq0h")
 resource = ExtResource("2_w3oyx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

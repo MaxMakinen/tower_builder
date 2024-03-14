@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=10 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://b1dwq5fesjgag" path="res://UI/UI.tscn" id="1_ergdv"]
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
+[ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Item/player_inventory.tres" id="4_0px0t"]
 [ext_resource type="PackedScene" uid="uid://fanfb7awf8" path="res://Item/item.tscn" id="6_ftpa4"]
 [ext_resource type="PackedScene" uid="uid://bcby2itgxncpx" path="res://Resource nodes/Wood_resource_node.tscn" id="6_i7vp6"]
 [ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="6_koy8y"]
@@ -28,6 +29,7 @@ layer_0/tile_data = PackedInt32Array(196638, 458754, 8, 262172, 196610, 3, 32770
 
 [node name="Player" parent="." instance=ExtResource("2_wednm")]
 position = Vector2(501, 163)
+inventory = ExtResource("4_0px0t")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

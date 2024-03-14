@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 class_name PersistentState
 
-# Varables for movement
+# Variables for movement
 @export var speed = 100.0
-@export var accel = 10.0
+@export var acceleration = 10.0
 var direction
 @onready var facing = Vector2(0, 1)
 
@@ -15,6 +15,9 @@ var state
 @onready var action_animation = get_node("MagicAction/MagicEffect")
 @onready var magic_action = get_node("MagicAction")
 var state_machine = StateMachine.new()
+
+# Variables for inventory
+@export var inventory: Inventory
 
 func _ready():
 	#animation = get_node("AnimatedSprite2D")
@@ -34,8 +37,8 @@ func _physics_process(_delta):
 		
 #	print("Direction = " + str(direction))
 #	print("Facing = " + str(facing))
-	velocity.x = move_toward(velocity.x, speed * direction.x, accel)
-	velocity.y = move_toward(velocity.y, speed * direction.y, accel)
+	velocity.x = move_toward(velocity.x, speed * direction.x, acceleration)
+	velocity.y = move_toward(velocity.y, speed * direction.y, acceleration)
 #	print("velocity = " + str(velocity))
 	#if velocity.length() > 0:
 	#	state_machine.transition_to("Movement")

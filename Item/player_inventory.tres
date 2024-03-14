@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=5 format=3 uid="uid://cs46dag621l4e"]
+
+[ext_resource type="Resource" uid="uid://oc6so0dcajpd" path="res://Item/Items/Copper.tres" id="1_ufjao"]
+[ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="2_o4r3k"]
+[ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="3_krojg"]
+[ext_resource type="Script" path="res://Inventory/Inventory.gd" id="4_onncw"]
+
+[resource]
+script = ExtResource("4_onncw")
+items = Array[Resource("res://Item/Item_resource.gd")]([ExtResource("1_ufjao"), null, ExtResource("2_o4r3k"), null, ExtResource("3_krojg"), ExtResource("3_krojg"), null, null])

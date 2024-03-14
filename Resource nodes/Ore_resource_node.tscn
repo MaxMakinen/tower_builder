@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://b7ojf8yo08dm2"]
 
-[ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_4gt6w"]
+[ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_gtohf"]
 [ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="2_now7k"]
 [ext_resource type="Resource" uid="uid://oc6so0dcajpd" path="res://Item/Items/Copper.tres" id="2_o2mkf"]
 [ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_gev3v"]
@@ -62,7 +62,7 @@ radius = 30.0167
 
 [node name="OreResourceNode" type="StaticBody2D"]
 collision_mask = 0
-script = ExtResource("1_4gt6w")
+script = ExtResource("1_gtohf")
 resource = ExtResource("2_o2mkf")
 type = "Ore"
 
