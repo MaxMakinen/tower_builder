@@ -4,6 +4,7 @@ extends StaticBody2D
 @onready var harvest_timer = $HarvestTimer
 @onready var effect_animation = $Effects
 @onready var numbers_origin = $NumbersOrigin
+@export var resource: ItemResource
 @export var type: String = "Stone"
 
 var interactable: bool = true
@@ -30,8 +31,7 @@ func _on_harvest_timer_timeout():
 	effect_animation.hide()
 
 	var item_temp = item.instantiate()
-	item_temp.set_type(type)
-	item_temp.global_position = self.global_position
+	item_temp.initialize(type, resource, self.global_position)
 	item_temp.spawn_in()
 
 	owner.add_child(item_temp)

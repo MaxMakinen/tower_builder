@@ -4,6 +4,7 @@ class_name ResourceNode
 
 var 		being_mined := false
 @onready	var effect = get_node("Effects")
+
 @export		var type: String = "Ore"
 @export		var amount: int = 10
 @export		var harvest_time: float = 1.0
