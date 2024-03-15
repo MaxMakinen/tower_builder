@@ -1,10 +1,9 @@
-extends Panel
+extends Control
 
 
 @onready var item_visual: Sprite2D = $CenterContainer/Panel/Item_display
-@onready var selection: Sprite2D = $Selection
+@onready var selection: Sprite2D = $CenterContainer/Panel/Selection
 @onready var stack_size: Label = $CenterContainer/Panel/Stack_size
-var selected := false
 
 
 func update(item_slot: InventorySlot):
@@ -25,7 +24,11 @@ func update(item_slot: InventorySlot):
 			item_visual.frame = item_slot.item.frame
 
 
-#func _on_mouse_entered():
-#	print("Mouse entered slot")
-#	selection.visible = true
+func _on_item_button_mouse_entered():
+#	print("Mouse entered button")
+	selection.visible = true
 
+
+func _on_item_button_mouse_exited():
+#	print("Mouse exited button")
+	selection.visible = false

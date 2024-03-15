@@ -74,5 +74,3 @@ layout_mode = 2
 
 [node name="Inventory_UI_slot8" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
 layout_mode = 2
-
-[connection signal="mouse_entered" from="Inventory_BG/GridContainer/Inventory_UI_slot1" to="." method="_on_inventory_ui_slot_1_mouse_entered"]

@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://chnbtbv1iu5om"]
+[gd_scene load_steps=4 format=3 uid="uid://chnbtbv1iu5om"]
 
 [ext_resource type="Texture2D" uid="uid://cjq6fayd38fep" path="res://Assets/Free Inventory/Inventory_Slot.png" id="1_n1g8x"]
 [ext_resource type="Script" path="res://Inventory/inventory_UI_slot.gd" id="1_qn2uv"]
 [ext_resource type="Texture2D" uid="uid://bme5a5k7m340k" path="res://Assets/Free Inventory/Inventory_select.png" id="3_3e8n6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_axlqf"]
-
-[node name="Inventory_UI_slot" type="Panel"]
+[node name="Inventory_UI_slot" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 20)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("1_qn2uv")
@@ -37,18 +37,18 @@ scale = Vector2(0.4, 0.4)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 horizontal_alignment = 2
 
-[node name="Slot_area" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Slot_area"]
-position = Vector2(10, 10)
-shape = SubResource("RectangleShape2D_axlqf")
-
-[node name="Panel" type="Panel" parent="Slot_area"]
-self_modulate = Color(1, 1, 1, 0)
-offset_right = 20.0
-offset_bottom = 20.0
-
-[node name="Selection" type="Sprite2D" parent="."]
+[node name="Selection" type="Sprite2D" parent="CenterContainer/Panel"]
 visible = false
+position = Vector2(-10, -10)
 texture = ExtResource("3_3e8n6")
 centered = false
+
+[node name="Item_button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+flat = true
+
+[connection signal="mouse_entered" from="Item_button" to="." method="_on_item_button_mouse_entered"]
+[connection signal="mouse_exited" from="Item_button" to="." method="_on_item_button_mouse_exited"]
