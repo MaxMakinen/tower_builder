@@ -12,4 +12,4 @@ class_name ItemResource
 @export var Vframes := 11
 @export var max_stack_size: int = 99
 @export var description: String = "Default description"
-
+@export var consumable: bool = false

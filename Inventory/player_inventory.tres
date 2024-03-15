@@ -1,44 +1,48 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=13 format=3 uid="uid://cs46dag621l4e"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=14 format=3 uid="uid://cs46dag621l4e"]
 
+[ext_resource type="Resource" uid="uid://dk418qqwy0oky" path="res://Item/Items/Potion.tres" id="1_bfims"]
 [ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="2_ece6g"]
-[ext_resource type="Script" path="res://inventory_slot.gd" id="2_rovl3"]
+[ext_resource type="Script" path="res://Inventory/inventory_slot.gd" id="2_wok5y"]
 [ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="3_vo7vp"]
 [ext_resource type="Script" path="res://Inventory/Inventory.gd" id="4_6kdiy"]
 
 [sub_resource type="Resource" id="Resource_erwn6"]
-script = ExtResource("2_rovl3")
-amount = 0
+script = ExtResource("2_wok5y")
+item = ExtResource("1_bfims")
+amount = 1
 
 [sub_resource type="Resource" id="Resource_hnkr2"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
 item = ExtResource("2_ece6g")
 amount = 1
 
 [sub_resource type="Resource" id="Resource_krgfc"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
+item = ExtResource("3_vo7vp")
 amount = 0
 
 [sub_resource type="Resource" id="Resource_oyfge"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
 amount = 0
 
 [sub_resource type="Resource" id="Resource_jvxi8"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
 item = ExtResource("3_vo7vp")
 amount = 4
 
 [sub_resource type="Resource" id="Resource_ot5v3"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
 amount = 0
 
 [sub_resource type="Resource" id="Resource_olsuk"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
 amount = 0
 
 [sub_resource type="Resource" id="Resource_q22c8"]
-script = ExtResource("2_rovl3")
+script = ExtResource("2_wok5y")
 amount = 0
 
 [resource]
 script = ExtResource("4_6kdiy")
-item_slots = Array[ExtResource("2_rovl3")]([SubResource("Resource_erwn6"), SubResource("Resource_hnkr2"), SubResource("Resource_krgfc"), SubResource("Resource_oyfge"), SubResource("Resource_jvxi8"), SubResource("Resource_ot5v3"), SubResource("Resource_olsuk"), SubResource("Resource_q22c8")])
+item_slots = Array[ExtResource("2_wok5y")]([SubResource("Resource_erwn6"), SubResource("Resource_hnkr2"), SubResource("Resource_krgfc"), SubResource("Resource_oyfge"), SubResource("Resource_jvxi8"), SubResource("Resource_ot5v3"), SubResource("Resource_olsuk"), SubResource("Resource_q22c8")])
+inventory_size = 8

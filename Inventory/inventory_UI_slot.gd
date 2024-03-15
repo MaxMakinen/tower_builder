@@ -1,13 +1,14 @@
 extends Control
 
 
+@onready var slot_bg: Sprite2D = $Slot_bg
 @onready var item_visual: Sprite2D = $CenterContainer/Panel/Item_display
 @onready var selection: Sprite2D = $CenterContainer/Panel/Selection
 @onready var stack_size: Label = $CenterContainer/Panel/Stack_size
-@onready var item_display: NinePatchRect = $Item_display
-@onready var item_name: Label = $Item_display/Item_name
-@onready var item_type: Label = $Item_display/Item_type
-@onready var item_description: Label = $Item_display/Item_description
+@onready var item_details: NinePatchRect = $Item_details
+@onready var item_name: Label = $Item_details/Item_name
+@onready var item_type: Label = $Item_details/Item_type
+@onready var item_description: Label = $Item_details/Item_description
 
 # Signals
 signal drag_start(slot)
@@ -18,14 +19,16 @@ var contents: InventorySlot = null
 
 
 func  _ready():
-	# Ensure item_display starts out invisible for all slots
-	item_display.visible = false
+	# Ensure item_details starts out invisible for all slots
+	item_details.visible = false
 
 
 func update(item_slot: InventorySlot):
 	if !item_slot.item:
 		item_visual.visible = false
 		stack_size.visible = false
+	elif item_slot.amount < 1:
+		item_slot.erase()
 	else:
 		# Store contained slot. Necessary? Yes, for drag and drop.
 		contents = item_slot
@@ -64,7 +67,17 @@ func _on_item_button_mouse_exited():
 
 func _on_item_button_gui_input(event):
 	if event is InputEventMouseButton:
+		# Details display
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			if contents != null:
-				item_display.visible = !item_display.visible
+				item_details.visible = !item_details.visible
+		# Draggin item
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.is_pressed():
+				slot_bg.modulate = Color(0.8, 0.8, 1)
+				drag_start.emit(self)
+			else:
+				slot_bg.modulate = Color(1, 1, 1)
+				drag_end.emit()
+		
 

@@ -15,6 +15,7 @@ var state_machine = StateMachine.new()
 
 # Variables for inventory
 @export var inventory: Inventory
+@onready var inventory_hotbar = $Inventory_hotbar
 
 func _ready():
 	pass
@@ -32,4 +33,16 @@ func _physics_process(_delta):
 
 func add_to_inventory(item: ItemResource):
 	inventory.insert(item)
+
+
+func toggle_hotbar():
+	inventory_hotbar.visible = !inventory_hotbar.visible
+
+
+func open_hotbar():
+	inventory_hotbar.visible = true
+
+
+func close_hotbar():
+	inventory_hotbar.visible = false
 
