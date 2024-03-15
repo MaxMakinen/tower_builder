@@ -54,8 +54,9 @@ animations = [{
 "speed": 25.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_klmbj"]
-radius = 13.0384
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k2unc"]
+radius = 9.0
+height = 26.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xkd0"]
 radius = 30.0167
@@ -82,7 +83,9 @@ frame = 3
 frame_progress = 0.938884
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_klmbj")
+position = Vector2(0, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_k2unc")
 
 [node name="InteractionArea" parent="." instance=ExtResource("4_1u4nc")]
 

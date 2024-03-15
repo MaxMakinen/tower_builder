@@ -17,7 +17,7 @@ var item = preload("res://Item/item.tscn")
 func _ready():
 	interaction_area.interact = Callable(self, "_on_interact")
 
-
+# 
 func _on_interact():
 	effect_animation.show()
 	effect_animation.play("PlayerMined")
