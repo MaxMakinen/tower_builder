@@ -9,6 +9,9 @@ extends Control
 @onready var item_type: Label = $Item_display/Item_type
 @onready var item_description: Label = $Item_display/Item_description
 
+# Signals
+signal drag_start(slot)
+signal drag_end()
 
 # Contained item and item stack size
 var contents: InventorySlot = null
