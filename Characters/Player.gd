@@ -10,19 +10,13 @@ var direction
 
 # Variables for state manager
 var state
-#var state_machine = preload("res://State_machine/StateMachine.tscn")
 @onready var animation = get_node("AnimationPlayer")
-#@onready var action_animation = get_node("MagicAction/MagicEffect")
-#@onready var magic_action = get_node("MagicAction")
 var state_machine = StateMachine.new()
 
 # Variables for inventory
 @export var inventory: Inventory
 
 func _ready():
-	#animation = get_node("AnimatedSprite2D")
-#	state_machine = state_machine_scn.new()
-#	change_state("Idle")
 	pass
 
 func _physics_process(_delta):
