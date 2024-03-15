@@ -28,3 +28,4 @@ func open():
 func close():
 	visible = false
 	is_open = false
+

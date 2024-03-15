@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://chnbtbv1iu5om" path="res://Inventory/inventory_UI_slot.tscn" id="3_pb2wv"]
 
 [node name="Inventory_UI" type="Control"]
-z_index = 20
 custom_minimum_size = Vector2(104, 56)
 layout_mode = 3
 anchors_preset = 0
@@ -13,6 +12,7 @@ offset_right = 104.0
 offset_bottom = 56.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 script = ExtResource("1_v5wc4")
 
 [node name="Inventory_BG" type="NinePatchRect" parent="."]
@@ -28,6 +28,7 @@ offset_right = 52.0
 offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 texture = ExtResource("2_kj1jn")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -51,6 +52,7 @@ columns = 4
 
 [node name="Inventory_UI_slot1" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Inventory_UI_slot2" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
 layout_mode = 2
@@ -72,3 +74,5 @@ layout_mode = 2
 
 [node name="Inventory_UI_slot8" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
 layout_mode = 2
+
+[connection signal="mouse_entered" from="Inventory_BG/GridContainer/Inventory_UI_slot1" to="." method="_on_inventory_ui_slot_1_mouse_entered"]
