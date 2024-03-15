@@ -1,9 +1,7 @@
 extends Node2D
 
-@onready var button_animation: AnimatedSprite2D = $Button/AnimatedSprite2D
 
 func _on_button_pressed():
-	button_animation.play("button_pressed")
 	_go_to_game()
 
 

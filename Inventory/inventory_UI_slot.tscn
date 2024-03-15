@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://chnbtbv1iu5om"]
+[gd_scene load_steps=7 format=3 uid="uid://chnbtbv1iu5om"]
 
 [ext_resource type="Texture2D" uid="uid://cjq6fayd38fep" path="res://Assets/Free Inventory/Inventory_Slot.png" id="1_n1g8x"]
 [ext_resource type="Script" path="res://Inventory/inventory_UI_slot.gd" id="1_qn2uv"]
 [ext_resource type="Texture2D" uid="uid://bme5a5k7m340k" path="res://Assets/Free Inventory/Inventory_select.png" id="3_3e8n6"]
+[ext_resource type="Texture2D" uid="uid://bgbdwbe6tv7ue" path="res://Assets/GUI_Essential_Free/01_Basic_Collection/01_Flat_Theme/Sprites/UI_Flat_Banner_01_Downward.png" id="4_ct1o2"]
+[ext_resource type="FontFile" uid="uid://b61ct7pq2o716" path="res://Assets/Fonts/VecTerminus12Medium.otf" id="5_yc6d8"]
+[ext_resource type="FontFile" uid="uid://bhwwqpsq4uit6" path="res://Assets/Fonts/unifont.ttf" id="6_i4mpr"]
 
 [node name="Inventory_UI_slot" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
@@ -50,5 +53,85 @@ offset_right = 20.0
 offset_bottom = 20.0
 flat = true
 
+[node name="Item_display" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.543
+anchor_top = -2.193
+anchor_right = 1.596
+anchor_bottom = -0.408
+offset_left = -16.14
+offset_top = -5.14
+offset_right = 15.08
+offset_bottom = 2.16
+texture = ExtResource("4_ct1o2")
+region_rect = Rect2(0, 3, 96, 22)
+patch_margin_left = 18
+patch_margin_top = 6
+patch_margin_right = 18
+patch_margin_bottom = 6
+
+[node name="Item_name" type="Label" parent="Item_display"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -16.5
+offset_right = 87.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_yc6d8")
+theme_override_font_sizes/font_size = 24
+text = "Item name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Item_type" type="Label" parent="Item_display"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.488
+anchor_right = 0.5
+anchor_bottom = 0.488
+offset_left = -21.0
+offset_top = -4.984
+offset_right = 86.0
+offset_bottom = 15.016
+grow_horizontal = 2
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_i4mpr")
+theme_override_font_sizes/font_size = 16
+text = "Item type"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Item_description" type="Label" parent="Item_display"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.488
+anchor_right = 0.5
+anchor_bottom = 0.488
+offset_left = -21.0
+offset_top = 5.016
+offset_right = 86.0
+offset_bottom = 42.016
+grow_horizontal = 2
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_i4mpr")
+theme_override_font_sizes/font_size = 16
+text = "Item description"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="gui_input" from="Item_button" to="." method="_on_item_button_gui_input"]
 [connection signal="mouse_entered" from="Item_button" to="." method="_on_item_button_mouse_entered"]
 [connection signal="mouse_exited" from="Item_button" to="." method="_on_item_button_mouse_exited"]
