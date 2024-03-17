@@ -24,13 +24,14 @@ func  _ready():
 
 
 func update(item_slot: InventorySlot):
-	if !item_slot.item:
+	if !item_slot.item or item_slot.amount < 1:
+		contents = null
 		item_visual.visible = false
 		stack_size.visible = false
-	elif item_slot.amount < 1:
-		item_slot.erase()
+		item_details.visible = false
 	else:
 		# Store contained slot. Necessary? Yes, for drag and drop.
+		# TODO Or is it!? clean up if necessary
 		contents = item_slot
 		item_visual.visible = true
 		_set_texture(item_slot)
@@ -50,10 +51,17 @@ func _set_texture(item_slot: InventorySlot):
 		item_visual.frame = item_slot.item.frame
 
 
+func _clear_details():
+	item_name.text = ""
+	item_type.text = ""
+	item_description.text = ""
+
+
 func _set_details(item: ItemResource):
 	item_name.text = item.name
 	item_type.text = item.type
 	item_description.text = item.description
+
 
 func _on_item_button_mouse_entered():
 #	print("Mouse entered button")
@@ -79,5 +87,9 @@ func _on_item_button_gui_input(event):
 			else:
 				slot_bg.modulate = Color(1, 1, 1)
 				drag_end.emit()
-		
+
+
+func _on_button_pressed():
+	contents.decrease()
+	update(contents)
 

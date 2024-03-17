@@ -13,8 +13,6 @@ func _ready():
 	hotbar_inventory.resize(hotbar_size)
 
 
-
-
 func add_hotbar_item(item: InventorySlot):
 	for i in range(hotbar_size):
 		if hotbar_inventory[i] == null:

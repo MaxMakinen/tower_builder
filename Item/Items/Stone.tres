@@ -14,3 +14,4 @@ Hframes = 11
 Vframes = 11
 max_stack_size = 99
 description = "Raw Stone"
+consumable = false

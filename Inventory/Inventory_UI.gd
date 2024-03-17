@@ -65,7 +65,7 @@ func _drop_slot(slot1: Control, slot2: Control):
 		return
 	else:
 		if inventory.swap_items(slot1_index, slot2_index):
-			print("Dropping slot items: ", slot1, slot2_index)
+			print("Dropping slot items: ", slot2, " ", slot2_index)
 
 
 func update_slots():
