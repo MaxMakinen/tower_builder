@@ -15,6 +15,7 @@ var state_machine = StateMachine.new()
 
 # Variables for inventory
 @export var inventory: Inventory
+@export var hotbar: Hotbar
 @onready var inventory_hotbar = $Inventory_hotbar
 
 func _ready():

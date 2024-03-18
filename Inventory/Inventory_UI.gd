@@ -25,6 +25,7 @@ func _process(delta):
 			#player.close_hotbar()
 			open()
 
+
 func _on_drag_start(slot_control: Control):
 	dragged_slot = slot_control
 	print("Drag started from slot: ", dragged_slot)
@@ -49,10 +50,14 @@ func _get_slot_under_mouse() -> Control:
 
 
 func _get_slot_index(slot: Control) -> int:
-	for i in range(grid_container.get_child_count()):
-		if grid_container.get_child(i) == slot:
+	for i in range(slots.size()):
+		if slots[i] == slot:
 			# Valid slot found
 			return i
+#	for i in range(grid_container.get_child_count()):
+#		if grid_container.get_child(i) == slot:
+#			# Valid slot found
+#			return i
 	# Invalid slot
 	return -1
 

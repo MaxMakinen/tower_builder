@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Hotbar" load_steps=3 format=3 uid="uid://b2vo6uwff4xiq"]
+
+[ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/player_inventory.tres" id="1_5cpa2"]
+[ext_resource type="Script" path="res://Hotbar.gd" id="2_l3qhf"]
+
+[resource]
+script = ExtResource("2_l3qhf")
+inventory = ExtResource("1_5cpa2")
+hotbar_slots = Array[Resource("res://Inventory/inventory_slot.gd")]([])
+hotbar_size = 8

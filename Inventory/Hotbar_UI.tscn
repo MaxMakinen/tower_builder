@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://pnocgj46045j"]
 
-[ext_resource type="Script" path="res://Inventory/Hotbar_UI.gd" id="1_pn3su"]
+[ext_resource type="Script" path="res://Inventory/Hotbar_UI.gd" id="1_7y8no"]
 [ext_resource type="Texture2D" uid="uid://dgxs5772wkf8e" path="res://Assets/Free Inventory/Inventory_background.png" id="2_kn8kp"]
 [ext_resource type="PackedScene" uid="uid://chnbtbv1iu5om" path="res://Inventory/inventory_UI_slot.tscn" id="3_44yop"]
 
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_pn3su")
+script = ExtResource("1_7y8no")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(122, 32)
