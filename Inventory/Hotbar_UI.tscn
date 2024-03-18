@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://pnocgj46045j"]
 
-[ext_resource type="Script" path="res://Inventory/Hotbar.gd" id="1_gvqu4"]
-[ext_resource type="Texture2D" uid="uid://dgxs5772wkf8e" path="res://Assets/Free Inventory/Inventory_background.png" id="1_m6xge"]
-[ext_resource type="PackedScene" uid="uid://chnbtbv1iu5om" path="res://Inventory/inventory_UI_slot.tscn" id="3_72f70"]
+[ext_resource type="Script" path="res://Inventory/Hotbar_UI.gd" id="1_pn3su"]
+[ext_resource type="Texture2D" uid="uid://dgxs5772wkf8e" path="res://Assets/Free Inventory/Inventory_background.png" id="2_kn8kp"]
+[ext_resource type="PackedScene" uid="uid://chnbtbv1iu5om" path="res://Inventory/inventory_UI_slot.tscn" id="3_44yop"]
 
-[node name="Inventory_hotbar" type="Control"]
+[node name="Hotbar_UI" type="Control"]
 layout_mode = 3
 anchor_top = 0.877
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_gvqu4")
+script = ExtResource("1_pn3su")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(122, 32)
@@ -30,7 +30,7 @@ offset_right = 61.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("1_m6xge")
+texture = ExtResource("2_kn8kp")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
@@ -53,14 +53,14 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="Inventory_UI_slot" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_72f70")]
+[node name="Inventory_UI_slot" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
 layout_mode = 2
 
-[node name="Inventory_UI_slot2" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_72f70")]
+[node name="Inventory_UI_slot2" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
 layout_mode = 2
 
-[node name="Inventory_UI_slot3" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_72f70")]
+[node name="Inventory_UI_slot3" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
 layout_mode = 2
 
-[node name="Inventory_UI_slot4" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_72f70")]
+[node name="Inventory_UI_slot4" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
 layout_mode = 2

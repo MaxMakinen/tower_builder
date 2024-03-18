@@ -9,9 +9,7 @@ signal inventory_update
 
 
 func _ready():
-	item_slots.resize(inventory_size)
-	for i in range(inventory_size):
-		item_slots[i].slot_update.connect(_update)
+	_resize_inventory()
 
 # Go through inventory and remove items with amount < 1
 func _update():
@@ -51,17 +49,28 @@ func merge_stacks(start_slot: InventorySlot, target_slot: InventorySlot):
 func get_total_amount(item: InventorySlot):
 	pass
 
+# Set new inventory size and then resize inventory slot array
+func set_inventory_size(new_size: int):
+	inventory_size = new_size
+	_resize_inventory()
 
+# Resize inventory size and connect every slots slot_update signal to the _update function
+func _resize_inventory():
+	item_slots.resize(inventory_size)
+	for i in range(inventory_size):
+		item_slots[i].slot_update.connect(_update)
+
+# TODO : Is this used at all?
 func decrease(item: InventorySlot):
 	item.decrease()
 	inventory_update.emit()
 
+# TODO : Is this used at all?
 func increase(item: InventorySlot):
 	item.increase()
 	inventory_update.emit()
 
-
-# Swap items_slots in inventory based on their indices
+# Swap item_slots in inventory array based on their indices
 func swap_items(index1, index2):
 	if index1 < 0 or index1 > inventory_size or index2 < 0 or index2 > inventory_size:
 		return false

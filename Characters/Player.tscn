@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://db73depc0bi7i" path="res://Assets/Willibab's Simple Weapon Icons/Hand_axe.png" id="4_ampx0"]
 [ext_resource type="Texture2D" uid="uid://cpdgjhxbnm5bp" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/char_a_p1_0bas_humn_v01.png" id="4_mtkeh"]
 [ext_resource type="Texture2D" uid="uid://bmddjfh8fkua5" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/5hat/char_a_p1_5hat_pnty_v04.png" id="4_u0jp0"]
-[ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/Hotbar.tscn" id="9_3xo03"]
+[ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/Hotbar_UI.tscn" id="9_3xo03"]
 [ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/inventory_UI.tscn" id="10_ige18"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4eia"]

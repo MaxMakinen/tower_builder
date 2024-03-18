@@ -20,9 +20,7 @@ func add_hotbar_item(item: InventorySlot):
 			return true
 	return false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
 # Get the slot under the mouse if applicable
 func _get_slot_under_mouse() -> Control:
 	var mouse_position = get_global_mouse_position()
