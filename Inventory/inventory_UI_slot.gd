@@ -1,4 +1,4 @@
-class_name InventorySlot
+class_name InventoryUISlot
 extends PanelContainer
 
 
@@ -19,6 +19,7 @@ extends PanelContainer
 # Signals
 signal drag_start(slot)
 signal drag_end()
+signal selected(slot)
 
 # Contained item and item stack size
 var contents: InventorySlot = null
