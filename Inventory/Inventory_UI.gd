@@ -29,16 +29,6 @@ func toggle():
 		open()
 
 
-#func _process(delta):
-#	if Input.is_action_just_pressed("inventory"):
-#		if is_open:
-#			#player.open_hotbar()
-#			close()
-#		else:
-#			#player.close_hotbar()
-#			open()
-
-
 func _on_drag_start(slot_control: PanelContainer):
 	dragged_slot = slot_control
 	print("Drag started from slot: ", dragged_slot)

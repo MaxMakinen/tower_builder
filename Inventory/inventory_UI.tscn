@@ -66,7 +66,7 @@ theme = ExtResource("6_5tr4t")
 layout_mode = 2
 
 [node name="Description" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
-custom_minimum_size = Vector2(88, 88)
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 text = "Default Description"
 autowrap_mode = 1
