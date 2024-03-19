@@ -83,6 +83,10 @@ func _on_item_button_mouse_exited():
 func _toggle_selected():
 	slot_selected = !slot_selected
 
+func unselect():
+	slot_selected = false
+	selection.visible = false
+
 func _on_item_button_gui_input(event):
 	if event is InputEventMouseButton:
 		# Details display
@@ -91,7 +95,7 @@ func _on_item_button_gui_input(event):
 				#item_details.visible = !item_details.visible
 				_toggle_selected()
 				selected.emit(self)
-		# Draggin item
+		# Dragging item
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.is_pressed():
 				slot_background.modulate = Color(0.8, 0.8, 1)

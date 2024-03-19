@@ -1,9 +1,10 @@
 extends Control
 
 @export var inventory: Inventory
-
-@onready var grid_container = %GridContainer
 @export var slot_scene: PackedScene
+
+@onready var description = %Description
+@onready var grid_container = %GridContainer
 
 # Ensure inventory starts closed
 var is_open := false
@@ -13,6 +14,7 @@ var dragged_slot: InventoryUISlot = null
 var selected_slot: InventoryUISlot = null
 
 func _ready():
+	description.text = ""
 	for item in inventory.get_items():
 		var slot = slot_scene.instantiate()
 		grid_container.add_child(slot)
@@ -79,7 +81,19 @@ func _drop_slot(slot1: InventoryUISlot, slot2: InventoryUISlot):
 
 
 func _select_slot(slot: InventoryUISlot):
+	if selected_slot != null and selected_slot != slot:
+		selected_slot.unselect()
+		print("Option 1")
+	elif selected_slot == slot:
+		print("Option 2")
+		description.text = ""
+		selected_slot = null
+		return
 	selected_slot = slot
+	description.text = slot.contents.item.description
+#	item_name.text = item.name
+#	item_type.text = item.type
+#	item_description.text = item.description
 
 func update_slots():
 	var slots: Array = %GridContainer.get_children()
