@@ -9,8 +9,8 @@ extends Control
 var is_open := false
 
 # Drag and Drop
-var dragged_slot: PanelContainer = null
-
+var dragged_slot: InventorySlot = null
+var selected_slot: InventorySlot = null
 
 func _ready():
 	for item in inventory.get_items():
@@ -29,7 +29,7 @@ func toggle():
 		open()
 
 
-func _on_drag_start(slot_control: PanelContainer):
+func _on_drag_start(slot_control: InventorySlot):
 	dragged_slot = slot_control
 	print("Drag started from slot: ", dragged_slot)
 
@@ -43,7 +43,7 @@ func _on_drag_end():
 
 
 # Get the slot under the mouse if applicable
-func _get_slot_under_mouse() -> PanelContainer:
+func _get_slot_under_mouse() -> InventorySlot:
 	var mouse_position = get_global_mouse_position()
 	var slots: Array = %GridContainer.get_children()
 	for slot in slots:
@@ -53,7 +53,7 @@ func _get_slot_under_mouse() -> PanelContainer:
 	return null
 
 
-func _get_slot_index(slot: PanelContainer) -> int:
+func _get_slot_index(slot: InventorySlot) -> int:
 	var slots: Array = %GridContainer.get_children()
 	for i in range(slots.size()):
 		if slots[i] == slot:
@@ -67,7 +67,7 @@ func _get_slot_index(slot: PanelContainer) -> int:
 	return -1
 
 
-func _drop_slot(slot1: PanelContainer, slot2: PanelContainer):
+func _drop_slot(slot1: InventorySlot, slot2: InventorySlot):
 	var slot1_index = _get_slot_index(slot1)
 	var slot2_index = _get_slot_index(slot2)
 	if slot1_index == -1 or slot2_index == -1:
@@ -78,9 +78,13 @@ func _drop_slot(slot1: PanelContainer, slot2: PanelContainer):
 			print("Dropping slot items: ", slot2, " ", slot2_index)
 
 
+func _select_slot(slot: InventorySlot):
+	selected_slot = slot
+
 func update_slots():
 	var slots: Array = %GridContainer.get_children()
 	for i in range(min(inventory.item_slots.size(), inventory.inventory_size)):
+		slots[i].selected.connect(_select_slot)
 		slots[i].drag_start.connect(_on_drag_start)
 		slots[i].drag_end.connect(_on_drag_end)
 		slots[i].update(inventory.item_slots[i])
