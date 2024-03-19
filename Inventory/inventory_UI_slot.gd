@@ -23,7 +23,7 @@ signal selected(slot)
 
 # Contained item and item stack size
 var contents: InventorySlot = null
-
+var slot_selected: bool = false
 
 func  _ready():
 	# Ensure item_details starts out invisible for all slots
@@ -77,15 +77,20 @@ func _on_item_button_mouse_entered():
 
 func _on_item_button_mouse_exited():
 #	print("Mouse exited button")
-	selection.visible = false
+	if slot_selected == false:
+		selection.visible = false
 
+func _toggle_selected():
+	slot_selected = !slot_selected
 
 func _on_item_button_gui_input(event):
 	if event is InputEventMouseButton:
 		# Details display
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			if contents != null:
-				item_details.visible = !item_details.visible
+				#item_details.visible = !item_details.visible
+				_toggle_selected()
+				selected.emit(self)
 		# Draggin item
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.is_pressed():
