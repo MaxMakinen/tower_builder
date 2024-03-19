@@ -54,6 +54,7 @@ offset_bottom = 20.0
 flat = true
 
 [node name="Item_details" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.543

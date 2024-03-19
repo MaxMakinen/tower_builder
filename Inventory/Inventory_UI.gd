@@ -1,9 +1,9 @@
 extends Control
 
-@onready var inventory: Inventory = preload("res://Inventory/player_inventory.tres")
-@onready var grid_container = $Inventory_BG/GridContainer
-@onready var slots: Array = $Inventory_BG/GridContainer.get_children()
-#@onready var player = get_tree().get_first_node_in_group("player")
+@export var inventory: Inventory
+
+@onready var grid_container = %GridContainer
+@export var slot_scene: PackedScene
 
 # Ensure inventory starts closed
 var is_open := false
@@ -11,19 +11,32 @@ var is_open := false
 # Drag and Drop
 var dragged_slot: Control = null
 
+
 func _ready():
+	for item in inventory.get_items():
+		var slot = slot_scene.instantiate()
+		grid_container.add_child(slot)
+
 	inventory.inventory_update.connect(update_slots)
 	update_slots()
 	close()
 
-func _process(delta):
-	if Input.is_action_just_pressed("inventory"):
-		if is_open:
-			#player.open_hotbar()
-			close()
-		else:
-			#player.close_hotbar()
-			open()
+# Toggle if inventory open or closed
+func toggle():
+	if is_open == true:
+		close()
+	else:
+		open()
+
+
+#func _process(delta):
+#	if Input.is_action_just_pressed("inventory"):
+#		if is_open:
+#			#player.open_hotbar()
+#			close()
+#		else:
+#			#player.close_hotbar()
+#			open()
 
 
 func _on_drag_start(slot_control: Control):
@@ -42,6 +55,7 @@ func _on_drag_end():
 # Get the slot under the mouse if applicable
 func _get_slot_under_mouse() -> Control:
 	var mouse_position = get_global_mouse_position()
+	var slots: Array = %GridContainer.get_children()
 	for slot in slots:
 		var slot_rect = Rect2(slot.global_position, slot.size)
 		if slot_rect.has_point(mouse_position):
@@ -50,6 +64,7 @@ func _get_slot_under_mouse() -> Control:
 
 
 func _get_slot_index(slot: Control) -> int:
+	var slots: Array = %GridContainer.get_children()
 	for i in range(slots.size()):
 		if slots[i] == slot:
 			# Valid slot found
@@ -74,7 +89,8 @@ func _drop_slot(slot1: Control, slot2: Control):
 
 
 func update_slots():
-	for i in range(min(inventory.item_slots.size(), slots.size())):
+	var slots: Array = %GridContainer.get_children()
+	for i in range(min(inventory.item_slots.size(), inventory.inventory_size)):
 		slots[i].drag_start.connect(_on_drag_start)
 		slots[i].drag_end.connect(_on_drag_end)
 		slots[i].update(inventory.item_slots[i])

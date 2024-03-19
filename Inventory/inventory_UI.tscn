@@ -1,76 +1,76 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4ugmt28rldcf"]
+[gd_scene load_steps=7 format=3 uid="uid://b4ugmt28rldcf"]
 
 [ext_resource type="Script" path="res://Inventory/Inventory_UI.gd" id="1_v5wc4"]
-[ext_resource type="Texture2D" uid="uid://dgxs5772wkf8e" path="res://Assets/Free Inventory/Inventory_background.png" id="2_kj1jn"]
+[ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/player_inventory.tres" id="2_87n84"]
 [ext_resource type="PackedScene" uid="uid://chnbtbv1iu5om" path="res://Inventory/inventory_UI_slot.tscn" id="3_pb2wv"]
+[ext_resource type="FontFile" uid="uid://cnrntny6vvh8t" path="res://Assets/Fonts/Terminus.ttf" id="3_t86iy"]
+[ext_resource type="Theme" uid="uid://2u22t484dthy" path="res://Inventory/inventory_theme.tres" id="5_sid8s"]
+[ext_resource type="Theme" uid="uid://clr1uetrq7vum" path="res://Inventory/description_theme.tres" id="6_5tr4t"]
 
 [node name="Inventory_UI" type="Control"]
 custom_minimum_size = Vector2(104, 56)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 104.0
-offset_bottom = 56.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-script = ExtResource("1_v5wc4")
-
-[node name="Inventory_BG" type="NinePatchRect" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -52.0
-offset_top = -28.0
-offset_right = 52.0
-offset_bottom = 28.0
+offset_top = -35.0
+offset_right = 155.0
+offset_bottom = 107.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
-texture = ExtResource("2_kj1jn")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+script = ExtResource("1_v5wc4")
+inventory = ExtResource("2_87n84")
+slot_scene = ExtResource("3_pb2wv")
 
-[node name="GridContainer" type="GridContainer" parent="Inventory_BG"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -22.0
-offset_right = 46.0
-offset_bottom = 22.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("5_sid8s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TitleBar" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/TitleBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer/TitleBar"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_t86iy")
+theme_override_font_sizes/font_size = 12
+text = "X"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_5tr4t")
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 columns = 4
 
-[node name="Inventory_UI_slot1" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
-mouse_filter = 1
-
-[node name="Inventory_UI_slot2" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot3" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot4" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot5" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot6" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot7" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot8" parent="Inventory_BG/GridContainer" instance=ExtResource("3_pb2wv")]
-layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6

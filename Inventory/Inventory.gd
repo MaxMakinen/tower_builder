@@ -11,6 +11,9 @@ signal inventory_update
 func _ready():
 	_resize_inventory()
 
+func get_items() -> Array[InventorySlot]:
+	return item_slots
+
 # Go through inventory and remove items with amount < 1
 func _update():
 	for i in range(inventory_size):

@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://clr1uetrq7vum"]
+
+[ext_resource type="FontFile" uid="uid://cnrntny6vvh8t" path="res://Assets/Fonts/Terminus.ttf" id="1_s7usu"]
+[ext_resource type="Texture2D" uid="uid://bgbdwbe6tv7ue" path="res://Assets/GUI_Essential_Free/01_Basic_Collection/01_Flat_Theme/Sprites/UI_Flat_Banner_01_Downward.png" id="2_vvbxr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tkv78"]
+texture = ExtResource("2_vvbxr")
+texture_margin_left = 18.0
+texture_margin_top = 9.0
+texture_margin_right = 18.0
+texture_margin_bottom = 14.0
+
+[resource]
+Label/fonts/font = ExtResource("1_s7usu")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_tkv78")
+TextEdit/fonts/font = ExtResource("1_s7usu")

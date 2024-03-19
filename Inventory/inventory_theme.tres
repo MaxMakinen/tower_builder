@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://2u22t484dthy"]
+
+[ext_resource type="FontFile" uid="uid://b61ct7pq2o716" path="res://Assets/Fonts/VecTerminus12Medium.otf" id="1_13of0"]
+[ext_resource type="Texture2D" uid="uid://dgxs5772wkf8e" path="res://Assets/Free Inventory/Inventory_background.png" id="2_j6hpg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cyj6e"]
+texture = ExtResource("2_j6hpg")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[resource]
+Label/font_sizes/font_size = 48
+Label/fonts/font = ExtResource("1_13of0")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_cyj6e")

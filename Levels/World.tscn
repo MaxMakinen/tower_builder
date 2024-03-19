@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=11 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bcby2itgxncpx" path="res://Resource nodes/Wood_resource_node.tscn" id="6_i7vp6"]
 [ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="6_koy8y"]
 [ext_resource type="PackedScene" uid="uid://b7ojf8yo08dm2" path="res://Resource nodes/Ore_resource_node.tscn" id="7_sdoew"]
+[ext_resource type="Script" path="res://Levels/UI_Root.gd" id="8_a8ilv"]
 [ext_resource type="PackedScene" uid="uid://dj47x0fv27j0j" path="res://Resource nodes/Stone_resource_node.tscn" id="8_xru8f"]
+[ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/inventory_UI.tscn" id="9_4pq7l"]
+[ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/Hotbar_UI.tscn" id="10_vgurw"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -46,8 +49,17 @@ z_index = 1
 position = Vector2(599, 145)
 
 [node name="Player" parent="." instance=ExtResource("2_wednm")]
+unique_name_in_owner = true
 z_index = 1
 position = Vector2(501, 163)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+
+[node name="UI_Root" type="CanvasLayer" parent="."]
+script = ExtResource("8_a8ilv")
+
+[node name="Inventory_UI" parent="UI_Root" instance=ExtResource("9_4pq7l")]
+unique_name_in_owner = true
+
+[node name="Hotbar_UI" parent="UI_Root" instance=ExtResource("10_vgurw")]
