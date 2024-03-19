@@ -15,10 +15,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -35.0
-offset_right = 155.0
-offset_bottom = 107.0
+offset_left = -114.0
+offset_top = -112.5
+offset_right = 114.0
+offset_bottom = 112.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -58,9 +58,28 @@ text = "X"
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ItemDescription" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_5tr4t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+layout_mode = 2
+text = "Default Description"
+autowrap_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Use"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Drop"
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
