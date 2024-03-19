@@ -9,7 +9,7 @@ extends Control
 var is_open := false
 
 # Drag and Drop
-var dragged_slot: Control = null
+var dragged_slot: PanelContainer = null
 
 
 func _ready():
@@ -39,7 +39,7 @@ func toggle():
 #			open()
 
 
-func _on_drag_start(slot_control: Control):
+func _on_drag_start(slot_control: PanelContainer):
 	dragged_slot = slot_control
 	print("Drag started from slot: ", dragged_slot)
 
@@ -53,7 +53,7 @@ func _on_drag_end():
 
 
 # Get the slot under the mouse if applicable
-func _get_slot_under_mouse() -> Control:
+func _get_slot_under_mouse() -> PanelContainer:
 	var mouse_position = get_global_mouse_position()
 	var slots: Array = %GridContainer.get_children()
 	for slot in slots:
@@ -63,7 +63,7 @@ func _get_slot_under_mouse() -> Control:
 	return null
 
 
-func _get_slot_index(slot: Control) -> int:
+func _get_slot_index(slot: PanelContainer) -> int:
 	var slots: Array = %GridContainer.get_children()
 	for i in range(slots.size()):
 		if slots[i] == slot:
@@ -77,7 +77,7 @@ func _get_slot_index(slot: Control) -> int:
 	return -1
 
 
-func _drop_slot(slot1: Control, slot2: Control):
+func _drop_slot(slot1: PanelContainer, slot2: PanelContainer):
 	var slot1_index = _get_slot_index(slot1)
 	var slot2_index = _get_slot_index(slot2)
 	if slot1_index == -1 or slot2_index == -1:

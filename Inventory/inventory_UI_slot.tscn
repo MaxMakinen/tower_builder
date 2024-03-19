@@ -7,11 +7,9 @@
 [ext_resource type="FontFile" uid="uid://b61ct7pq2o716" path="res://Assets/Fonts/VecTerminus12Medium.otf" id="5_yc6d8"]
 [ext_resource type="FontFile" uid="uid://bhwwqpsq4uit6" path="res://Assets/Fonts/unifont.ttf" id="6_i4mpr"]
 
-[node name="Inventory_UI_slot" type="Control"]
+[node name="Inventory_UI_slot" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 20)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("1_qn2uv")
@@ -22,9 +20,7 @@ centered = false
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(20, 20)
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="Panel" type="Panel" parent="CenterContainer"]
 layout_mode = 2
@@ -48,23 +44,12 @@ centered = false
 
 [node name="Item_button" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 20.0
+layout_mode = 2
 flat = true
 
 [node name="Item_details" type="NinePatchRect" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.543
-anchor_top = -2.193
-anchor_right = 1.596
-anchor_bottom = -0.408
-offset_left = -16.14
-offset_top = -5.14
-offset_right = 15.08
-offset_bottom = 2.16
+layout_mode = 2
 texture = ExtResource("4_ct1o2")
 region_rect = Rect2(0, 3, 96, 22)
 patch_margin_left = 18

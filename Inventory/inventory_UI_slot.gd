@@ -1,4 +1,4 @@
-extends Control
+extends PanelContainer
 
 
 @onready var slot_bg: Sprite2D = $Slot_bg
