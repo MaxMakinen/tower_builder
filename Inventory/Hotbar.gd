@@ -43,7 +43,6 @@ func _resize_hotbar():
 func _update():
 	for i in range(hotbar_size):
 		if hotbar_slots[i].amount < 1:
-			hotbar_slots[i].modulate()
 			_erase(hotbar_slots[i])
 
 # Remove target item from hotbar array
@@ -76,8 +75,21 @@ func activate(item: InventorySlot):
 func insert_at(item: InventorySlot, index: int):
 	pass
 
+#func old_insert(item: ItemResource):
+#	var slots = item_slots.filter(func(slot): return slot.item == item)
+#	if !slots.is_empty():
+#		slots[0].amount += 1
+#	else:
+#		var emptyslots = item_slots.filter(func(slot): return slot.item == null)
+#		if !emptyslots.is_empty():
+#			emptyslots[0].item = item
+#			emptyslots[0].amount = 1
+#	hotbar_update.emit()
+
+
 # TODO : Insert item at first empty slot in hotbar array, else return false
 func insert(item: InventorySlot):
+	insert_at(item, 0)
 	pass
 
 # TODO : Switch between hotbars in case we implement multiple hotbars

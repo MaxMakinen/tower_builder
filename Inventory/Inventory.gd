@@ -58,9 +58,13 @@ func split_stack_to_size(item: InventorySlot, size: int):
 func merge_stacks(start_slot: InventorySlot, target_slot: InventorySlot):
 	pass
 
-# TODO : Get total amount of all stacks of same item
-func get_total_amount(item: InventorySlot):
-	pass
+# Get total amount of all stacks of same item
+func get_total_amount(target: InventorySlot) -> int:
+	var total: int = 0
+	for item in item_slots:
+		if target.item == item.item:
+			total += item.amount
+	return total
 
 ## TODO : Is this used at all?
 #func decrease(item: InventorySlot):

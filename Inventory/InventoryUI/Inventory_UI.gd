@@ -99,7 +99,9 @@ func _select_slot(slot: InventoryUISlot):
 
 func _update_slots():
 	var slots: Array = %GridContainer.get_children()
+	print("Inv_UI _update_slots slots array : ")
 	for i in range(min(inventory.item_slots.size(), inventory.inventory_size)):
+		print("Slot ", i, " : ", slots[i].contents)
 		slots[i].selected.connect(_select_slot)
 		slots[i].drag_start.connect(_on_drag_start)
 		slots[i].drag_end.connect(_on_drag_end)
@@ -114,4 +116,12 @@ func open():
 func close():
 	visible = false
 	is_open = false
+
+
+
+
+func _on_button_pressed():
+	print("Inventory contents : ")
+	for item in inventory.item_slots:
+		print("item : ", item.item, " amount : ", item.amount)
 

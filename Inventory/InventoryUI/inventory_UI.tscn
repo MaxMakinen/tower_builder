@@ -75,11 +75,11 @@ autowrap_mode = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
+[node name="UseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Use"
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
+[node name="DropButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Drop"
 
@@ -95,3 +95,5 @@ theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer/UseButton" to="." method="_on_button_pressed"]

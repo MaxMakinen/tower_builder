@@ -47,7 +47,6 @@ func _connect_to_inventory():
 	for i in range(min(inventory.item_slots.size(), inventory.inventory_size)):
 		slots[i].drag_start.connect(_on_drag_start)
 		slots[i].drag_end.connect(_on_drag_end)
-		slots[i].update(inventory.item_slots[i])
 
 
 func _on_drag_start(slot_control: Control):
@@ -64,7 +63,7 @@ func _on_drag_end():
 
 # TODO : BORKED WED 20.3.2024
 func _get_slot_index(slot: Control) -> int:
-	var slots: Array = $NinePatchRect/HBoxContainer.get_children()
+	var slots: Array = %SlotContainer.get_children()
 	for i in range(slots.size()):
 		if slots[i] == slot:
 			# Valid slot found
