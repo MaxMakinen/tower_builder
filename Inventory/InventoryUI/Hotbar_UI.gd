@@ -3,9 +3,6 @@ extends Control
 @export var inventory: Inventory
 @export var hotbar: Hotbar = null
 @export var slot_scene: PackedScene
-
-#@onready var slot_container = $NinePatchRect/HBoxContainer
-#@onready var slots: Array = $NinePatchRect/HBoxContainer.get_children()
 @onready var slot_container = %SlotContainer
 
 
@@ -17,7 +14,6 @@ func _ready():
 	if hotbar == null:
 		hotbar = Hotbar.new(inventory)
 	_populate_grid()
-#	hotbar.hotbar_update.connect(update_slots)
 	update_slots()
 
 func _populate_grid():

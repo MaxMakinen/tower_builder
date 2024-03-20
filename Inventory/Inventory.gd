@@ -62,23 +62,20 @@ func merge_stacks(start_slot: InventorySlot, target_slot: InventorySlot):
 func get_total_amount(item: InventorySlot):
 	pass
 
-# TODO : Is this used at all?
-func decrease(item: InventorySlot):
-	item.decrease()
-	inventory_update.emit()
-
-# TODO : Is this used at all?
-func increase(item: InventorySlot):
-	item.increase()
-	inventory_update.emit()
+## TODO : Is this used at all?
+#func decrease(item: InventorySlot):
+#	item.decrease()
+#	inventory_update.emit()
+#
+## TODO : Is this used at all?
+#func increase(item: InventorySlot):
+#	item.increase()
+#	inventory_update.emit()
 
 # Swap item_slots in inventory array based on their indices
-func swap_items(index1, index2):
+func swap_items(index1, index2) -> bool:
 	if index1 < 0 or index1 > inventory_size or index2 < 0 or index2 > inventory_size:
 		return false
-	# TODO remove print statements
-	print("index1: ", index1 ," slot1: ", item_slots[index1])
-	print("index2: ", index2, " slot2: ", item_slots[index2])
 	var temp_slot = item_slots[index1]
 	item_slots[index1] = item_slots[index2]
 	item_slots[index2] = temp_slot
