@@ -39,6 +39,17 @@ func insert(item: ItemResource):
 			emptyslots[0].amount = 1
 	inventory_update.emit()
 
+# Set new inventory size and then resize inventory slot array
+func set_inventory_size(new_size: int):
+	inventory_size = new_size
+	_resize_inventory()
+
+# Resize inventory size and connect every slots slot_update signal to the _update function
+func _resize_inventory():
+	item_slots.resize(inventory_size)
+	for i in range(inventory_size):
+		item_slots[i].slot_update.connect(_update)
+
 # TODO : Split existing stack into new stack of size x and reduce amount of original stack. Retun new stack.
 func split_stack_to_size(item: InventorySlot, size: int):
 	pass
@@ -50,17 +61,6 @@ func merge_stacks(start_slot: InventorySlot, target_slot: InventorySlot):
 # TODO : Get total amount of all stacks of same item
 func get_total_amount(item: InventorySlot):
 	pass
-
-# Set new inventory size and then resize inventory slot array
-func set_inventory_size(new_size: int):
-	inventory_size = new_size
-	_resize_inventory()
-
-# Resize inventory size and connect every slots slot_update signal to the _update function
-func _resize_inventory():
-	item_slots.resize(inventory_size)
-	for i in range(inventory_size):
-		item_slots[i].slot_update.connect(_update)
 
 # TODO : Is this used at all?
 func decrease(item: InventorySlot):

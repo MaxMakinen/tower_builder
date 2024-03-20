@@ -2,14 +2,8 @@ class_name InventoryUISlot
 extends PanelContainer
 
 
-#@onready var item_visual = %ItemDisplay
 @onready var item_visual = %Item_display
-
 @onready var slot_background = %SlotBackground
-#@onready var item_visual: Sprite2D = $CenterContainer/Panel/Item_display
-#@onready var selection: Sprite2D = $CenterContainer/Panel/Selection
-#@onready var stack_size: Label = $CenterContainer/Panel/Stack_size
-
 @onready var item_description: Label = $Item_details/Item_description
 @onready var selection = %Selection
 @onready var stack_size = %Stack_size
@@ -22,6 +16,7 @@ signal selected(slot)
 # Contained item and item stack size
 var contents: InventorySlot = null
 var slot_selected: bool = false
+var slot_highlighted: bool = false
 
 func  _ready():
 	# Ensure item_details starts out invisible for all slots
@@ -29,6 +24,9 @@ func  _ready():
 
 
 func update(item_slot: InventorySlot):
+	if !item_slot:
+		print("Item_slot = null : ", item_slot)
+		return
 	if !item_slot.item or item_slot.amount < 1:
 		contents = null
 		item_visual.visible = false
@@ -56,18 +54,25 @@ func _set_texture(item_slot: InventorySlot):
 
 func _on_item_button_mouse_entered():
 #	print("Mouse entered button")
-	selection.visible = true
+	slot_highlighted = true
+	highlight_slot()
+	#selection.visible = true
 
 
 func _on_item_button_mouse_exited():
 #	print("Mouse exited button")
-	if slot_selected == false:
-		selection.visible = false
+	slot_highlighted = false
+	highlight_slot()
+#	if slot_selected == false:
+#		selection.visible = false
 
 
 func _toggle_selected():
 	slot_selected = !slot_selected
-
+	if slot_selected == false:
+		selection.visible = false
+	else:
+		selection.visible = true
 
 func unselect():
 	slot_selected = false
@@ -85,10 +90,17 @@ func _on_item_button_gui_input(event):
 		# Dragging item
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.is_pressed():
+				#highlight_slot()
 				slot_background.modulate = Color(0.8, 0.8, 1)
 				drag_start.emit(self)
 			else:
+				#highlight_slot()
 				slot_background.modulate = Color(1, 1, 1)
 				drag_end.emit()
 
-
+func highlight_slot():
+	#slot_highlighted = !slot_highlighted
+	if slot_highlighted:
+		slot_background.modulate = Color(0.9, 0.8, 0.8)
+	else:
+		slot_background.modulate = Color(1, 1, 1)

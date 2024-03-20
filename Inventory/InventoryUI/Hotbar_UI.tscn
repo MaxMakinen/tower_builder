@@ -1,16 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://pnocgj46045j"]
 
 [ext_resource type="Script" path="res://Inventory/InventoryUI/Hotbar_UI.gd" id="1_7y8no"]
-[ext_resource type="Texture2D" uid="uid://dgxs5772wkf8e" path="res://Assets/Free Inventory/Inventory_background.png" id="2_kn8kp"]
 [ext_resource type="PackedScene" uid="uid://chnbtbv1iu5om" path="res://Inventory/InventoryUI/inventory_UI_slot.tscn" id="3_44yop"]
 [ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/InventoryResources/player_inventory.tres" id="3_olxnn"]
+[ext_resource type="Theme" uid="uid://2u22t484dthy" path="res://Inventory/InventoryUI/inventory_theme.tres" id="4_12odq"]
 
 [node name="Hotbar_UI" type="Control"]
 layout_mode = 3
-anchor_top = 0.877
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.296021
+offset_top = -48.0
+offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -18,52 +20,24 @@ size_flags_vertical = 4
 script = ExtResource("1_7y8no")
 inventory = ExtResource("3_olxnn")
 hotbar = ExtResource("3_olxnn")
+slot_scene = ExtResource("3_44yop")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(122, 32)
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -61.0
-offset_top = -40.0
-offset_right = 61.0
-offset_bottom = -8.0
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_kn8kp")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+grow_vertical = 2
+theme = ExtResource("4_12odq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -55.0
-offset_top = -26.0
-offset_right = 55.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="SlotContainer" type="HBoxContainer" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_constants/separation = 10
-
-[node name="Inventory_UI_slot" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot2" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot3" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
-layout_mode = 2
-
-[node name="Inventory_UI_slot4" parent="NinePatchRect/HBoxContainer" instance=ExtResource("3_44yop")]
-layout_mode = 2

@@ -14,17 +14,28 @@ signal hotbar_update
 
 func _ready():
 	_resize_hotbar()
+	for i in range(hotbar_size):
+		#TODO : Does this do anything? Find better way to cxonnect slots to bar
+		hotbar_slots[i].slot_update.connect(_update)
 
 func set_hotbar_size(new_size: int):
 	hotbar_size = new_size
 	_resize_hotbar()
 
+func _init(new_inventory: Inventory):
+	inventory = new_inventory
+	_resize_hotbar()
+
+func get_hotbar_slots():
+	return hotbar_slots
+
 # Resize inventory size and connect every slots slot_update signal to the _update function
 func _resize_hotbar():
 	hotbar_slots.resize(hotbar_size)
-	for i in range(hotbar_size):
-		#TODO : Does this do anything?
-		hotbar_slots[i].slot_update.connect(_update)
+#	for i in range(hotbar_size):
+#		#TODO : Does this do anything? Find better way to cxonnect slots to bar
+#		hotbar_slots[i].slot_update.connect(_update)
+#		pass
 
 
 #region Hotbar shit TODO : Don't remove anything. Modulate to Grey/Dark if stack_size hits 0. Even if stack disappears from inventory.
@@ -32,6 +43,7 @@ func _resize_hotbar():
 func _update():
 	for i in range(hotbar_size):
 		if hotbar_slots[i].amount < 1:
+			hotbar_slots[i].modulate()
 			_erase(hotbar_slots[i])
 
 # Remove target item from hotbar array
