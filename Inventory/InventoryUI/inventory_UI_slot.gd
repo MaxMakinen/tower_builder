@@ -24,9 +24,6 @@ func  _ready():
 
 
 func update(item_slot: InventorySlot):
-	if !item_slot:
-		print("Item_slot = null : ", item_slot)
-		return
 	if !item_slot.item or item_slot.amount < 1:
 		contents = null
 		item_visual.visible = false

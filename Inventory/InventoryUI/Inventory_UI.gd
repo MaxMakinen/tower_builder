@@ -59,7 +59,7 @@ func _get_slot_under_mouse() -> InventoryUISlot:
 
 func _get_slot_index(slot: InventoryUISlot) -> int:
 	var slots: Array = %GridContainer.get_children()
-	for i in range(slots.size()):
+	for i in range(min(slots.size(), inventory.inventory_size)):
 		if slots[i] == slot:
 			# Valid slot found
 			return i
@@ -85,9 +85,7 @@ func _drop_slot(slot1: InventoryUISlot, slot2: InventoryUISlot):
 func _select_slot(slot: InventoryUISlot):
 	if selected_slot != null and selected_slot != slot:
 		selected_slot.unselect()
-		print("Option 1")
 	elif selected_slot == slot:
-		print("Option 2")
 		description.text = ""
 		selected_slot = null
 		return
@@ -99,9 +97,7 @@ func _select_slot(slot: InventoryUISlot):
 
 func _update_slots():
 	var slots: Array = %GridContainer.get_children()
-	print("Inv_UI _update_slots slots array : ")
 	for i in range(min(inventory.item_slots.size(), inventory.inventory_size)):
-		print("Slot ", i, " : ", slots[i].contents)
 		slots[i].selected.connect(_select_slot)
 		slots[i].drag_start.connect(_on_drag_start)
 		slots[i].drag_end.connect(_on_drag_end)
@@ -123,5 +119,7 @@ func close():
 func _on_button_pressed():
 	print("Inventory contents : ")
 	for item in inventory.item_slots:
+		if item.item:
+			print("name : ", item.item.name)
 		print("item : ", item.item, " amount : ", item.amount)
 

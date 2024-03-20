@@ -15,9 +15,10 @@ func get_items() -> Array[InventorySlot]:
 
 # Go through inventory and remove items with amount < 1
 func _update():
-	for i in range(inventory_size):
-		if item_slots[i].amount < 1:
-			_erase(item_slots[i])
+	for item in item_slots:
+		if item.amount < 1:
+			print("erased ", item.item)
+			_erase(item)
 
 # Empty out inventory slot
 func _erase(slot: InventorySlot):
@@ -49,6 +50,7 @@ func _resize_inventory():
 	item_slots.resize(inventory_size)
 	for i in range(inventory_size):
 		item_slots[i].slot_update.connect(_update)
+	_update()
 
 # TODO : Split existing stack into new stack of size x and reduce amount of original stack. Retun new stack.
 func split_stack_to_size(item: InventorySlot, size: int):

@@ -26,15 +26,22 @@ func _init(new_inventory: Inventory):
 	inventory = new_inventory
 	_resize_hotbar()
 
+func _populate_hotbar():
+	for i in hotbar_size:
+		if hotbar_slots[i] == null:
+			hotbar_slots[i] = InventorySlot.new()
+
+
 func get_hotbar_slots():
 	return hotbar_slots
 
 # Resize inventory size and connect every slots slot_update signal to the _update function
 func _resize_hotbar():
 	hotbar_slots.resize(hotbar_size)
-#	for i in range(hotbar_size):
+	_populate_hotbar()
+	for i in range(hotbar_size):
 #		#TODO : Does this do anything? Find better way to cxonnect slots to bar
-#		hotbar_slots[i].slot_update.connect(_update)
+		hotbar_slots[i].slot_update.connect(_update)
 #		pass
 
 

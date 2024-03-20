@@ -19,7 +19,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_7y8no")
 inventory = ExtResource("3_olxnn")
-hotbar = ExtResource("3_olxnn")
 slot_scene = ExtResource("3_44yop")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
