@@ -1,10 +1,10 @@
 extends Control
 
-@onready var inventory: Inventory = preload("res://Inventory/player_inventory.tres")
-@onready var hotbar: Hotbar = preload("res://Inventory/player_hotbar.tres")
+@export var inventory: Inventory
+@export var hotbar: Hotbar = null
+
 @onready var slot_container = $NinePatchRect/HBoxContainer
 @onready var slots: Array = $NinePatchRect/HBoxContainer.get_children()
-
 
 
 # Drag and Drop
@@ -12,6 +12,8 @@ var dragged_slot: Control = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if hotbar == null:
+		hotbar = Hotbar.new()
 	hotbar.hotbar_update.connect(update_slots)
 	update_slots()
 

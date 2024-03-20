@@ -7,7 +7,6 @@ signal inventory_update
 @export var item_slots: Array[InventorySlot]
 @export var inventory_size: int = 8
 
-
 func _ready():
 	_resize_inventory()
 

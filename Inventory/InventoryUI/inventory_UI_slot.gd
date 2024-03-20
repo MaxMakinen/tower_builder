@@ -40,6 +40,7 @@ func update(item_slot: InventorySlot):
 		item_visual.visible = true
 		_set_texture(item_slot)
 
+
 func _set_texture(item_slot: InventorySlot):
 	item_visual.texture = item_slot.item.texture
 	stack_size.text = str(item_slot.amount)

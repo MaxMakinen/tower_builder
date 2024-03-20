@@ -1,6 +1,5 @@
-extends Resource
-
 class_name Hotbar
+extends Resource
 
 signal hotbar_update
 
@@ -27,6 +26,8 @@ func _resize_hotbar():
 		#TODO : Does this do anything?
 		hotbar_slots[i].slot_update.connect(_update)
 
+
+#region Hotbar shit TODO : Don't remove anything. Modulate to Grey/Dark if stack_size hits 0. Even if stack disappears from inventory.
 # Go through inventory and remove items with amount < 1
 func _update():
 	for i in range(hotbar_size):
@@ -39,7 +40,9 @@ func _erase(item: InventorySlot):
 		if hotbar_slots[i] == item:
 			hotbar_slots[i] = null
 			return
+#endregion
 
+# TODO : Shit don't work
 # Swap item_slots in inventory array based on their indices
 func swap_items(index1, index2):
 	if index1 < 0 or index1 > hotbar_size or index2 < 0 or index2 > hotbar_size:

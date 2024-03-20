@@ -15,12 +15,8 @@ var selected_slot: InventoryUISlot = null
 
 func _ready():
 	description.text = ""
-	for item in inventory.get_items():
-		var slot = slot_scene.instantiate()
-		grid_container.add_child(slot)
-
-	inventory.inventory_update.connect(update_slots)
-	update_slots()
+	_populate_grid()
+	_update_slots()
 	close()
 
 # Toggle if inventory open or closed
@@ -30,6 +26,12 @@ func toggle():
 	else:
 		open()
 
+
+func _populate_grid():
+	for item in inventory.get_items():
+		var slot = slot_scene.instantiate()
+		grid_container.add_child(slot)
+	inventory.inventory_update.connect(_update_slots)
 
 func _on_drag_start(slot_control: InventoryUISlot):
 	dragged_slot = slot_control
@@ -95,7 +97,7 @@ func _select_slot(slot: InventoryUISlot):
 #	item_type.text = item.type
 #	item_description.text = item.description
 
-func update_slots():
+func _update_slots():
 	var slots: Array = %GridContainer.get_children()
 	for i in range(min(inventory.item_slots.size(), inventory.inventory_size)):
 		slots[i].selected.connect(_select_slot)

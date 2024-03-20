@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b7ojf8yo08dm2" path="res://Resource nodes/Ore_resource_node.tscn" id="7_sdoew"]
 [ext_resource type="Script" path="res://Levels/UI_Root.gd" id="8_a8ilv"]
 [ext_resource type="PackedScene" uid="uid://dj47x0fv27j0j" path="res://Resource nodes/Stone_resource_node.tscn" id="8_xru8f"]
-[ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/inventory_UI.tscn" id="9_4pq7l"]
-[ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/Hotbar_UI.tscn" id="10_vgurw"]
+[ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/InventoryUI/inventory_UI.tscn" id="9_4pq7l"]
+[ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/InventoryUI/Hotbar_UI.tscn" id="10_vgurw"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
