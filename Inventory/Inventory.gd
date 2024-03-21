@@ -38,7 +38,6 @@ func set_inventory_size(new_size: int) -> void:
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item
-	var temp: Array[int] = [index]
 	indices.append(index)
 	inventory_update.emit(indices)
 	indices.clear()
@@ -48,7 +47,6 @@ func set_item(index: int, item: InventorySlot):
 func remove_item(index: int) -> InventorySlot:
 	var previous_item = item_slots[index].duplicate()
 	item_slots[index] = null
-	var temp: Array[int] = [index]
 	indices.append(index)
 	inventory_update.emit(indices)
 	indices.clear()
@@ -60,7 +58,9 @@ func set_item_amount(index: int, amount: int) -> void:
 	if item_slots[index].amount <= 0:
 		remove_item(index)
 	else:
-		inventory_update.emit([index])
+		indices.append(index)
+		inventory_update.emit(indices)
+		indices.clear()
 
 # Get total amount of all stacks of same item
 func get_total_amount(target: InventorySlot) -> int:
