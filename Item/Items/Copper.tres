@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://oc6so0dcajpd"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://oc6so0dcajpd"]
 
 [ext_resource type="Script" path="res://Item/Item_resource.gd" id="1_a30o7"]
 [ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="2_c5606"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0bqh"]
+atlas = ExtResource("2_c5606")
+region = Rect2(96, 72, 24, 24)
 
 [resource]
 script = ExtResource("1_a30o7")
 name = "Copper"
 type = "Ore"
-texture = ExtResource("2_c5606")
-spritesheet = true
-frame = 35
-Hframes = 11
-Vframes = 11
+texture = SubResource("AtlasTexture_w0bqh")
 max_stack_size = 99
 description = "Copper ore"
+consumable = false

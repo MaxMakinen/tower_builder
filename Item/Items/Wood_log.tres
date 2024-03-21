@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://dltmj65nst8rk"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://dltmj65nst8rk"]
 
 [ext_resource type="Script" path="res://Item/Item_resource.gd" id="1_pfxyo"]
 [ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="2_k00eu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut7t5"]
+atlas = ExtResource("2_k00eu")
+region = Rect2(0, 0, 24, 24)
 
 [resource]
 script = ExtResource("1_pfxyo")
 name = "Wood"
 type = "Wood"
-texture = ExtResource("2_k00eu")
-spritesheet = true
-frame = 0
-Hframes = 11
-Vframes = 11
+texture = SubResource("AtlasTexture_ut7t5")
 max_stack_size = 99
 description = "Fibrous plant material"
+consumable = false

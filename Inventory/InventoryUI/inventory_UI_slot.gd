@@ -44,10 +44,7 @@ func _set_texture(item_slot: InventorySlot):
 		stack_size.visible = true
 	else:
 		stack_size.visible = false
-	if item_slot.item.spritesheet == true:
-		item_visual.hframes = item_slot.item.Hframes
-		item_visual.vframes = item_slot.item.Vframes
-		item_visual.frame = item_slot.item.frame
+
 
 
 func _on_item_button_mouse_entered():

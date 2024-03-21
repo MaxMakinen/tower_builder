@@ -16,8 +16,6 @@ var is_being_spawned := false
 
 func _ready():
 	_set_texture()
-	item.set_frame(resource.frame)
-	shadow.set_frame(resource.frame)
 	if is_being_spawned == true:
 		var spawn_direction = _randomize_spawn_direction()
 		var spawn_point = spawn_direction * 20

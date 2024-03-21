@@ -1,17 +1,18 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://dk418qqwy0oky"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://dk418qqwy0oky"]
 
 [ext_resource type="Script" path="res://Item/Item_resource.gd" id="1_kghlw"]
 [ext_resource type="Texture2D" uid="uid://7ehb312qijt1" path="res://Assets/Fantasy Icons/potions.png" id="2_5okml"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t00i6"]
+atlas = ExtResource("2_5okml")
+region = Rect2(48, 16, 16, 16)
+margin = Rect2(1, 1, 2, 2)
 
 [resource]
 script = ExtResource("1_kghlw")
 name = "Potion"
 type = "misc"
-texture = ExtResource("2_5okml")
-spritesheet = true
-frame = 7
-Hframes = 21
-Vframes = 15
+texture = SubResource("AtlasTexture_t00i6")
 max_stack_size = 99
 description = "Magical Potion"
 consumable = true
