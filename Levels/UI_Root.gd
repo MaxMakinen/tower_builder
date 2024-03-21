@@ -9,8 +9,10 @@ extends CanvasLayer
 func _ready() -> void:
 	visible = true
 	for item_slot in get_tree().get_nodes_in_group("item_slot"):
-		var index = item_slot.get_index()
-		item_slot.gui_input.connect(_on_ItemSlot_gui_input, index)
+		var index = []
+		index.append(item_slot.get_index())
+		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
+		#item_slot.gui_input.connect(_eye_monkey)
 
 
 func _unhandled_input(event) -> void:
@@ -18,15 +20,21 @@ func _unhandled_input(event) -> void:
 		if inventory_ui.visible and drag_preview.dragged_item: return
 		inventory_ui.toggle()
 
+func _eye_monkey(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		print("Eye monkey sees all!")
+		print("Event : ", event)
 
-func _on_ItemSlot_gui_input(event: InputEvent, index: Array[int]) -> void:
+func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			print("Melonius garbage")
 			if inventory_ui.visible:
-				drag_item(index[0])
+				drag_item(index)
 
 
 func drag_item(index: int) -> void:
+	print("Pearilous situation")
 	var inventory_item = player.inventory.get_item_at(index)
 	var dragged_item = drag_preview.dragged_item
 	# Pick item

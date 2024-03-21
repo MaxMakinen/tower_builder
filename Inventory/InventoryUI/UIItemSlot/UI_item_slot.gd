@@ -3,6 +3,8 @@ extends TextureRect
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
+
+
 func display_item(item: InventorySlot) -> void:
 	if item != null and item.item != null:
 		# TODO : In case we decide for proper individual sprites

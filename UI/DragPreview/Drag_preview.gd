@@ -7,14 +7,14 @@ var dragged_item: InventorySlot = null
 
 
 # If we are dragging an item, dragged_item is not null, make node follow mouse position
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if dragged_item != null:
 		position = get_global_mouse_position()
 
 
 func set_dragged_item(item: InventorySlot) -> void:
 	dragged_item = item
-	if dragged_item != null:
+	if dragged_item != null and dragged_item.item != null:
 		item_icon.texture = item.item.texture
 		item_amount.text = str(item.amount) if item.is_stackable() else ""
 	else:

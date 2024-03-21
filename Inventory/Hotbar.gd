@@ -74,14 +74,6 @@ func swap_items(index1, index2):
 	hotbar_update.emit()
 	return true
 
-# TODO : Use usable item in slot, consume consumable etc.
-func activate(item: InventorySlot):
-	pass
-
-# TODO : Insert target into array at index, else return false
-func insert_at(item: InventorySlot, index: int):
-	pass
-
 #func old_insert(item: ItemResource):
 #	var slots = item_slots.filter(func(slot): return slot.item == item)
 #	if !slots.is_empty():
@@ -93,13 +85,4 @@ func insert_at(item: InventorySlot, index: int):
 #			emptyslots[0].amount = 1
 #	hotbar_update.emit()
 
-
-# TODO : Insert item at first empty slot in hotbar array, else return false
-func insert(item: InventorySlot):
-	insert_at(item, 0)
-	pass
-
-# TODO : Switch between hotbars in case we implement multiple hotbars
-func change_hotbar():
-	pass
 

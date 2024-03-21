@@ -4,7 +4,6 @@ extends PanelContainer
 
 @onready var item_visual = %Item_display
 @onready var slot_background = %SlotBackground
-@onready var item_description: Label = $Item_details/Item_description
 @onready var selection = %Selection
 @onready var stack_size = %Stack_size
 
