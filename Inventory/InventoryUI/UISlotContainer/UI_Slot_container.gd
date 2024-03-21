@@ -8,7 +8,6 @@ class_name SlotContainer
 
 # TODO : Will we implement rows and cols for more grid control?
 
-
 func display_items() -> void:
 	for index in range(inventory.inventory_size):
 		var item_slot = item_slots.instantiate()
