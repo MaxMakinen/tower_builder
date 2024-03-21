@@ -57,12 +57,21 @@ func set_item_amount(index: int, amount: int) -> void:
 		_signal_change(index)
 
 # Get total amount of all stacks of same item
-func get_total_amount(target: InventorySlot) -> int:
+func get_total_amount(target: ItemResource) -> int:
 	var total: int = 0
 	for item in item_slots:
-		if target.item == item.item:
+		if item.item == target:
 			total += item.amount
 	return total
+
+
+func get_all_types() -> Array[ItemResource]:
+	var types: Array[ItemResource]
+	for item in item_slots:
+		if item.item not in types:
+			types.append(item)
+	return types
+
 
 func _signal_change(index: int) -> void:
 	_refresh()

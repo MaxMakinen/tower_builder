@@ -1,5 +1,7 @@
 extends TextureRect
 
+class_name ItemSlot
+
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 

@@ -6,4 +6,3 @@ func _ready() -> void:
 	columns = 8
 	display_items()
 	pass # Replace with function body.
-
