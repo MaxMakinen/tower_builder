@@ -1,10 +1,10 @@
-extends ColorRect
+extends TextureRect
 
-@onready var item_icon: TextureRect = $ItemIcon
-@onready var item_amount: Label = $ItemAmount
+@onready var item_icon: TextureRect = %ItemIcon
+@onready var item_amount: Label = %ItemAmount
 
 func display_item(item: InventorySlot) -> void:
-	if item != null:
+	if item != null and item.item != null:
 		# TODO : In case we decide for proper individual sprites
 		#item_icon.texture = load("res://Assets/crafting_materials/%s" % item.item.name)
 		item_icon.texture = item.item.texture

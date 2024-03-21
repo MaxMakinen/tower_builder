@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://rn2fcaglqw21"]
+[gd_scene load_steps=6 format=3 uid="uid://60y8el6d17tj"]
 
+[ext_resource type="Texture2D" uid="uid://cjq6fayd38fep" path="res://Assets/Free Inventory/Inventory_Slot.png" id="1_ldhix"]
 [ext_resource type="Script" path="res://Inventory/InventoryUI/UIItemSlot/UI_item_slot.gd" id="1_r7deg"]
 [ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="1_wmtec"]
 [ext_resource type="FontFile" uid="uid://b61ct7pq2o716" path="res://Assets/Fonts/VecTerminus12Medium.otf" id="2_3cpdr"]
@@ -8,36 +9,42 @@
 atlas = ExtResource("1_wmtec")
 region = Rect2(0, 0, 24, 24)
 
-[node name="UI_item_slot" type="ColorRect" groups=["item_slot"]]
+[node name="UI_item_slot" type="TextureRect" groups=["item_slot"]]
+custom_minimum_size = Vector2(60, 60)
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(0.2, 0.2, 0.2, 1)
+texture = ExtResource("1_ldhix")
 script = ExtResource("1_r7deg")
 
-[node name="ItemIcon" type="TextureRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_540lg")
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
-[node name="ItemAmount" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -12.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = SubResource("AtlasTexture_540lg")
+expand_mode = 2
+
+[node name="ItemAmount" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("2_3cpdr")
 theme_override_font_sizes/font_size = 12
 text = "1"

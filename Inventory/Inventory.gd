@@ -4,13 +4,21 @@ class_name Inventory
 
 
 @export var item_slots: Array[InventorySlot]
-@export var inventory_size: int = 8
+@export var inventory_size: int = 16
 
 signal inventory_update(indices: Array[int])
 
 
 func _ready():
-	item_slots.resize(inventory_size)
+	if item_slots.size() != inventory_size:
+		item_slots.resize(inventory_size)
+	_refresh()
+
+
+func _refresh()-> void:
+	for index in range(inventory_size):
+		if item_slots[index].amount <= 0:
+			remove_item(index)
 
 # Return entire array of item_slots
 func get_items() -> Array[InventorySlot]:

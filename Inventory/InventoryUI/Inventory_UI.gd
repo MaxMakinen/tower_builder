@@ -119,7 +119,8 @@ func close():
 func _on_button_pressed():
 	print("Inventory contents : ")
 	for item in inventory.item_slots:
-		if item.item:
-			print("name : ", item.item.name)
-		print("item : ", item.item, " amount : ", item.amount)
+		if item:
+			if item.item:
+				print("name : ", item.item.name)
+			print("item : ", item.item, " amount : ", item.amount)
 

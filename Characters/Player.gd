@@ -18,6 +18,7 @@ var state_machine = StateMachine.new()
 
 
 func _ready():
+	inventory.set_inventory_size(16)
 	pass
 
 func _physics_process(_delta):

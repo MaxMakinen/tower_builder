@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=12 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://b7ojf8yo08dm2" path="res://Resource nodes/Ore_resource_node.tscn" id="7_sdoew"]
 [ext_resource type="Script" path="res://Levels/UI_Root.gd" id="8_a8ilv"]
 [ext_resource type="PackedScene" uid="uid://dj47x0fv27j0j" path="res://Resource nodes/Stone_resource_node.tscn" id="8_xru8f"]
+[ext_resource type="PackedScene" uid="uid://cld084l5j3fg5" path="res://Inventory/InventoryUI/UIHotbar/UI_hotbar.tscn" id="9_0m02f"]
 [ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/InventoryUI/inventory_UI.tscn" id="9_4pq7l"]
+[ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/InventoryResources/player_inventory.tres" id="10_0nvrf"]
 [ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/InventoryUI/Hotbar_UI.tscn" id="10_vgurw"]
+[ext_resource type="PackedScene" uid="uid://ceei6115mex87" path="res://UI/DragPreview/Drag_preview.tscn" id="11_6g0nj"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -51,10 +54,22 @@ position = Vector2(501, 163)
 remote_path = NodePath("../../Camera2D")
 
 [node name="UI_Root" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("8_a8ilv")
 
 [node name="Inventory_UI" parent="UI_Root" instance=ExtResource("9_4pq7l")]
 unique_name_in_owner = true
+visible = false
 
 [node name="Hotbar_UI" parent="UI_Root" instance=ExtResource("10_vgurw")]
+visible = false
+
+[node name="UIHotbar" parent="UI_Root" instance=ExtResource("9_0m02f")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -12.0
+offset_bottom = -12.0
+size_flags_vertical = 8
+inventory = ExtResource("10_0nvrf")
+
+[node name="DragPreview" parent="UI_Root" instance=ExtResource("11_6g0nj")]

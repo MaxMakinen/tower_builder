@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4ugmt28rldcf"]
+[gd_scene load_steps=8 format=3 uid="uid://b4ugmt28rldcf"]
 
 [ext_resource type="Script" path="res://Inventory/InventoryUI/Inventory_UI.gd" id="1_w8d0g"]
 [ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/InventoryResources/player_inventory.tres" id="2_mrbwc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://2u22t484dthy" path="res://Inventory/InventoryUI/inventory_theme.tres" id="4_yr8sc"]
 [ext_resource type="FontFile" uid="uid://cnrntny6vvh8t" path="res://Assets/Fonts/Terminus.ttf" id="5_eytcr"]
 [ext_resource type="Theme" uid="uid://clr1uetrq7vum" path="res://Inventory/InventoryUI/description_theme.tres" id="6_rdw0m"]
+[ext_resource type="PackedScene" uid="uid://bmy7n8gq75pij" path="res://Inventory/InventoryUI/UIInvSlotContainer/UI_inv_slot_container.tscn" id="7_m35h1"]
 
 [node name="Inventory_UI" type="Control"]
 custom_minimum_size = Vector2(104, 56)
@@ -23,22 +24,34 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_w8d0g")
 inventory = ExtResource("2_mrbwc")
 slot_scene = ExtResource("3_gxxko")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -86.5
+offset_right = 114.0
+offset_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("4_yr8sc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TitleBar" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/TitleBar"]
 layout_mode = 2
@@ -57,36 +70,50 @@ text = "X"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ItemDescription" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("6_rdw0m")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Description" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+size_flags_vertical = 6
 text = "Default Description"
 autowrap_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="UseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 text = "Use"
 
 [node name="DropButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 text = "Drop"
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
+mouse_filter = 2
 columns = 4
+
+[node name="UIInvSlotContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("7_m35h1")]
+layout_mode = 2
+inventory = ExtResource("2_mrbwc")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 visible = false
