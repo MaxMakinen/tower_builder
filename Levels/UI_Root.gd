@@ -20,21 +20,15 @@ func _unhandled_input(event) -> void:
 		if inventory_ui.visible and drag_preview.dragged_item: return
 		inventory_ui.toggle()
 
-func _eye_monkey(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		print("Eye monkey sees all!")
-		print("Event : ", event)
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			print("Melonius garbage")
 			if inventory_ui.visible:
 				drag_item(index)
 
 
 func drag_item(index: int) -> void:
-	print("Pearilous situation")
 	var inventory_item = player.inventory.get_item_at(index)
 	var dragged_item = drag_preview.dragged_item
 	# Pick item

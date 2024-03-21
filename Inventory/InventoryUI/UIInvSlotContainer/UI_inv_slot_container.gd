@@ -1,6 +1,8 @@
 extends SlotContainer
 
 
+var selected_item: int
+
 
 func _ready() -> void:
 	columns = 4

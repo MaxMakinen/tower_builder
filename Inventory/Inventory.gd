@@ -8,6 +8,7 @@ class_name Inventory
 
 signal inventory_update(indices: Array[int])
 
+var indices: Array[int]
 
 func _ready():
 	if item_slots.size() != inventory_size:
@@ -38,7 +39,9 @@ func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item
 	var temp: Array[int] = [index]
-	inventory_update.emit(temp)
+	indices.append(index)
+	inventory_update.emit(indices)
+	indices.clear()
 	return previous_item
 
 # Remove item stack from array at index
@@ -46,7 +49,9 @@ func remove_item(index: int) -> InventorySlot:
 	var previous_item = item_slots[index].duplicate()
 	item_slots[index] = null
 	var temp: Array[int] = [index]
-	inventory_update.emit(temp)
+	indices.append(index)
+	inventory_update.emit(indices)
+	indices.clear()
 	return previous_item
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
