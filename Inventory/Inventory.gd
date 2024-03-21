@@ -13,6 +13,9 @@ func _ready():
 func get_items() -> Array[InventorySlot]:
 	return item_slots
 
+func get_item_at(index: int) -> InventorySlot:
+	return item_slots[index]
+
 # Go through inventory and remove items with amount < 1
 func _update():
 	for item in item_slots:

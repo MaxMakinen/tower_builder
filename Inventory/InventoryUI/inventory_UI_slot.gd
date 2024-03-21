@@ -31,6 +31,7 @@ func update(item_slot: InventorySlot):
 	else:
 		# Store contained slot. Necessary? Yes, for drag and drop.
 		# TODO Or is it!? clean up if necessary
+		item_slot.slot_update.connect(update)
 		contents = item_slot
 		item_visual.visible = true
 		_set_texture(item_slot)
