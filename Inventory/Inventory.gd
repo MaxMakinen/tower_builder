@@ -18,7 +18,7 @@ func _ready():
 
 func _refresh()-> void:
 	for index in range(inventory_size):
-		if item_slots[index].amount <= 0:
+		if item_slots[index] and item_slots[index].amount <= 0:
 			remove_item(index)
 
 # Return entire array of item_slots
@@ -38,18 +38,14 @@ func set_inventory_size(new_size: int) -> void:
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item
-	indices.append(index)
-	inventory_update.emit(indices)
-	indices.clear()
+	_signal_change(index)
 	return previous_item
 
 # Remove item stack from array at index
 func remove_item(index: int) -> InventorySlot:
 	var previous_item = item_slots[index].duplicate()
 	item_slots[index] = null
-	indices.append(index)
-	inventory_update.emit(indices)
-	indices.clear()
+	_signal_change(index)
 	return previous_item
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
@@ -58,9 +54,7 @@ func set_item_amount(index: int, amount: int) -> void:
 	if item_slots[index].amount <= 0:
 		remove_item(index)
 	else:
-		indices.append(index)
-		inventory_update.emit(indices)
-		indices.clear()
+		_signal_change(index)
 
 # Get total amount of all stacks of same item
 func get_total_amount(target: InventorySlot) -> int:
@@ -70,6 +64,12 @@ func get_total_amount(target: InventorySlot) -> int:
 			total += item.amount
 	return total
 
+func _signal_change(index: int) -> void:
+	_refresh()
+	indices.clear()
+	indices.append(index)
+	inventory_update.emit(indices)
+	indices.clear()
 
 # Old shit
 # TODO : Return false if insert fails.

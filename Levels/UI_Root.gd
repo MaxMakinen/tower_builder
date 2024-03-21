@@ -12,7 +12,6 @@ func _ready() -> void:
 		var index = []
 		index.append(item_slot.get_index())
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
-		#item_slot.gui_input.connect(_eye_monkey)
 
 
 func _unhandled_input(event) -> void:
@@ -25,10 +24,10 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if inventory_ui.visible:
-				drag_item(index)
+				_drag_item(index)
 
 
-func drag_item(index: int) -> void:
+func _drag_item(index: int) -> void:
 	var inventory_item = player.inventory.get_item_at(index)
 	var dragged_item = drag_preview.dragged_item
 	# Pick item
