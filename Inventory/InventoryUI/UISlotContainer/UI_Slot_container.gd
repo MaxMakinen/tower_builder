@@ -20,6 +20,5 @@ func display_items() -> void:
 func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
 		if index < inventory.inventory_size:
-			print("Mangoes here")
 			var item_slot = get_child(index)
 			item_slot.display_item(inventory.get_item_at(index))
