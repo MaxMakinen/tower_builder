@@ -55,8 +55,8 @@ func get_total_amount(target: InventorySlot) -> int:
 			total += item.amount
 	return total
 
-################################################################################
 
+# Old shit
 # TODO : Return false if insert fails.
 # TODO : Detect stack_size and attempt to insert new stack if stack full.
 # Insert item into inventory array or increase item amount if already present
