@@ -13,3 +13,9 @@ func display_item(item: InventorySlot) -> void:
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
+	if get_parent() and get_parent().name == "UIHotbar":
+		if get_index() == get_parent().inventory.selected:
+			modulate = Color(0.8, 0.8, 0.8)
+		else:
+			modulate = Color(1, 1, 1)
+			

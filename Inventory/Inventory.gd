@@ -7,8 +7,13 @@ class_name Inventory
 @export var inventory_size: int = 16
 
 signal inventory_update(indices: Array[int])
+signal selected_changed
 
-var indices: Array[int]
+# Utility variables
+#var indices: Array[int] = []
+
+# Keep track of selected slot
+var selected: int = 0
 
 func _ready():
 	if item_slots.size() != inventory_size:
@@ -38,14 +43,14 @@ func set_inventory_size(new_size: int) -> void:
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item
-	_signal_change(index)
+	_signal_change([index])
 	return previous_item
 
 # Remove item stack from array at index
 func remove_item(index: int) -> InventorySlot:
 	var previous_item = item_slots[index].duplicate()
 	item_slots[index] = null
-	_signal_change(index)
+	_signal_change([index])
 	return previous_item
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
@@ -54,7 +59,7 @@ func increase_item_amount(index: int, amount: int) -> void:
 	if item_slots[index].amount <= 0:
 		remove_item(index)
 	else:
-		_signal_change(index)
+		_signal_change([index])
 
 # Attempt to insert new item into inventory. Otherwise return false
 func insert(new_item: ItemResource) -> bool:
@@ -94,13 +99,24 @@ func get_all_types() -> Array[ItemResource]:
 			types.append(item)
 	return types
 
-
-func _signal_change(index: int) -> void:
+# signal TODO: Feels clunky as hell...CLEANUP when possible
+func _signal_change(indices: Array[int]) -> void:
 	_refresh()
-	indices.clear()
-	indices.append(index)
+#	indices.clear()
+#	indices.append(index)
 	inventory_update.emit(indices)
-	indices.clear()
+#	indices.clear()
+	for index in indices:
+		if index == selected:
+			selected_changed.emit()
+
+func set_selected(new_selected: int) -> void:
+	var last_selected = selected
+	selected = new_selected
+	_signal_change([selected, last_selected])
+
+func get_slected() -> InventorySlot:
+	return item_slots[selected]
 
 
 # Old shit

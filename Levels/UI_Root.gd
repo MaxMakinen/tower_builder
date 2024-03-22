@@ -26,9 +26,14 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		if event.is_action_pressed("ctrl_click"):# and event.pressed:
 			if inventory_ui.visible:
 				_split_item(index)
+			elif !inventory_ui.visible:
+				_select_item(index)
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if inventory_ui.visible:
 				_drag_item(index)
+
+func _select_item(index: int) -> void:
+	player.inventory.set_selected(index)
 
 func _drag_item(index: int) -> void:
 	# TODO : Needs to work across inventories, not just player inventory
