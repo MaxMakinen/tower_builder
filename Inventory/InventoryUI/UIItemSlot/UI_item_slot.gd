@@ -5,7 +5,7 @@ class_name ItemSlot
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
-# Display item sprite and amount that are found inside the InventorySlot
+# Display item sprite and amount that are found inside the InventorySlot If nothing founid in slot then display empty
 func display_item(item: InventorySlot) -> void:
 	if item != null and item.item != null:
 		item_icon.texture = item.item.texture

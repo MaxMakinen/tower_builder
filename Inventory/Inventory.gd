@@ -49,12 +49,33 @@ func remove_item(index: int) -> InventorySlot:
 	return previous_item
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
-func set_item_amount(index: int, amount: int) -> void:
+func increase_item_amount(index: int, amount: int) -> void:
 	item_slots[index].amount += amount
 	if item_slots[index].amount <= 0:
 		remove_item(index)
 	else:
 		_signal_change(index)
+
+# Attempt to insert new item into inventory. Otherwise return false
+func insert(new_item: ItemResource) -> bool:
+	var empty_slot_index: int = -1
+	for index in inventory_size:
+		# Look for first empty InventorySlot and remember its index
+		if empty_slot_index < 0:
+			if !item_slots[index] or !item_slots[index].item:
+				empty_slot_index = index
+		# Look for existing InventorySlot with resource and increase amount
+		elif item_slots[index] and item_slots[index].item == new_item:
+			increase_item_amount(index, 1)
+			return true
+	# No existing resource of type new_item found so add new item at index of first empty InventorySlot
+	if empty_slot_index > -1:
+		var new_slot = InventorySlot.new()
+		new_slot.item = new_item
+		new_slot.amount = 1
+		set_item(empty_slot_index, new_slot)
+		return true
+	return false
 
 # Get total amount of all stacks of same item
 func get_total_amount(target: ItemResource) -> int:

@@ -23,7 +23,6 @@ func _on_interact():
 	effect_animation.play("PlayerMined")
 	interactable = false
 	harvest_timer.start(harvest_time)
-	print("Interaction success")
 
 
 func _on_harvest_timer_timeout():
