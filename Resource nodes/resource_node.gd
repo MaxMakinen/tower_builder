@@ -11,6 +11,7 @@ class_name ResourceNode
 var interactable: bool = true
 var harvest_time: float = 0.5
 var item = preload("res://Item/item.tscn")
+var pickup = preload("res://Item/pickup.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,9 +31,10 @@ func _on_harvest_timer_timeout():
 	effect_animation.stop()
 	effect_animation.hide()
 
-	var item_temp = item.instantiate()
-	item_temp.initialize(resource, self.global_position)
-	item_temp.spawn_in()
+	var item_temp = pickup.instantiate()
+	item_temp.spawn_item(resource, self.global_position)
+	#item_temp.initialize(resource, self.global_position)
+	#item_temp.spawn_in()
 
 	owner.add_child(item_temp)
 

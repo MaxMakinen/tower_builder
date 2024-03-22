@@ -11,7 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	position = get_global_mouse_position() + Vector2(4, 4)
+	position = get_global_mouse_position() + Vector2.ONE * 4
 
 
 func display_info(item: ItemResource) -> void:

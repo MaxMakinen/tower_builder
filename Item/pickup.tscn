@@ -16,6 +16,7 @@ item = ExtResource("2_3uyaf")
 shape = SubResource("CircleShape2D_ll0a7")
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.6, 0.6)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
