@@ -59,13 +59,13 @@ func increase_item_amount(index: int, amount: int) -> void:
 # Attempt to insert new item into inventory. Otherwise return false
 func insert(new_item: ItemResource) -> bool:
 	var empty_slot_index: int = -1
-	for index in inventory_size:
+	for index in range(inventory_size):
 		# Look for first empty InventorySlot and remember its index
 		if empty_slot_index < 0:
 			if !item_slots[index] or !item_slots[index].item:
 				empty_slot_index = index
-		# Look for existing InventorySlot with resource and increase amount
-		elif item_slots[index] and item_slots[index].item == new_item:
+		# Look for existing InventorySlot with resource and increase amount, then return
+		if item_slots[index] and item_slots[index].item == new_item:
 			increase_item_amount(index, 1)
 			return true
 	# No existing resource of type new_item found so add new item at index of first empty InventorySlot
@@ -75,6 +75,7 @@ func insert(new_item: ItemResource) -> bool:
 		new_slot.amount = 1
 		set_item(empty_slot_index, new_slot)
 		return true
+	# Insert has failed, inform caller
 	return false
 
 # Get total amount of all stacks of same item
@@ -85,7 +86,7 @@ func get_total_amount(target: ItemResource) -> int:
 			total += item.amount
 	return total
 
-
+# Get list of unique ItemResources in inventory
 func get_all_types() -> Array[ItemResource]:
 	var types: Array[ItemResource] = []
 	for item in item_slots:
@@ -100,6 +101,11 @@ func _signal_change(index: int) -> void:
 	indices.append(index)
 	inventory_update.emit(indices)
 	indices.clear()
+
+func _print_inv() -> void:
+	print("Inventory contents:")
+	for index in range(inventory_size):
+		print("bam")
 
 # Old shit
 # TODO : Return false if insert fails.
