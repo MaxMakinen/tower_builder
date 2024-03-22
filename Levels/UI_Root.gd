@@ -28,15 +28,22 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 
 
 func _drag_item(index: int) -> void:
-	var inventory_item = player.inventory.get_item_at(index)
+	# TODO : Needs to work across inventories, not just player inventory
+	var target_inventory = player.inventory
+	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.dragged_item
 	# Pick item
 	if inventory_item and !dragged_item:
-		drag_preview.set_dragged_item(player.inventory.remove_item(index))
+		drag_preview.set_dragged_item(target_inventory.remove_item(index))
 	# Drop item
 	elif !inventory_item and dragged_item:
-		drag_preview.set_dragged_item(player.inventory.set_item(index, dragged_item))
-	# Swap items
+		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
 	elif inventory_item and dragged_item:
-		drag_preview.set_dragged_item(player.inventory.set_item(index, dragged_item))
+		# Stack item
+		if inventory_item.item == dragged_item.item:
+			target_inventory.increase_item_amount(index, dragged_item.amount)
+			drag_preview.set_dragged_item(null)
+		# Swap items
+		else:
+			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
 

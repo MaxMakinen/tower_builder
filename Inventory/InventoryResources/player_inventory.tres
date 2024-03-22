@@ -31,7 +31,8 @@ amount = 4
 
 [sub_resource type="Resource" id="Resource_ot5v3"]
 script = ExtResource("2_wok5y")
-amount = 0
+item = ExtResource("3_vo7vp")
+amount = 4
 
 [sub_resource type="Resource" id="Resource_olsuk"]
 script = ExtResource("2_wok5y")
