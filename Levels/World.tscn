@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=14 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/InventoryResources/player_inventory.tres" id="10_0nvrf"]
 [ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/InventoryUI/Hotbar_UI.tscn" id="10_vgurw"]
 [ext_resource type="PackedScene" uid="uid://ceei6115mex87" path="res://UI/DragPreview/Drag_preview.tscn" id="11_6g0nj"]
+[ext_resource type="PackedScene" uid="uid://bdqnrl8wuixpk" path="res://UI/Tooltip/tooltip.tscn" id="12_usydm"]
+[ext_resource type="PackedScene" uid="uid://bnlw8a4uw6sam" path="res://Item/item_container.tscn" id="13_can0h"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -74,3 +76,10 @@ inventory = ExtResource("10_0nvrf")
 
 [node name="DragPreview" parent="UI_Root" instance=ExtResource("11_6g0nj")]
 unique_name_in_owner = true
+
+[node name="Tooltip" parent="UI_Root" instance=ExtResource("12_usydm")]
+unique_name_in_owner = true
+
+[node name="ItemContainer" parent="." instance=ExtResource("13_can0h")]
+position = Vector2(441, 117)
+script = null

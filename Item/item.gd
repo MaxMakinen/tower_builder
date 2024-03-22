@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var shadow = $Sprites/Shadow
-@onready var item = $Sprites/Item
+
+@onready var shadow: Sprite2D = %Shadow
+@onready var item: Sprite2D = %Item
 @onready var animation = $AnimationPlayer
 @export var resource: ItemResource
 

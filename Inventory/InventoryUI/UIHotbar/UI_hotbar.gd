@@ -8,7 +8,7 @@ func _ready() -> void:
 	display_items()
 	pass # Replace with function body.
 
-
+# Highlight selected slot
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.is_action_pressed("1"):

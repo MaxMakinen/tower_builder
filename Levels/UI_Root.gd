@@ -4,14 +4,18 @@ extends CanvasLayer
 @onready var inventory_ui: Control = %Inventory_UI
 @onready var player: PersistentState = %Player
 @onready var drag_preview: DragPreview = %DragPreview
+@onready var tooltip: Tooltip = %Tooltip
 
 
 func _ready() -> void:
 	visible = true
 	for item_slot in get_tree().get_nodes_in_group("item_slot"):
-		var index = []
-		index.append(item_slot.get_index())
+		#var index = []
+		#index.append(item_slot.get_index())
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
+		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
+		item_slot.mouse_exited.connect(hide_tooltip.bind(item_slot.get_index()))
+
 
 
 func _unhandled_input(event) -> void:
@@ -26,11 +30,13 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		if event.is_action_pressed("ctrl_click"):# and event.pressed:
 			if inventory_ui.visible:
 				_split_item(index)
+				hide_tooltip()
 			elif !inventory_ui.visible:
 				_select_item(index)
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if inventory_ui.visible:
 				_drag_item(index)
+				hide_tooltip()
 
 func _select_item(index: int) -> void:
 	player.inventory.set_selected(index)
@@ -78,8 +84,22 @@ func _split_item(index: int) -> void:
 		target_inventory.increase_item_amount(index, -split_amount)
 
 
-func print_inv() -> void:
-	var inv = player.inventory
+func show_tooltip(index: int) -> void:
+	var inventory_item: ItemResource = null
+	if player.inventory.item_slots[index]:
+		inventory_item = player.inventory.item_slots[index].item
+	if inventory_item and !drag_preview.dragged_item:
+		tooltip.display_info(inventory_item)
+		tooltip.show()
+	else:
+		tooltip.hide()
+
+
+func hide_tooltip(_index: int = 0) -> void:
+	tooltip.hide()
+
+# FOR DEBUGGING. Print contents of given inventory
+func print_inv(inv: Inventory) -> void:
 	print("Inventory")
 	for index in inv.inventory_size:
 		if inv.item_slots[index]:
