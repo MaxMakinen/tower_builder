@@ -26,7 +26,7 @@ func spawn_item(new_item: ItemResource, new_position: Vector2) -> void:
 
 func _animate() -> void:
 	var animation_tween = create_tween().set_loops()
-	animation_tween.tween_property(self, "position", position + Vector2(0, -1), 0.5).set_ease(Tween.EASE_OUT_IN)
+	animation_tween.tween_property(self, "position", position + Vector2(0, -1), 0.5).set_ease(Tween.EASE_IN_OUT)
 	animation_tween.tween_interval(0.1)
 	animation_tween.tween_property(self, "position", position, 0.5).set_ease(Tween.EASE_IN_OUT)
 	animation_tween.tween_interval(0.2)
@@ -39,7 +39,7 @@ func _spawn() -> void:
 	var randY = rng.randf_range(0, 1)
 	var direction = Vector2(randX, randY)
 	var spawn_point = position + direction.normalized() * 20
-	tween.tween_property(self, "position", spawn_point, 0.2).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", spawn_point, 0.3).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	tween.kill()
 	position = spawn_point
