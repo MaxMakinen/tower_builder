@@ -66,7 +66,7 @@ func get_total_amount(target: ItemResource) -> int:
 
 
 func get_all_types() -> Array[ItemResource]:
-	var types: Array[ItemResource]
+	var types: Array[ItemResource] = []
 	for item in item_slots:
 		if item.item not in types:
 			types.append(item)

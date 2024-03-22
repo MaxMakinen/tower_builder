@@ -31,7 +31,7 @@ func _physics_process(_delta):
 	velocity.y = move_toward(velocity.y, speed * direction.y, acceleration)
 	move_and_slide()
 
-# TODO : It's broken, fex soon
+# TODO : It's broken, fix soon
 func add_to_inventory(item: ItemResource):
 	inventory.insert(item)
 
