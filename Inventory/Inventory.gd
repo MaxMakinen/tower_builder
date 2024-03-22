@@ -69,8 +69,8 @@ func insert(new_item: ItemResource) -> bool:
 		if empty_slot_index < 0:
 			if !item_slots[index] or !item_slots[index].item:
 				empty_slot_index = index
-		# Look for existing InventorySlot with resource and increase amount, then return
-		if item_slots[index] and item_slots[index].item == new_item:
+		# Look for existing InventorySlot with resource and increase amount if possible, then return to break loop
+		if item_slots[index] and item_slots[index].item == new_item and item_slots[index].amount < item_slots[index].item.max_stack_size:
 			increase_item_amount(index, 1)
 			return true
 	# No existing resource of type new_item found so add new item at index of first empty InventorySlot

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=16 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
 [ext_resource type="PackedScene" uid="uid://bcby2itgxncpx" path="res://Resource nodes/Wood_resource_node.tscn" id="6_i7vp6"]
+[ext_resource type="PackedScene" uid="uid://bnlw8a4uw6sam" path="res://Item/pickup.tscn" id="6_v6yus"]
 [ext_resource type="PackedScene" uid="uid://b7ojf8yo08dm2" path="res://Resource nodes/Ore_resource_node.tscn" id="7_sdoew"]
 [ext_resource type="Script" path="res://Levels/UI_Root.gd" id="8_a8ilv"]
 [ext_resource type="PackedScene" uid="uid://dj47x0fv27j0j" path="res://Resource nodes/Stone_resource_node.tscn" id="8_xru8f"]
@@ -12,7 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://pnocgj46045j" path="res://Inventory/InventoryUI/Hotbar_UI.tscn" id="10_vgurw"]
 [ext_resource type="PackedScene" uid="uid://ceei6115mex87" path="res://UI/DragPreview/Drag_preview.tscn" id="11_6g0nj"]
 [ext_resource type="PackedScene" uid="uid://bdqnrl8wuixpk" path="res://UI/Tooltip/tooltip.tscn" id="12_usydm"]
-[ext_resource type="PackedScene" uid="uid://bnlw8a4uw6sam" path="res://Item/item_container.tscn" id="13_can0h"]
+[ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="14_qub3j"]
+[ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="15_1tbrp"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -76,10 +78,21 @@ inventory = ExtResource("10_0nvrf")
 
 [node name="DragPreview" parent="UI_Root" instance=ExtResource("11_6g0nj")]
 unique_name_in_owner = true
+offset_left = 33.0
+offset_top = 10.0
+offset_right = 33.0
+offset_bottom = 10.0
 
 [node name="Tooltip" parent="UI_Root" instance=ExtResource("12_usydm")]
 unique_name_in_owner = true
 
-[node name="ItemContainer" parent="." instance=ExtResource("13_can0h")]
-position = Vector2(441, 117)
-script = null
+[node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
+position = Vector2(460, 129)
+
+[node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
+position = Vector2(524, 130)
+item = ExtResource("14_qub3j")
+
+[node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
+position = Vector2(488, 129)
+item = ExtResource("15_1tbrp")
