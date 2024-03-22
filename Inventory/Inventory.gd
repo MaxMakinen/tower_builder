@@ -102,10 +102,6 @@ func _signal_change(index: int) -> void:
 	inventory_update.emit(indices)
 	indices.clear()
 
-func _print_inv() -> void:
-	print("Inventory contents:")
-	for index in range(inventory_size):
-		print("bam")
 
 # Old shit
 # TODO : Return false if insert fails.

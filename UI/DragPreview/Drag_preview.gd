@@ -1,5 +1,7 @@
 extends Control
 
+class_name DragPreview
+
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
@@ -20,3 +22,10 @@ func set_dragged_item(item: InventorySlot) -> void:
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
+
+func change_amount(amount: int) -> void:
+	dragged_item.amount += amount
+
+func update() -> void:
+	if dragged_item.amount < 1:
+		set_dragged_item(null)
