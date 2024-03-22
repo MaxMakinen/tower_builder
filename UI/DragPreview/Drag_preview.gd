@@ -25,7 +25,5 @@ func set_dragged_item(item: InventorySlot) -> void:
 
 func change_amount(amount: int) -> void:
 	dragged_item.amount += amount
-
-func update() -> void:
 	if dragged_item.amount < 1:
 		set_dragged_item(null)

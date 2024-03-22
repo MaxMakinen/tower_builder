@@ -23,12 +23,12 @@ func _unhandled_input(event) -> void:
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if inventory_ui.visible:
-				_drag_item(index)
 		if event.is_action_pressed("ctrl_click"):# and event.pressed:
 			if inventory_ui.visible:
 				_split_item(index)
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if inventory_ui.visible:
+				_drag_item(index)
 
 func _drag_item(index: int) -> void:
 	# TODO : Needs to work across inventories, not just player inventory
@@ -61,12 +61,23 @@ func _split_item(index: int) -> void:
 	# Find size of stack that will be split off target item
 	var split_amount: int = ceil(inventory_item.amount / 2)
 	if dragged_item and inventory_item.item == dragged_item.item:
+		print("Dragged item\nsplit amount : ", split_amount)
 		drag_preview.change_amount(split_amount)
 		target_inventory.increase_item_amount(index, -split_amount)
-	# Split off new Inventory slot duplicate and adjust amounts of
+	# Split off new Inventory slot duplicate and adjust amounts of STUFF
 	if !dragged_item:
+		print("No dragged item\nSplit amount : ", split_amount)
 		var item = inventory_item.duplicate()
 		item.amount = split_amount
 		drag_preview.set_dragged_item(item)
 		target_inventory.increase_item_amount(index, -split_amount)
-	drag_preview.update()
+
+
+func print_inv() -> void:
+	var inv = player.inventory
+	print("Inventory")
+	for index in inv.inventory_size:
+		if inv.item_slots[index]:
+			print("Index: ", index, " 	item : ", inv.item_slots[index].item.name, "  	amount : ", inv.item_slots[index].amount)
+		else:
+			print("Index: ", index, " 	", inv.item_slots[index])
