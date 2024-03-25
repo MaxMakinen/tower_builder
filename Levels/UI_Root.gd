@@ -4,9 +4,10 @@ extends CanvasLayer
 @onready var inventory_ui: Control = %Inventory_UI
 @onready var player: PersistentState = %Player
 @onready var drag_preview: DragPreview = %DragPreview
-#@onready var tooltip: Tooltip = %Tooltip
+
 @export var tooltip_scene = preload("res://UI/Tooltip/tooltip.tscn")
-var tooltip = null
+var tooltip : Tooltip = null
+var dragging : int = 0
 
 
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 		#var index = []
 		#index.append(item_slot.get_index())
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
+		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
 		#item_slot.mouse_exited.connect(hide_tooltip.bind(item_slot.get_index()))
 		item_slot.mouse_exited.connect(hide_tooltip)
@@ -27,6 +29,9 @@ func _unhandled_input(event) -> void:
 			return
 		inventory_ui.toggle()
 
+func _follow_mouse(index: int) -> void:
+	dragging = index	
+	print("Testing mouse motion index : ", index)
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
@@ -37,14 +42,16 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 			elif !inventory_ui.visible:
 				_select_item(index)
 		# Drag item while button is being held
-		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		elif event.is_action_pressed("left_click"):
 			if inventory_ui.visible:
 				_drag_item(index)
 				hide_tooltip()
 		# Release dragged item when mouse is released
-		elif event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
+		elif event.is_action_released("left_click"):
 			if inventory_ui.visible:
-				_drag_item(index)
+				_drag_item(dragging)
+#	else:
+#		dragging = index
 
 func _select_item(index: int) -> void:
 	player.inventory.set_selected(index)
@@ -68,6 +75,7 @@ func _drag_item(index: int) -> void:
 		# Swap items
 		else:
 			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+
 
 func _split_item(index: int) -> void:
 	# TODO : Needs to work across inventories, not just player inventory
