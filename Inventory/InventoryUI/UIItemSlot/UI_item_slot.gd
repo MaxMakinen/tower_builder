@@ -1,6 +1,6 @@
 extends TextureRect
 
-class_name ItemSlot
+class_name UIItemSlot
 
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
@@ -10,6 +10,7 @@ func display_item(item: InventorySlot) -> void:
 	if item != null and item.item != null:
 		item_icon.texture = item.item.texture
 		item_amount.text = str(item.amount) if item.is_stackable() else ""
+		set_tooltip_text(item.item.description)
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
@@ -18,4 +19,4 @@ func display_item(item: InventorySlot) -> void:
 			modulate = Color(0.8, 0.8, 0.8)
 		else:
 			modulate = Color(1, 1, 1)
-			
+

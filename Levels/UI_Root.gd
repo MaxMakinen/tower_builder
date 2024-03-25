@@ -4,7 +4,9 @@ extends CanvasLayer
 @onready var inventory_ui: Control = %Inventory_UI
 @onready var player: PersistentState = %Player
 @onready var drag_preview: DragPreview = %DragPreview
-@onready var tooltip: Tooltip = %Tooltip
+#@onready var tooltip: Tooltip = %Tooltip
+@export var tooltip_scene = preload("res://UI/Tooltip/tooltip.tscn")
+var tooltip = null
 
 
 func _ready() -> void:
@@ -14,7 +16,8 @@ func _ready() -> void:
 		#index.append(item_slot.get_index())
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
-		item_slot.mouse_exited.connect(hide_tooltip.bind(item_slot.get_index()))
+		#item_slot.mouse_exited.connect(hide_tooltip.bind(item_slot.get_index()))
+		item_slot.mouse_exited.connect(hide_tooltip)
 
 
 
@@ -89,14 +92,20 @@ func show_tooltip(index: int) -> void:
 	if player.inventory.item_slots[index]:
 		inventory_item = player.inventory.item_slots[index].item
 	if inventory_item and !drag_preview.dragged_item:
+		tooltip = tooltip_scene.instantiate()
+		add_child(tooltip)
 		tooltip.display_info(inventory_item)
+		
 		tooltip.show()
 	else:
+		hide_tooltip()
+
+
+func hide_tooltip() -> void:
+	if tooltip:
 		tooltip.hide()
-
-
-func hide_tooltip(_index: int = 0) -> void:
-	tooltip.hide()
+		tooltip.queue_free()
+		tooltip = null
 
 # FOR DEBUGGING. Print contents of given inventory
 func print_inv(inv: Inventory) -> void:
