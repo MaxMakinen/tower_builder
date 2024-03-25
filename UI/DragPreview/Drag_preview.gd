@@ -5,18 +5,18 @@ class_name DragPreview
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
-var dragged_item: InventorySlot = null
+var _dragged_item: InventorySlot = null
 
 
-# If we are dragging an item, dragged_item is not null, make node follow mouse position
+# If we are dragging an item, _dragged_item is not null, make node follow mouse position
 func _process(_delta: float) -> void:
-	if dragged_item != null:
+	if _dragged_item != null:
 		position = get_global_mouse_position()
 
 
 func set_dragged_item(item: InventorySlot) -> void:
-	dragged_item = item
-	if dragged_item != null and dragged_item.item != null:
+	_dragged_item = item
+	if _dragged_item != null and _dragged_item.item != null:
 		item_icon.texture = item.item.texture
 		item_amount.text = str(item.amount) if item.is_stackable() else ""
 	else:
@@ -24,6 +24,10 @@ func set_dragged_item(item: InventorySlot) -> void:
 		item_amount.text = ""
 
 func change_amount(amount: int) -> void:
-	dragged_item.amount += amount
-	if dragged_item.amount < 1:
+	_dragged_item.amount += amount
+	if _dragged_item.amount < 1:
 		set_dragged_item(null)
+
+func get_dragged_item() -> InventorySlot:
+	return _dragged_item
+

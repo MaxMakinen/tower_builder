@@ -36,10 +36,15 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				hide_tooltip()
 			elif !inventory_ui.visible:
 				_select_item(index)
+		# Drag item while button is being held
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if inventory_ui.visible:
 				_drag_item(index)
 				hide_tooltip()
+		# Release dragged item when mouse is released
+		elif event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
+			if inventory_ui.visible:
+				_drag_item(index)
 
 func _select_item(index: int) -> void:
 	player.inventory.set_selected(index)
