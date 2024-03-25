@@ -80,8 +80,6 @@ func _select_item(index: int) -> void:
 	player.inventory.set_selected(index)
 
 func _drag_item(index: int) -> void:
-	# TODO : Needs to work across inventories, not just player inventory
-	#var target_inventory = player.inventory
 	var target_inventory = target_slot_container.get_inventory()
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
@@ -102,8 +100,6 @@ func _drag_item(index: int) -> void:
 
 
 func _split_item(index: int) -> void:
-	# TODO : Needs to work across inventories, not just player inventory
-	#var target_inventory = player.inventory
 	var target_inventory = target_slot_container.get_inventory()
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
