@@ -10,7 +10,6 @@ class_name ResourceNode
 
 var interactable: bool = true
 var harvest_time: float = 0.5
-var item = preload("res://Item/item.tscn")
 var pickup = preload("res://Item/pickup.tscn")
 
 
