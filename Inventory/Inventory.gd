@@ -25,6 +25,9 @@ func _refresh()-> void:
 	for index in range(inventory_size):
 		if item_slots[index] and item_slots[index].amount <= 0:
 			remove_item(index)
+		elif item_slots[index] != null:
+			item_slots[index].slot_update.connect(_signal_change.bind([index]))
+
 
 # Return entire array of item_slots
 func get_items() -> Array[InventorySlot]:
@@ -101,7 +104,7 @@ func get_all_types() -> Array[ItemResource]:
 
 
 func _signal_change(indices: Array[int]) -> void:
-	_refresh()
+	#_refresh()
 	inventory_update.emit(indices)
 	for index in indices:
 		if index == selected:

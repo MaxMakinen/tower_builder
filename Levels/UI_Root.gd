@@ -53,7 +53,7 @@ func _drag_item(index: int) -> void:
 	# TODO : Needs to work across inventories, not just player inventory
 	var target_inventory = player.inventory
 	var inventory_item = target_inventory.get_item_at(index)
-	var dragged_item = drag_preview.dragged_item
+	var dragged_item = drag_preview.get_dragged_item()
 	# Pick item
 	if inventory_item and !dragged_item:
 		drag_preview.set_dragged_item(target_inventory.remove_item(index))
@@ -94,7 +94,7 @@ func show_tooltip(index: int) -> void:
 	var inventory_item: ItemResource = null
 	if player.inventory.item_slots[index]:
 		inventory_item = player.inventory.item_slots[index].item
-	if inventory_item and !drag_preview.dragged_item:
+	if inventory_item and !drag_preview.get_dragged_item():
 		tooltip = tooltip_scene.instantiate()
 		add_child(tooltip)
 		tooltip.display_info(inventory_item)
