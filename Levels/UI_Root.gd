@@ -112,17 +112,16 @@ func _split_item(index: int) -> void:
 		return
 	# Find size of stack that will be split off target item
 	var split_amount: int = ceil(inventory_item.get_amount() / 2)
-	if split_amount > inventory_item.get_amount():
-		pass
-	if dragged_item and inventory_item.get_item() == dragged_item.get_item():
-		drag_preview.change_amount(split_amount)
-		target_inventory.increase_item_amount(index, -split_amount)
-	# Split off new Inventory slot duplicate and adjust amounts of STUFF
-	if !dragged_item:
-		var item = inventory_item.duplicate()
-		item.amount = split_amount
-		drag_preview.set_dragged_item(item)
-		target_inventory.increase_item_amount(index, -split_amount)
+	if split_amount > 0:
+		if dragged_item and inventory_item.get_item() == dragged_item.get_item():
+			drag_preview.change_amount(split_amount)
+			target_inventory.increase_item_amount(index, -split_amount)
+		# Split off new Inventory slot duplicate and adjust amounts of STUFF
+		if !dragged_item:
+			var item = inventory_item.duplicate()
+			item.amount = split_amount
+			drag_preview.set_dragged_item(item)
+			target_inventory.increase_item_amount(index, -split_amount)
 
 
 func show_tooltip(index: int) -> void:
