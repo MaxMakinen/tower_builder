@@ -10,7 +10,8 @@ func display_item(item: InventorySlot) -> void:
 	if item != null and item.item != null:
 		item_icon.texture = item.item.texture
 		item_amount.text = str(item.amount) if item.is_stackable() else ""
-		set_tooltip_text(item.item.description)
+		# TODO : Should we replace custom tooltip with built-in option and customize that?
+		#set_tooltip_text(item.item.name)
 	else:
 		item_icon.texture = null
 		item_amount.text = ""

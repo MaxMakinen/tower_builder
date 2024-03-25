@@ -1,36 +1,38 @@
 extends Control
 
+# EXPORT VARIABLES
 @export var inventory: Inventory
 @export var slot_scene: PackedScene
 
+# ONREADY VARIABLES
 @onready var description = %Description
+@onready var item_description: PanelContainer = $PanelContainer/VBoxContainer/HBoxContainer/ItemDescription
 
 # Ensure inventory starts closed
-var is_open := false
+var is_open: bool = false
 
-func _ready():
-	description.text = ""
+func _ready() -> void:
 	close()
 
 # Toggle if inventory open or closed
-func toggle():
+func toggle() -> void:
 	if is_open == true:
 		close()
 	else:
 		open()
 
 
-func open():
+func open() -> void:
 	visible = true
 	is_open = true
 
 
-func close():
+func close() -> void:
 	visible = false
 	is_open = false
 
 
-func _on_button_pressed():
+func _on_button_pressed() -> void:
 	print("Inventory contents : ")
 	for item in inventory.item_slots:
 		if item:
