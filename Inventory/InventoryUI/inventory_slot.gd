@@ -7,16 +7,21 @@ extends Resource
 
 # SIGNALS
 signal slot_empty(index)
+# TODO : Slot_full might be useless signal. Maybe for UI to highlight maxed out stacks?
 signal slot_full(index)
 
 # Change amout of current slot, emit signal with index of current placement in inventory array if amount reaches 0 or if max_stack_size reached
 func change_amount(new_amount: int, index: int) -> int:
 	amount += new_amount
+	var difference : int = amount - item.max_stack_size
 	if amount <= 0:
 		slot_empty.emit(index)
-	elif amount >= item.max_stack_size:
+	elif amount == item.max_stack_size:
 		slot_full.emit(index)
-	return amount
+	elif amount > item.max_stack_size:
+		amount = item.max_stack_size
+	return difference
+
 
 # Return true if amount has reached max_stack_size
 func is_full() -> bool:

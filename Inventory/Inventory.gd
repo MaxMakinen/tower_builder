@@ -20,14 +20,14 @@ func _ready():
 		item_slots.resize(inventory_size)
 	_refresh()
 
-# TODO : This is dumb. Multiple calls to this script in refresh and change amoount whenever a slot reaches 0
+# TODO : This is dumb. Needs complete rewrite and better logic
 func _refresh()-> void:
 	for index in range(inventory_size):
-		_check_slot(index)
+		#_check_slot(index)
 		if item_slots[index] != null:
-			item_slots[index].slot_update.connect(_check_slot.bind(index))
+			item_slots[index].slot_empty.connect(remove_item)
 
-
+# TODO : See earlier comment
 func _check_slot(index: int) -> void:
 	if item_slots[index] and item_slots[index].amount <= 0:
 		remove_item(index)
@@ -61,10 +61,12 @@ func remove_item(index: int) -> InventorySlot:
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
 func increase_item_amount(index: int, amount: int) -> void:
-	if item_slots[index].change_amount(amount) <= 0:
-		remove_item(index)
-	else:
-		_signal_change([index])
+	item_slots[index].change_amount(amount, index)
+	_signal_change([index])
+#	if item_slots[index].change_amount(amount, index) <= 0:
+#		remove_item(index)
+#	else: 
+#		_signal_change([index])
 
 # Attempt to insert new item into inventory. Otherwise return false
 func insert(new_item: ItemResource) -> bool:
@@ -108,9 +110,12 @@ func get_all_types() -> Array[ItemResource]:
 func _signal_change(indices: Array[int]) -> void:
 	#_refresh()
 	inventory_update.emit(indices)
-	for index in indices:
-		if index == selected:
-			selected_changed.emit()
+	if selected in indices:
+		selected_changed.emit()
+
+#	for index in indices:
+#		if index == selected:
+#			selected_changed.emit()
 
 func set_selected(new_selected: int) -> void:
 	var last_selected = selected
