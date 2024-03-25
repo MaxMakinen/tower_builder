@@ -6,10 +6,11 @@ extends CanvasLayer
 @onready var drag_preview: DragPreview = %DragPreview
 @onready var ui_hotbar: UIHotbar = %UIHotbar
 
-@export var tooltip_scene = preload("res://UI/Tooltip/tooltip.tscn")
+@export var tooltip_scene: PackedScene = preload("res://UI/Tooltip/tooltip.tscn")
 var tooltip: Tooltip = null
 var target_slot: int = 0
-var target_slot_container : SlotContainer = null
+var target_slot_container: SlotContainer = null
+var left_mouse_pressed: bool = false
 
 func _ready() -> void:
 	visible = true
@@ -43,6 +44,11 @@ func _unhandled_input(event) -> void:
 		if inventory_ui.visible and drag_preview.get_dragged_item():
 			return
 		inventory_ui.toggle()
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("left_click"):
+			left_mouse_pressed = true
+		elif event.is_action_released("left_click"):
+			left_mouse_pressed = false
 
 func _follow_mouse(index: int) -> void:
 	target_slot = index	
@@ -63,7 +69,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				_drag_item(index)
 				hide_tooltip()
 		# Release dragged item when mouse is released
-		elif event.is_action_released("left_click"):
+		elif left_mouse_pressed and event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
 				if target_slot >= 0:
 					_drag_item(target_slot)
@@ -105,8 +111,10 @@ func _split_item(index: int) -> void:
 	if !inventory_item or !inventory_item.is_stackable():
 		return
 	# Find size of stack that will be split off target item
-	var split_amount: int = ceil(inventory_item.amount / 2)
-	if dragged_item and inventory_item.item == dragged_item.item:
+	var split_amount: int = ceil(inventory_item.get_amount() / 2)
+	if split_amount > inventory_item.get_amount():
+		pass
+	if dragged_item and inventory_item.get_item() == dragged_item.get_item():
 		drag_preview.change_amount(split_amount)
 		target_inventory.increase_item_amount(index, -split_amount)
 	# Split off new Inventory slot duplicate and adjust amounts of STUFF

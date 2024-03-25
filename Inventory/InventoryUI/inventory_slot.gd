@@ -34,13 +34,21 @@ func change_amount(new_amount: int, index: int) -> int:
 		amount = item.max_stack_size
 	return difference
 
-# Return item texture
+# Return item texture. If no item present, return null
 func get_texture() -> Texture2D:
-	return item.texture
+	if item:
+		return item.texture
+	return null
 
 # Return amount of items in slot
 func get_amount() -> int:
 	return amount
+
+# Returns Max_stack_size of item. If no item present, return 0
+func get_max_stack_size() -> int:
+	if item:
+		return item.max_stack_size
+	return 0
 
 # Returns item
 func get_item() -> ItemResource:
