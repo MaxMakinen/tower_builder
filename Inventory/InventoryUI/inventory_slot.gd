@@ -5,12 +5,14 @@ extends Resource
 @export var item: ItemResource
 @export var amount: int
 
+# TODO : Is this signal useful at all?
 signal slot_update
 
 
-func change_amount(new_amount):
+func change_amount(new_amount) -> int:
 	amount += new_amount
 	slot_update.emit()
+	return amount
 
 
 func is_stackable() -> bool:

@@ -58,8 +58,7 @@ func remove_item(index: int) -> InventorySlot:
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
 func increase_item_amount(index: int, amount: int) -> void:
-	item_slots[index].amount += amount
-	if item_slots[index].amount <= 0:
+	if item_slots[index].change_amount(amount) <= 0:
 		remove_item(index)
 	else:
 		_signal_change([index])
