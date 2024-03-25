@@ -112,7 +112,7 @@ func set_selected(new_selected: int) -> void:
 	selected = new_selected
 	_signal_change([selected, last_selected])
 
-func get_slected() -> InventorySlot:
+func get_selected() -> InventorySlot:
 	return item_slots[selected]
 
 
