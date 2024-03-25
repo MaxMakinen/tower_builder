@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=15 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
@@ -9,10 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://dj47x0fv27j0j" path="res://Resource nodes/Stone_resource_node.tscn" id="8_xru8f"]
 [ext_resource type="PackedScene" uid="uid://cld084l5j3fg5" path="res://Inventory/InventoryUI/UIHotbar/UI_hotbar.tscn" id="9_0m02f"]
 [ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/InventoryUI/inventory_UI.tscn" id="9_4pq7l"]
-[ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/InventoryResources/player_inventory.tres" id="10_0nvrf"]
+[ext_resource type="Script" path="res://Inventory/Inventory.gd" id="9_say5h"]
 [ext_resource type="PackedScene" uid="uid://ceei6115mex87" path="res://UI/DragPreview/Drag_preview.tscn" id="11_6g0nj"]
 [ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="14_qub3j"]
 [ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="15_1tbrp"]
+
+[sub_resource type="Resource" id="Resource_cpr44"]
+script = ExtResource("9_say5h")
+item_slots = Array[Resource("res://Inventory/InventoryUI/inventory_slot.gd")]([])
+inventory_size = 16
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -63,13 +68,14 @@ unique_name_in_owner = true
 visible = false
 
 [node name="UIHotbar" parent="UI_Root" instance=ExtResource("9_0m02f")]
+unique_name_in_owner = true
 anchors_preset = 7
 anchor_left = 0.5
 anchor_right = 0.5
 offset_top = -12.0
 offset_bottom = -12.0
 size_flags_vertical = 8
-inventory = ExtResource("10_0nvrf")
+inventory = SubResource("Resource_cpr44")
 
 [node name="DragPreview" parent="UI_Root" instance=ExtResource("11_6g0nj")]
 unique_name_in_owner = true
@@ -79,12 +85,12 @@ offset_right = 33.0
 offset_bottom = 10.0
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 125.542)
+position = Vector2(460, 124.442)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 126.542)
+position = Vector2(524, 125.442)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 125.542)
+position = Vector2(488, 124.442)
 item = ExtResource("15_1tbrp")

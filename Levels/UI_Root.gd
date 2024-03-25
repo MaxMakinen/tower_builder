@@ -4,11 +4,12 @@ extends CanvasLayer
 @onready var inventory_ui: Control = %Inventory_UI
 @onready var player: PersistentState = %Player
 @onready var drag_preview: DragPreview = %DragPreview
+@onready var ui_hotbar: UIHotbar = %UIHotbar
 
 @export var tooltip_scene = preload("res://UI/Tooltip/tooltip.tscn")
-var tooltip : Tooltip = null
-var dragging : int = 0
-
+var tooltip: Tooltip = null
+var dragging: int = 0
+var target_slot_container : SlotContainer = null
 
 func _ready() -> void:
 	visible = true
@@ -18,10 +19,23 @@ func _ready() -> void:
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
-		#item_slot.mouse_exited.connect(hide_tooltip.bind(item_slot.get_index()))
+		item_slot.mouse_exited.connect(hide_tooltip)
+	_link_slot_container(ui_hotbar)
+
+func _link_slot_container(slot_container: SlotContainer) -> void:
+	slot_container.mouse_entered.connect(_follow_slot_container.bind(slot_container))
+	slot_container.mouse_exited.connect(_follow_slot_container.bind(null))
+	for item_slot in slot_container.get_children():
+		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
+		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
+		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
 		item_slot.mouse_exited.connect(hide_tooltip)
 
-
+func _follow_slot_container(container: SlotContainer) -> void:
+	target_slot_container = container
+	if container:
+		print("BANuana : ", container.name)
+	pass
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):

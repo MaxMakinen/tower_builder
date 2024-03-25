@@ -3,7 +3,7 @@ extends GridContainer
 class_name SlotContainer
 
 @export var item_slots: PackedScene = preload("res://Inventory/InventoryUI/UIItemSlot/UI_item_slot.tscn")
-@export var inventory: Inventory
+@export var inventory: Inventory = null
 
 
 # TODO : Will we implement rows and cols for more grid control?

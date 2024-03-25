@@ -5,6 +5,8 @@ class_name UIHotbar
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	columns = 8
+	if !inventory or !inventory.item_slots:
+		inventory = Inventory.new(8)
 	display_items()
 	pass # Replace with function body.
 

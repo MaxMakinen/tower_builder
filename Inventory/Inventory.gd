@@ -14,6 +14,12 @@ signal selected_changed
 var selected: int = 0
 
 # PRIVATE FUNCTIONS
+func _init(size: int = inventory_size) -> void:
+	inventory_size = size
+	for index in inventory_size:
+		print("Fuckwit")
+		item_slots.append(InventorySlot.new())
+
 func _ready():
 	if item_slots.size() != inventory_size:
 		item_slots.resize(inventory_size)
