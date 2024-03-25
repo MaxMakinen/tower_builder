@@ -84,13 +84,16 @@ offset_top = 10.0
 offset_right = 33.0
 offset_bottom = 10.0
 
+[node name="MouseTimer" type="Timer" parent="UI_Root"]
+unique_name_in_owner = true
+
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 123.675)
+position = Vector2(460, 123.628)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 124.675)
+position = Vector2(524, 124.628)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 123.675)
+position = Vector2(488, 123.628)
 item = ExtResource("15_1tbrp")

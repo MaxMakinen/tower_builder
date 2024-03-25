@@ -5,14 +5,18 @@ extends CanvasLayer
 @onready var player: PersistentState = %Player
 @onready var drag_preview: DragPreview = %DragPreview
 @onready var ui_hotbar: UIHotbar = %UIHotbar
+@onready var mouse_timer: Timer = %MouseTimer
 
 @export var tooltip_scene: PackedScene = preload("res://UI/Tooltip/tooltip.tscn")
 var tooltip: Tooltip = null
+
 var target_slot: int = 0
 var target_slot_container: SlotContainer = null
 var left_mouse_pressed: bool = false
 
 func _ready() -> void:
+	mouse_timer.wait_time = 0.2
+	mouse_timer.one_shot = true
 	visible = true
 #	for item_slot in get_tree().get_nodes_in_group("item_slot"):
 #		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
@@ -41,14 +45,13 @@ func _follow_slot_container(container: SlotContainer) -> void:
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
-		if inventory_ui.visible and drag_preview.get_dragged_item():
+		if inventory_ui.visible and drag_preview.get_dragged_item() != null:
 			return
 		inventory_ui.toggle()
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("left_click"):
-			left_mouse_pressed = true
-		elif event.is_action_released("left_click"):
-			left_mouse_pressed = false
+			mouse_timer.start()
+
 
 func _follow_mouse(index: int) -> void:
 	target_slot = index	
@@ -57,7 +60,7 @@ func _follow_mouse(index: int) -> void:
 # TODO : If we switch from indexes to references to individual slots. I think we can fix the dragging/swapping issue. It should also enable us to figure out inter inventory movement.
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
-		if event.is_action_pressed("ctrl_click"):# and event.pressed:
+		if event.is_action_pressed("right_click"):
 			if inventory_ui.visible:
 				_split_item(index)
 				hide_tooltip()
@@ -69,12 +72,11 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				_drag_item(index)
 				hide_tooltip()
 		# Release dragged item when mouse is released
-		elif left_mouse_pressed and event.is_action_released("left_click"):
+		elif mouse_timer.is_stopped() and event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
 				if target_slot >= 0:
 					_drag_item(target_slot)
-#	else:
-#		dragging = index
+
 
 func _select_item(index: int) -> void:
 	player.inventory.set_selected(index)
