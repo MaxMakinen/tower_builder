@@ -21,6 +21,7 @@ func _ready() -> void:
 		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
 		item_slot.mouse_exited.connect(hide_tooltip)
 	_link_slot_container(ui_hotbar)
+	_link_slot_container(inventory_ui.get_slot_container())
 
 func _link_slot_container(slot_container: SlotContainer) -> void:
 	slot_container.mouse_entered.connect(_follow_slot_container.bind(slot_container))

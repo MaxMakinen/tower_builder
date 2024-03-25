@@ -17,7 +17,6 @@ var selected: int = 0
 func _init(size: int = inventory_size) -> void:
 	inventory_size = size
 	for index in inventory_size:
-		print("Fuckwit")
 		item_slots.append(InventorySlot.new())
 
 func _ready():

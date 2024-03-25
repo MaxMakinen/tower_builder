@@ -85,12 +85,12 @@ offset_right = 33.0
 offset_bottom = 10.0
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 124.442)
+position = Vector2(460, 123.675)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 125.442)
+position = Vector2(524, 124.675)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 124.442)
+position = Vector2(488, 123.675)
 item = ExtResource("15_1tbrp")

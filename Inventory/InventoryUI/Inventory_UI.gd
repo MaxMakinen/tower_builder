@@ -7,6 +7,7 @@ extends Control
 # ONREADY VARIABLES
 @onready var description = %Description
 @onready var item_description: PanelContainer = $PanelContainer/VBoxContainer/HBoxContainer/ItemDescription
+@onready var ui_inv_slot_container: GridContainer = $PanelContainer/VBoxContainer/HBoxContainer/UIInvSlotContainer
 
 # Ensure inventory starts closed
 var is_open: bool = false
@@ -21,6 +22,8 @@ func toggle() -> void:
 	else:
 		open()
 
+func get_slot_container() -> SlotContainer:
+	return ui_inv_slot_container
 
 func open() -> void:
 	visible = true
