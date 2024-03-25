@@ -53,6 +53,7 @@ func set_inventory_size(new_size: int) -> void:
 	inventory_size = new_size
 	item_slots.resize(inventory_size)
 
+# Return inventory size as int
 func get_inventory_size() -> int:
 	return inventory_size
 

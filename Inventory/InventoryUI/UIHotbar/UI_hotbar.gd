@@ -11,16 +11,17 @@ func _ready() -> void:
 		inventory = Inventory.new(hotbar_size)
 	display_items()
 
-func get_hotbar_size(new_size: int) -> void:
+func set_hotbar_size(new_size: int) -> void:
 	hotbar_size = new_size
 	columns = hotbar_size
 	
-func set_hotbar_size() -> int:
+func get_hotbar_size() -> int:
 	return hotbar_size
 
 func load_hotbar(new_inventory: Inventory) -> void:
 	inventory = new_inventory
 	columns = inventory.get_inventory_size()
+	display_items()
 
 # Highlight selected slot
 func _input(event: InputEvent) -> void:
