@@ -84,9 +84,7 @@ func insert(new_item: ItemResource, amount: int = 1) -> bool:
 			return true
 	# No existing resource of type new_item found so add new item at index of first empty InventorySlot
 	if empty_slot_index > -1:
-		var new_slot = InventorySlot.new()
-		new_slot.item = new_item
-		new_slot.amount = 1
+		var new_slot = InventorySlot.new(new_item, amount)
 		set_item(empty_slot_index, new_slot)
 		return true
 	# Insert has failed, inform caller

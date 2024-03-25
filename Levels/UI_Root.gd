@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
-		if inventory_ui.visible and drag_preview.dragged_item:
+		if inventory_ui.visible and drag_preview.get_dragged_item():
 			return
 		inventory_ui.toggle()
 
