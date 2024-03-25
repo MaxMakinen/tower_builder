@@ -63,7 +63,7 @@ func remove_item(index: int) -> InventorySlot:
 func increase_item_amount(index: int, amount: int) -> void:
 	var leftover = item_slots[index].change_amount(amount, index)
 	if leftover > 0:
-		insert(item_slots[index].item, leftover)
+		insert(item_slots[index].get_item(), leftover)
 	_signal_change([index])
 #	if item_slots[index].change_amount(amount, index) <= 0:
 #		remove_item(index)
@@ -80,7 +80,7 @@ func insert(new_item: ItemResource, amount: int = 1) -> bool:
 				empty_slot_index = index
 		# Look for existing InventorySlot with resource and increase amount if possible, then return to break loop
 		if item_slots[index] and item_slots[index].item == new_item and item_slots[index].amount < item_slots[index].item.max_stack_size:
-			increase_item_amount(index, 1)
+			increase_item_amount(index, amount)
 			return true
 	# No existing resource of type new_item found so add new item at index of first empty InventorySlot
 	if empty_slot_index > -1:
