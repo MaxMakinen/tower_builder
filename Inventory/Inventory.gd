@@ -9,8 +9,6 @@ class_name Inventory
 signal inventory_update(indices: Array[int])
 signal selected_changed
 
-# Utility variables
-#var indices: Array[int] = []
 
 # Keep track of selected slot
 var selected: int = 0
@@ -20,17 +18,14 @@ func _ready():
 		item_slots.resize(inventory_size)
 	_refresh()
 
-# TODO : This is dumb. Needs complete rewrite and better logic
+# TODO : This feels dumb. Can it be better?
 func _refresh()-> void:
 	for index in range(inventory_size):
-		#_check_slot(index)
+		if item_slots[index] and item_slots[index].amount <= 0:
+			remove_item(index)
 		if item_slots[index] != null:
 			item_slots[index].slot_empty.connect(remove_item)
 
-# TODO : See earlier comment
-func _check_slot(index: int) -> void:
-	if item_slots[index] and item_slots[index].amount <= 0:
-		remove_item(index)
 
 # Return entire array of item_slots
 func get_items() -> Array[InventorySlot]:
@@ -49,6 +44,7 @@ func set_inventory_size(new_size: int) -> void:
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item
+	item_slots[index].slot_empty.connect(remove_item)
 	_signal_change([index])
 	return previous_item
 
@@ -65,10 +61,6 @@ func increase_item_amount(index: int, amount: int) -> void:
 	if leftover > 0:
 		insert(item_slots[index].get_item(), leftover)
 	_signal_change([index])
-#	if item_slots[index].change_amount(amount, index) <= 0:
-#		remove_item(index)
-#	else: 
-#		_signal_change([index])
 
 # Attempt to insert new item into inventory. Otherwise return false
 func insert(new_item: ItemResource, amount: int = 1) -> bool:
