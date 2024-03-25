@@ -116,28 +116,3 @@ func get_selected() -> InventorySlot:
 	return item_slots[selected]
 
 
-# Old shit
-# TODO : Return false if insert fails.
-# TODO : Detect stack_size and attempt to insert new stack if stack full.
-# Insert item into inventory array or increase item amount if already present
-#func insert(item: ItemResource):
-#	var slots = item_slots.filter(func(slot): return slot.item == item)
-#	if !slots.is_empty():
-#		slots[0].amount += 1
-#	else:
-#		var emptyslots = item_slots.filter(func(slot): return slot.item == null)
-#		if !emptyslots.is_empty():
-#			emptyslots[0].item = item
-#			emptyslots[0].amount = 1
-#	inventory_update.emit()
-#
-#
-## Swap item_slots in inventory array based on their indices
-#func swap_items(index1, index2) -> bool:
-#	if index1 < 0 or index1 > inventory_size or index2 < 0 or index2 > inventory_size:
-#		return false
-#	var temp_slot = item_slots[index1]
-#	item_slots[index1] = item_slots[index2]
-#	item_slots[index2] = temp_slot
-#	inventory_update.emit()
-#	return true
