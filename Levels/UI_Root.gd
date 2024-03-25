@@ -93,7 +93,6 @@ func show_tooltip(index: int) -> void:
 		tooltip = tooltip_scene.instantiate()
 		add_child(tooltip)
 		tooltip.display_info(inventory_item)
-		
 		tooltip.show()
 	else:
 		hide_tooltip()
