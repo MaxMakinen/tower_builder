@@ -9,10 +9,11 @@ class_name Inventory
 signal inventory_update(indices: Array[int])
 signal selected_changed
 
-
+# TODO : Should we care? Can it be exported to the UI?
 # Keep track of selected slot
 var selected: int = 0
 
+# PRIVATE FUNCTIONS
 func _ready():
 	if item_slots.size() != inventory_size:
 		item_slots.resize(inventory_size)
@@ -26,7 +27,13 @@ func _refresh()-> void:
 		if item_slots[index] != null:
 			item_slots[index].slot_empty.connect(remove_item)
 
+# Send signals
+func _signal_change(indices: Array[int]) -> void:
+	inventory_update.emit(indices)
+	if selected in indices:
+		selected_changed.emit()
 
+# PUBLIC FUNCTIONS
 # Return entire array of item_slots
 func get_items() -> Array[InventorySlot]:
 	return item_slots
@@ -98,16 +105,6 @@ func get_all_types() -> Array[ItemResource]:
 			types.append(item)
 	return types
 
-
-func _signal_change(indices: Array[int]) -> void:
-	#_refresh()
-	inventory_update.emit(indices)
-	if selected in indices:
-		selected_changed.emit()
-
-#	for index in indices:
-#		if index == selected:
-#			selected_changed.emit()
 
 func set_selected(new_selected: int) -> void:
 	var last_selected = selected
