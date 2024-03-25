@@ -54,6 +54,11 @@ func get_max_stack_size() -> int:
 func get_item() -> ItemResource:
 	return item
 
+func get_item_name():
+	if item:
+		return item.name
+	return "empty"
+
 # Return true if amount has reached max_stack_size
 func is_full() -> bool:
 	if item and amount >= item.max_stack_size:
@@ -65,3 +70,9 @@ func is_stackable() -> bool:
 	if item and item.max_stack_size > 1:
 		return true
 	return false
+
+func is_empty() -> bool:
+	if item == null or amount >= 0:
+		return true
+	return false
+

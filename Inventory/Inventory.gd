@@ -98,6 +98,17 @@ func insert(new_item: ItemResource, amount: int = 1) -> bool:
 	# Insert has failed, inform caller
 	return false
 
+# Insert item into empty slot in inventory at index. Otherwise return false
+func insert_at(new_item: ItemResource, index: int , amount: int = 1) -> bool:
+	if item_slots[index] == null or item_slots[index].is_empty():
+		var new_slot = InventorySlot.new(new_item, amount)
+		set_item(index, new_slot)
+		print("new item : ", new_item, " amount : ", amount, " at index : ", index)
+		return true
+	else:
+		print("Insert failed at index : ", index, ", Slooot : ", item_slots[index])
+	return false
+
 # Get total amount of all stacks of same item
 func get_total_amount(target: ItemResource) -> int:
 	var total: int = 0

@@ -36,10 +36,14 @@ func close() -> void:
 
 
 func _on_button_pressed() -> void:
+	print("Inventory size : ", inventory.get_inventory_size())
 	print("Inventory contents : ")
-	for item in inventory.item_slots:
-		if item:
-			if item.item:
-				print("name : ", item.item.name)
-			print("item : ", item.item, " amount : ", item.amount)
+	for index in inventory.get_inventory_size():
+		if inventory.item_slots[index]:
+			var item = inventory.item_slots[index]
+			#if item.item:
+			#	print("name : ", item.item.name)
+			print("index : ", index," item : ", item.get_item_name(), " amount : ", item.amount)
+		else:
+			print("index : ", index, " Slot empty")
 

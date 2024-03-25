@@ -88,12 +88,12 @@ offset_bottom = 10.0
 unique_name_in_owner = true
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 123.675)
+position = Vector2(460, 122.675)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 124.675)
+position = Vector2(524, 123.675)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 123.675)
+position = Vector2(488, 122.675)
 item = ExtResource("15_1tbrp")

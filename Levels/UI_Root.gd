@@ -54,7 +54,8 @@ func _unhandled_input(event) -> void:
 
 
 func _follow_mouse(index: int) -> void:
-	target_slot = index	
+	target_slot = index
+	print("Target slot : ", target_slot)
 
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
@@ -104,21 +105,30 @@ func _split_item(index: int) -> void:
 	var target_inventory = target_slot_container.get_inventory()
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
+	var split_amount: int = 0
 	# If no item in slot or item not stackable, then fail split attempt
-	if !inventory_item or !inventory_item.is_stackable():
+	if inventory_item and (!inventory_item.is_stackable() or !inventory_item.get_item()):
 		return
 	# Find size of stack that will be split off target item
-	var split_amount: int = ceil(inventory_item.get_amount() / 2)
-	if split_amount > 0:
+	if inventory_item and inventory_item.get_item():
+		split_amount = ceil(inventory_item.get_amount() / 2)
 		if dragged_item and inventory_item.get_item() == dragged_item.get_item():
-			drag_preview.change_amount(split_amount)
-			target_inventory.increase_item_amount(index, -split_amount)
-		# Split off new Inventory slot duplicate and adjust amounts of STUFF
-		if !dragged_item:
+			if split_amount > 0:
+				drag_preview.change_amount(split_amount)
+				target_inventory.increase_item_amount(index, -split_amount)
+			# Split off new Inventory slot duplicate and adjust amounts left
+		elif !dragged_item:
 			var item = inventory_item.duplicate()
 			item.amount = split_amount
 			drag_preview.set_dragged_item(item)
 			target_inventory.increase_item_amount(index, -split_amount)
+
+	elif dragged_item and (!inventory_item or !inventory_item.get_item()):
+		split_amount = ceil(dragged_item.get_amount() / 2)
+		if dragged_item and (!inventory_item or !inventory_item.get_item()):
+			if split_amount > 0:
+				dragged_item.change_amount(-split_amount, 0)
+				target_inventory.insert_at(dragged_item.get_item(), index, split_amount)
 
 
 func show_tooltip(index: int) -> void:
