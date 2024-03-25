@@ -99,13 +99,10 @@ func get_all_types() -> Array[ItemResource]:
 			types.append(item)
 	return types
 
-# signal TODO: Feels clunky as hell...CLEANUP when possible
+
 func _signal_change(indices: Array[int]) -> void:
 	_refresh()
-#	indices.clear()
-#	indices.append(index)
 	inventory_update.emit(indices)
-#	indices.clear()
 	for index in indices:
 		if index == selected:
 			selected_changed.emit()
