@@ -20,14 +20,17 @@ func _ready():
 		item_slots.resize(inventory_size)
 	_refresh()
 
-
+# TODO : This is dumb. Multiple calls to this script in refresh and change amoount whenever a slot reaches 0
 func _refresh()-> void:
 	for index in range(inventory_size):
-		if item_slots[index] and item_slots[index].amount <= 0:
-			remove_item(index)
-		elif item_slots[index] != null:
-			item_slots[index].slot_update.connect(_signal_change.bind([index]))
+		_check_slot(index)
+		if item_slots[index] != null:
+			item_slots[index].slot_update.connect(_check_slot.bind(index))
 
+
+func _check_slot(index: int) -> void:
+	if item_slots[index] and item_slots[index].amount <= 0:
+		remove_item(index)
 
 # Return entire array of item_slots
 func get_items() -> Array[InventorySlot]:
