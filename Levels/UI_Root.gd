@@ -75,12 +75,10 @@ func _split_item(index: int) -> void:
 	# Find size of stack that will be split off target item
 	var split_amount: int = ceil(inventory_item.amount / 2)
 	if dragged_item and inventory_item.item == dragged_item.item:
-		print("Dragged item\nsplit amount : ", split_amount)
 		drag_preview.change_amount(split_amount)
 		target_inventory.increase_item_amount(index, -split_amount)
 	# Split off new Inventory slot duplicate and adjust amounts of STUFF
 	if !dragged_item:
-		print("No dragged item\nSplit amount : ", split_amount)
 		var item = inventory_item.duplicate()
 		item.amount = split_amount
 		drag_preview.set_dragged_item(item)
