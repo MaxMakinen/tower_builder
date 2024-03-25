@@ -57,7 +57,6 @@ func _follow_mouse(index: int) -> void:
 	target_slot = index	
 
 
-# TODO : If we switch from indexes to references to individual slots. I think we can fix the dragging/swapping issue. It should also enable us to figure out inter inventory movement.
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("right_click"):
