@@ -2,13 +2,25 @@ extends SlotContainer
 
 class_name UIHotbar
 
+var hotbar_size = 8
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	columns = 8
+	columns = hotbar_size
 	if !inventory or !inventory.item_slots:
-		inventory = Inventory.new(8)
+		inventory = Inventory.new(hotbar_size)
 	display_items()
-	pass # Replace with function body.
+
+func get_hotbar_size(new_size: int) -> void:
+	hotbar_size = new_size
+	columns = hotbar_size
+	
+func set_hotbar_size() -> int:
+	return hotbar_size
+
+func load_hotbar(new_inventory: Inventory) -> void:
+	inventory = new_inventory
+	columns = inventory.inventory_size
 
 # Highlight selected slot
 func _input(event: InputEvent) -> void:

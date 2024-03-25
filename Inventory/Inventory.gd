@@ -53,6 +53,9 @@ func set_inventory_size(new_size: int) -> void:
 	inventory_size = new_size
 	item_slots.resize(inventory_size)
 
+func get_inventyory_size() -> int:
+	return inventory_size
+
 # Insert item stack into array at index
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
