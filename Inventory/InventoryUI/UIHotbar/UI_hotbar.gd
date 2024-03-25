@@ -20,7 +20,7 @@ func set_hotbar_size() -> int:
 
 func load_hotbar(new_inventory: Inventory) -> void:
 	inventory = new_inventory
-	columns = inventory.inventory_size
+	columns = inventory.get_inventory_size()
 
 # Highlight selected slot
 func _input(event: InputEvent) -> void:
