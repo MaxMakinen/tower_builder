@@ -22,6 +22,9 @@ func change_amount(new_amount: int, index: int) -> int:
 		amount = item.max_stack_size
 	return difference
 
+# Returns item
+func get_item() -> ItemResource:
+	return item
 
 # Return true if amount has reached max_stack_size
 func is_full() -> bool:

@@ -61,7 +61,9 @@ func remove_item(index: int) -> InventorySlot:
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
 func increase_item_amount(index: int, amount: int) -> void:
-	item_slots[index].change_amount(amount, index)
+	var leftover = item_slots[index].change_amount(amount, index)
+	if leftover > 0:
+		insert(item_slots[index].item, leftover)
 	_signal_change([index])
 #	if item_slots[index].change_amount(amount, index) <= 0:
 #		remove_item(index)
@@ -69,7 +71,7 @@ func increase_item_amount(index: int, amount: int) -> void:
 #		_signal_change([index])
 
 # Attempt to insert new item into inventory. Otherwise return false
-func insert(new_item: ItemResource) -> bool:
+func insert(new_item: ItemResource, amount: int = 1) -> bool:
 	var empty_slot_index: int = -1
 	for index in range(inventory_size):
 		# Look for first empty InventorySlot and remember its index
