@@ -33,6 +33,7 @@ func _follow_mouse(index: int) -> void:
 	dragging = index	
 	print("Testing mouse motion index : ", index)
 
+# TODO : If we switch from indexes to references to individual slots. I think we can fix the dragging/swapping issue. It should also enable us to figure out inter inventory movement.
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("ctrl_click"):# and event.pressed:
@@ -48,7 +49,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				hide_tooltip()
 		# Release dragged item when mouse is released
 		elif event.is_action_released("left_click"):
-			if inventory_ui.visible:
+			if inventory_ui.visible and drag_preview.get_dragged_item():
 				_drag_item(dragging)
 #	else:
 #		dragging = index
