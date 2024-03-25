@@ -8,18 +8,16 @@ extends CanvasLayer
 
 @export var tooltip_scene = preload("res://UI/Tooltip/tooltip.tscn")
 var tooltip: Tooltip = null
-var dragging: int = 0
+var target_slot: int = 0
 var target_slot_container : SlotContainer = null
 
 func _ready() -> void:
 	visible = true
-	for item_slot in get_tree().get_nodes_in_group("item_slot"):
-		#var index = []
-		#index.append(item_slot.get_index())
-		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
-		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
-		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
-		item_slot.mouse_exited.connect(hide_tooltip)
+#	for item_slot in get_tree().get_nodes_in_group("item_slot"):
+#		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
+#		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
+#		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
+#		item_slot.mouse_exited.connect(hide_tooltip)
 	_link_slot_container(ui_hotbar)
 	_link_slot_container(inventory_ui.get_slot_container())
 
@@ -29,14 +27,16 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 	for item_slot in slot_container.get_children():
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
+		item_slot.mouse_exited.connect(_follow_mouse.bind(-1))
 		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
 		item_slot.mouse_exited.connect(hide_tooltip)
 
 func _follow_slot_container(container: SlotContainer) -> void:
 	target_slot_container = container
 	if container:
-		print("BANuana : ", container.name)
-	pass
+		print("Entering Container : ", container.name)
+	else:
+		print("Leaving Container")
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
@@ -45,8 +45,8 @@ func _unhandled_input(event) -> void:
 		inventory_ui.toggle()
 
 func _follow_mouse(index: int) -> void:
-	dragging = index	
-	print("Testing mouse motion index : ", index)
+	target_slot = index	
+
 
 # TODO : If we switch from indexes to references to individual slots. I think we can fix the dragging/swapping issue. It should also enable us to figure out inter inventory movement.
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
@@ -65,7 +65,8 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		# Release dragged item when mouse is released
 		elif event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
-				_drag_item(dragging)
+				if target_slot >= 0:
+					_drag_item(target_slot)
 #	else:
 #		dragging = index
 
@@ -74,7 +75,8 @@ func _select_item(index: int) -> void:
 
 func _drag_item(index: int) -> void:
 	# TODO : Needs to work across inventories, not just player inventory
-	var target_inventory = player.inventory
+	#var target_inventory = player.inventory
+	var target_inventory = target_slot_container.get_inventory()
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
 	# Pick item
@@ -85,7 +87,7 @@ func _drag_item(index: int) -> void:
 		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
 	elif inventory_item and dragged_item:
 		# Stack item
-		if inventory_item.item == dragged_item.item:
+		if inventory_item.item == dragged_item.item and dragged_item.item != null:
 			target_inventory.increase_item_amount(index, dragged_item.amount)
 			drag_preview.set_dragged_item(null)
 		# Swap items
@@ -95,9 +97,10 @@ func _drag_item(index: int) -> void:
 
 func _split_item(index: int) -> void:
 	# TODO : Needs to work across inventories, not just player inventory
-	var target_inventory = player.inventory
+	#var target_inventory = player.inventory
+	var target_inventory = target_slot_container.get_inventory()
 	var inventory_item = target_inventory.get_item_at(index)
-	var dragged_item = drag_preview.dragged_item
+	var dragged_item = drag_preview.get_dragged_item()
 	# If no item in slot or item not stackable, then fail split attempt
 	if !inventory_item or !inventory_item.is_stackable():
 		return

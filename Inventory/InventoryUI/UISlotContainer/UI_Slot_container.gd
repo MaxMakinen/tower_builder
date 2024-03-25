@@ -15,6 +15,8 @@ func display_items() -> void:
 		item_slot.display_item(inventory.get_item_at(index))
 	inventory.inventory_update.connect(_on_inventory_update)
 
+func get_inventory() -> Inventory:
+	return inventory
 
 func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
