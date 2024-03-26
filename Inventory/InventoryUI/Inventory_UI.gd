@@ -29,7 +29,7 @@ func toggle() -> void:
 	else:
 		open()
 
-func _display_selected(index: int) -> void:
+func _display_selected(index: int = _selected) -> void:
 	_selected = index
 	if index >= 0 and index < inventory_container.get_inventory().get_inventory_size():
 		var selected: InventorySlot = inventory_container.get_inventory().get_item_at(index)
@@ -82,11 +82,17 @@ func _on_use_button_pressed() -> void:
 	if _selected >= 0:
 		var item = inventory_container.get_inventory().get_item_at(_selected)
 		if !item:
+			item_description.text = "Slot empty"
+			#get_tree().create_timer(1).timeout.connect(_display_selected)
 			print("Slot empty")
 		elif !item or !item.use_item():
+			item_description.text = "Item not consumable"
 			print("Item not consumable")
+			#get_tree().create_timer(1).timeout.connect(_display_selected)
 	else:
+		item_description.text = "Nothing selected"
 		print("Nothing selected")
+	get_tree().create_timer(1).timeout.connect(_display_selected)
 
 #	print("Inventory size : ", inventory.get_inventory_size())
 #	print("Inventory contents : ")
