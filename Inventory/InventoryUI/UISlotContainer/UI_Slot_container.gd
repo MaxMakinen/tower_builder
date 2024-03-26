@@ -6,7 +6,7 @@ class_name SlotContainer
 @export var inventory: Inventory = null
 
 
-var selected: int = -1
+var _selected: int = -1
 
 # TODO : Will we implement rows and cols for more grid control?
 
@@ -24,15 +24,17 @@ func display_items() -> void:
 func get_inventory() -> Inventory:
 	return inventory
 
-
+# Updates display for item_slot referenced by index
 func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
-		if index < inventory.inventory_size:
+		if index >= 0 and index < inventory.inventory_size:
 			var item_slot = get_child(index)
 			item_slot.display_item(inventory.get_item_at(index))
 
 
 func _set_selected(new_selected: int) -> void:
-	selected = new_selected
-	print("Selected = ", selected)
+	_selected = new_selected
+	print("Selected = ", _selected)
 
+func get_selected() -> int:
+	return _selected
