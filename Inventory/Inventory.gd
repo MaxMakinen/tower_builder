@@ -22,10 +22,10 @@ func _init(size: int = inventory_size) -> void:
 func _ready():
 	if item_slots.size() != inventory_size:
 		item_slots.resize(inventory_size)
-	_refresh()
+	refresh()
 
 # TODO : This feels dumb. Can it be better?
-func _refresh()-> void:
+func refresh()-> void:
 	for index in range(inventory_size):
 		if item_slots[index] and item_slots[index].amount <= 0:
 			remove_item(index)

@@ -12,13 +12,13 @@ var selected: int = -1
 
 
 func display_items() -> void:
+	inventory.refresh()
 	for index in range(inventory.get_inventory_size()):
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)
 		item_slot.display_item(inventory.get_item_at(index))
 	inventory.inventory_update.connect(_on_inventory_update)
 	inventory.selected_changed.connect(_set_selected)
-	inventory._refresh()
 
 
 func get_inventory() -> Inventory:
