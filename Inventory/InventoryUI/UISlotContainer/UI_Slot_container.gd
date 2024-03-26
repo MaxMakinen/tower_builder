@@ -22,6 +22,10 @@ func display_items() -> void:
 	inventory.inventory_update.connect(_on_inventory_update)
 	inventory.selected_changed.connect(_set_selected)
 
+func clear_items() -> void:
+	for child in get_children():
+		child.queue_free()
+
 # Return reference to inventory
 func get_inventory() -> Inventory:
 	return inventory

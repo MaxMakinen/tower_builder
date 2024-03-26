@@ -73,6 +73,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="ItemDescription" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("6_rdw0m")
@@ -81,35 +82,35 @@ theme = ExtResource("6_rdw0m")
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ItemDescription" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-size_flags_vertical = 6
-text = "Default Description"
-autowrap_mode = 1
-
 [node name="ItemName" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 0
 text = "Default Description"
-autowrap_mode = 1
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ItemDescription" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Default Description"
+autowrap_mode = 2
 
 [node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
+alignment = 1
 
 [node name="UseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Use"
 
 [node name="DropButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Drop"
