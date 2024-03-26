@@ -8,6 +8,8 @@ class_name SlotContainer
 
 var _selected: int = -1
 
+signal selected_changed(index)
+
 # TODO : Will we implement rows and cols for more grid control?
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory
@@ -41,7 +43,7 @@ func _set_selected(new_selected: int) -> void:
 	else:
 		_selected = new_selected
 		get_child(_selected).select()
-	print("Selected = ", _selected)
+	selected_changed.emit(_selected)
 
 # Return selected as Int
 func get_selected() -> int:

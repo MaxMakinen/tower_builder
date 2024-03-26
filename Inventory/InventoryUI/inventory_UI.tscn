@@ -81,7 +81,15 @@ theme = ExtResource("6_rdw0m")
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Description" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+[node name="ItemDescription" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Default Description"
+autowrap_mode = 1
+
+[node name="ItemName" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
@@ -107,6 +115,7 @@ size_flags_vertical = 4
 text = "Drop"
 
 [node name="UIInvSlotContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("7_m35h1")]
+unique_name_in_owner = true
 layout_mode = 2
 inventory = ExtResource("2_mrbwc")
 

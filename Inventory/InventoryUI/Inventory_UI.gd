@@ -5,23 +5,41 @@ extends Control
 @export var slot_scene: PackedScene
 
 # ONREADY VARIABLES
-@onready var description = %Description
-@onready var item_description: PanelContainer = $PanelContainer/VBoxContainer/HBoxContainer/ItemDescription
-@onready var ui_inv_slot_container: GridContainer = $PanelContainer/VBoxContainer/HBoxContainer/UIInvSlotContainer
+@onready var ui_inv_slot_container: GridContainer = %UIInvSlotContainer
+@onready var item_name: Label = %ItemName
+@onready var item_description: Label = %ItemDescription
+
+const DEFAULT_NAME: String = "ItemName"
+const DEFAULT_DESCRIPTION: String = "Lorem Ipsum Est"
 
 # Ensure inventory starts closed
-var is_open: bool = false
+var _is_open: bool = false
 
+#var _selected: int = -1
 
 func _ready() -> void:
 	close()
+	_display_selected(-1)
+	ui_inv_slot_container.selected_changed.connect(_display_selected)
 
 # Toggle if inventory open or closed
 func toggle() -> void:
-	if is_open == true:
+	if _is_open == true:
 		close()
 	else:
 		open()
+
+func _display_selected(index: int) -> void:
+	var inv: Inventory = ui_inv_slot_container.get_inventory()
+	var selected: InventorySlot = inv.get_item_at(index)
+	if selected == null:
+		return
+	if index >= 0 and index < inv.get_inventory_size():
+		item_name.text = inv.get_item_at(index).get_item_name()
+		item_description.text = inv.get_item_at(index).get_item_description()
+	else:
+		item_name.text = DEFAULT_NAME
+		item_description.text = DEFAULT_DESCRIPTION
 
 
 func get_slot_container() -> SlotContainer:
@@ -30,12 +48,12 @@ func get_slot_container() -> SlotContainer:
 
 func open() -> void:
 	visible = true
-	is_open = true
+	_is_open = true
 
 
 func close() -> void:
 	visible = false
-	is_open = false
+	_is_open = false
 
 
 func _on_drop_button_pressed() -> void:

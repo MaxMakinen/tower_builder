@@ -57,7 +57,12 @@ func get_item() -> ItemResource:
 func get_item_name():
 	if item:
 		return item.name
-	return "empty"
+	return "Empty"
+
+func get_item_description():
+	if item:
+		return item.description
+	return "Empty"
 
 # Return true if amount has reached max_stack_size
 func is_full() -> bool:
