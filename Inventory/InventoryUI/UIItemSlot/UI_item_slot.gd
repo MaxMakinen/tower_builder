@@ -5,7 +5,9 @@ class_name UIItemSlot
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
-# Display item sprite and amount that are found inside the InventorySlot If nothing founid in slot then display empty
+var _selected: bool = false
+
+# Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
 	if item != null and item.item != null:
 		item_icon.texture = item.get_texture()
@@ -21,3 +23,16 @@ func display_item(item: InventorySlot) -> void:
 		else:
 			modulate = Color(1, 1, 1)
 
+# Toggle whether slot is selected, modulate color accordingly
+func select() -> void:
+	_selected = !_selected
+	if _selected:
+		modulate = Color(1, 0.8, 0.8)
+	else:
+		modulate = Color(1, 1, 1)
+	pass
+
+# TODO : This might be useless
+#Return selected status of slot
+func is_selected() -> bool:
+	return _selected
