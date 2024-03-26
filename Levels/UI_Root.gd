@@ -17,11 +17,6 @@ var left_mouse_pressed: bool = false
 func _ready() -> void:
 	mouse_timer.one_shot = true
 	visible = true
-#	for item_slot in get_tree().get_nodes_in_group("item_slot"):
-#		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
-#		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
-#		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
-#		item_slot.mouse_exited.connect(hide_tooltip)
 	_link_slot_container(ui_hotbar)
 	_link_slot_container(inventory_ui.get_slot_container())
 
@@ -32,8 +27,8 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
 		item_slot.mouse_exited.connect(_follow_mouse.bind(-1))
-		item_slot.mouse_entered.connect(show_tooltip.bind(item_slot.get_index()))
-		item_slot.mouse_exited.connect(hide_tooltip)
+		item_slot.mouse_entered.connect(_show_tooltip.bind(item_slot.get_index()))
+		item_slot.mouse_exited.connect(_hide_tooltip)
 
 func _follow_slot_container(container: SlotContainer) -> void:
 	target_slot_container = container
@@ -49,7 +44,6 @@ func _unhandled_input(event) -> void:
 		inventory_ui.toggle()
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("left_click"):
-			mouse_timer.one_shot = true
 			mouse_timer.start(0.2)
 
 
@@ -63,14 +57,14 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		if event.is_action_pressed("right_click"):
 			if inventory_ui.visible:
 				_split_item(index)
-				hide_tooltip()
+				_hide_tooltip()
 			elif !inventory_ui.visible:
 				_select_item(index)
 		# Drag item while button is being held
 		elif event.is_action_pressed("left_click"):
 			if inventory_ui.visible:
 				_drag_item(index)
-				hide_tooltip()
+				_hide_tooltip()
 		# Release dragged item when mouse is released
 		elif mouse_timer.is_stopped() and event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
@@ -131,7 +125,7 @@ func _split_item(index: int) -> void:
 				target_inventory.insert_at(dragged_item.get_item(), index, split_amount)
 
 
-func show_tooltip(index: int) -> void:
+func _show_tooltip(index: int) -> void:
 	var inventory_item: ItemResource = null
 	if player.inventory.item_slots[index]:
 		inventory_item = player.inventory.item_slots[index].item
@@ -141,20 +135,11 @@ func show_tooltip(index: int) -> void:
 		tooltip.display_info(inventory_item)
 		tooltip.show()
 	else:
-		hide_tooltip()
+		_hide_tooltip()
 
 
-func hide_tooltip() -> void:
+func _hide_tooltip() -> void:
 	if tooltip:
 		tooltip.hide()
 		tooltip.queue_free()
 		tooltip = null
-
-# FOR DEBUGGING. Print contents of given inventory
-func print_inv(inv: Inventory) -> void:
-	print("Inventory")
-	for index in inv.inventory_size:
-		if inv.item_slots[index]:
-			print("Index: ", index, " 	item : ", inv.item_slots[index].item.name, "  	amount : ", inv.item_slots[index].amount)
-		else:
-			print("Index: ", index, " 	", inv.item_slots[index])

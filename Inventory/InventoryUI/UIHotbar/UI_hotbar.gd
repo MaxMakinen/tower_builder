@@ -9,6 +9,7 @@ func _ready() -> void:
 	columns = hotbar_size
 	if !inventory or !inventory.item_slots:
 		inventory = Inventory.new(hotbar_size)
+	inventory.set_selected(0)
 	display_items()
 
 func set_hotbar_size(new_size: int) -> void:

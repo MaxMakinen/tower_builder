@@ -89,17 +89,19 @@ size_flags_vertical = 6
 text = "Default Description"
 autowrap_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="UseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
+[node name="UseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Use"
 
-[node name="DropButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer"]
+[node name="DropButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Drop"
@@ -116,4 +118,5 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/HBoxContainer/UseButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer/UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer/DropButton" to="." method="_on_drop_button_pressed"]

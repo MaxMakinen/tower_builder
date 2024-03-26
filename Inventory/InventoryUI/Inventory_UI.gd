@@ -12,6 +12,7 @@ extends Control
 # Ensure inventory starts closed
 var is_open: bool = false
 
+
 func _ready() -> void:
 	close()
 
@@ -22,8 +23,10 @@ func toggle() -> void:
 	else:
 		open()
 
+
 func get_slot_container() -> SlotContainer:
 	return ui_inv_slot_container
+
 
 func open() -> void:
 	visible = true
@@ -35,7 +38,11 @@ func close() -> void:
 	is_open = false
 
 
-func _on_button_pressed() -> void:
+func _on_drop_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_use_button_pressed() -> void:
 	print("Inventory size : ", inventory.get_inventory_size())
 	print("Inventory contents : ")
 	for index in inventory.get_inventory_size():

@@ -7,11 +7,11 @@ class_name Inventory
 @export var inventory_size: int = 16
 
 signal inventory_update(indices: Array[int])
-signal selected_changed
+signal selected_changed(selected: int)
 
 # TODO : Should we care? Can it be exported to the UI?
 # Keep track of selected slot
-var selected: int = 0
+var selected: int = -1
 
 # PRIVATE FUNCTIONS
 func _init(size: int = inventory_size) -> void:
@@ -36,7 +36,7 @@ func _refresh()-> void:
 func _signal_change(indices: Array[int]) -> void:
 	inventory_update.emit(indices)
 	if selected in indices:
-		selected_changed.emit()
+		selected_changed.emit(selected)
 
 # PUBLIC FUNCTIONS
 # Return entire array of item_slots
