@@ -30,7 +30,7 @@ func refresh()-> void:
 		if item_slots[index] and item_slots[index].amount <= 0:
 			remove_item(index)
 		if item_slots[index] != null:
-			item_slots[index].slot_empty.connect(remove_item)
+			item_slots[index].slot_empty.connect(remove_item.bind(index))
 
 # Send signals
 func _signal_change(indices: Array[int]) -> void:
@@ -73,7 +73,7 @@ func remove_item(index: int) -> InventorySlot:
 
 # Change stack size of inventory slot and remove item if stack size falls below 1
 func increase_item_amount(index: int, amount: int) -> void:
-	var leftover = item_slots[index].change_amount(amount, index)
+	var leftover = item_slots[index].change_amount(amount)
 	if leftover > 0:
 		insert(item_slots[index].get_item(), leftover)
 	_signal_change([index])

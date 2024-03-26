@@ -67,14 +67,17 @@ func _on_drop_button_pressed() -> void:
 
 
 func _on_use_button_pressed() -> void:
-	print("Inventory size : ", inventory.get_inventory_size())
-	print("Inventory contents : ")
-	for index in inventory.get_inventory_size():
-		if inventory.item_slots[index]:
-			var item = inventory.item_slots[index]
-			#if item.item:
-			#	print("name : ", item.item.name)
-			print("index : ", index," item : ", item.get_item_name(), " amount : ", item.amount)
-		else:
-			print("index : ", index, " Slot empty")
+	if !inventory_container.get_inventory().get_item_at(_selected).use_item():
+		print("Item not consumable")
+	
+#	print("Inventory size : ", inventory.get_inventory_size())
+#	print("Inventory contents : ")
+#	for index in inventory.get_inventory_size():
+#		if inventory.item_slots[index]:
+#			var item = inventory.item_slots[index]
+#			#if item.item:
+#			#	print("name : ", item.item.name)
+#			print("index : ", index," item : ", item.get_item_name(), " amount : ", item.amount)
+#		else:
+#			print("index : ", index, " Slot empty")
 

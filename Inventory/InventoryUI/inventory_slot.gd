@@ -6,9 +6,9 @@ extends Resource
 @export var amount: int
 
 # SIGNALS
-signal slot_empty(index)
+signal slot_empty()
 # TODO : Slot_full might be useless signal. Maybe for UI to highlight maxed out stacks?
-signal slot_full(index)
+signal slot_full()
 
 # Sets new item info
 func _init(new_item: ItemResource = null, new_amount: int = 0) -> void:
@@ -20,19 +20,19 @@ func _init(new_item: ItemResource = null, new_amount: int = 0) -> void:
 #	item = new_item
 #	amount = new_amount
 
+# TODO : needs better variable names, too confusing
 # Change amout of current slot, emit signal with index of current placement in inventory array if amount reaches 0 or if max_stack_size reached
-func change_amount(new_amount: int, index: int) -> int:
+func change_amount(new_amount: int) -> int:
 	amount += new_amount
 	if !item:
 		return 0
-	var difference : int = amount - item.max_stack_size
 	if amount <= 0:
-		slot_empty.emit(index)
+		slot_empty.emit()
 	elif amount == item.max_stack_size:
-		slot_full.emit(index)
+		slot_full.emit()
 	elif amount > item.max_stack_size:
 		amount = item.max_stack_size
-	return difference
+	return amount - item.max_stack_size
 
 # Return item texture. If no item present, return null
 func get_texture() -> Texture2D:
@@ -85,5 +85,12 @@ func is_empty() -> bool:
 # Return true if slot not empty and has enough amount to be split
 func can_split() -> bool:
 	if item and amount > 1:
+		return true
+	return false
+
+func use_item() -> bool:
+	if item.consumable == true:
+		change_amount(-1)
+		print("Item : ", item.name, " Consumed")
 		return true
 	return false

@@ -23,9 +23,9 @@ func set_dragged_item(item: InventorySlot) -> void:
 		item_icon.texture = null
 		item_amount.text = ""
 
-# TODO : Possible that this is never used
+
 func change_amount(amount: int) -> void:
-	_dragged_item.change_amount(amount, 0)
+	_dragged_item.change_amount(amount)
 	item_amount.text = str(_dragged_item.get_amount())
 	if _dragged_item.get_amount() < 1:
 		set_dragged_item(null)
