@@ -64,12 +64,15 @@ func close() -> void:
 
 func _on_drop_button_pressed() -> void:
 	if _selected >= 0:
-		var world = get_parent().get_parent()
-		var pickup = Global.pickup.instantiate()
 		var target_inventory = inventory_container.get_inventory()
-		target_inventory.change_item_amount(_selected, -1)
-		pickup.spawn_item(target_inventory.get_item_at(_selected).get_item(), self.global_position)
-		world.add_child(pickup)
+		if target_inventory.get_item_at(_selected) != null:
+			var world = get_parent().get_parent()
+			var pickup = Global.pickup.instantiate()
+			target_inventory.change_item_amount(_selected, -1)
+			pickup.spawn_item(target_inventory.get_item_at(_selected).get_item(), self.global_position)
+			world.add_child(pickup)
+		else:
+			print("Slot empty")
 	else:
 		print("Nothing selected")
 	#print(get_tree_string_pretty())
@@ -77,9 +80,14 @@ func _on_drop_button_pressed() -> void:
 
 func _on_use_button_pressed() -> void:
 	if _selected >= 0:
-		if !inventory_container.get_inventory().get_item_at(_selected).use_item():
+		var item = inventory_container.get_inventory().get_item_at(_selected)
+		if !item:
+			print("Slot empty")
+		elif !item or !item.use_item():
 			print("Item not consumable")
-	
+	else:
+		print("Nothing selected")
+
 #	print("Inventory size : ", inventory.get_inventory_size())
 #	print("Inventory contents : ")
 #	for index in inventory.get_inventory_size():
