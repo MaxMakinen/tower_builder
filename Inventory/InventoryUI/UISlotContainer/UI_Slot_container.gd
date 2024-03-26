@@ -10,7 +10,7 @@ var _selected: int = -1
 
 # TODO : Will we implement rows and cols for more grid control?
 
-
+# Populate slot container with item_slots according to inventory size and display all items in inventory
 func display_items() -> void:
 	inventory.refresh()
 	for index in range(inventory.get_inventory_size()):
@@ -20,7 +20,7 @@ func display_items() -> void:
 	inventory.inventory_update.connect(_on_inventory_update)
 	inventory.selected_changed.connect(_set_selected)
 
-
+# Return reference to inventory
 func get_inventory() -> Inventory:
 	return inventory
 
@@ -31,10 +31,11 @@ func _on_inventory_update(indices: Array[int]) -> void:
 			var item_slot = get_child(index)
 			item_slot.display_item(inventory.get_item_at(index))
 
-
+# Set new value for selected
 func _set_selected(new_selected: int) -> void:
 	_selected = new_selected
 	print("Selected = ", _selected)
 
+# Return selected as Int
 func get_selected() -> int:
 	return _selected
