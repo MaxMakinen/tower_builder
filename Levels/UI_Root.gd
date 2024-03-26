@@ -31,7 +31,8 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 		item_slot.mouse_exited.connect(_hide_tooltip)
 
 func _follow_slot_container(container: SlotContainer) -> void:
-	target_slot_container = container
+	if !Input.is_action_pressed("left_click"):
+		target_slot_container = container
 	if container:
 		print("Entering Container : ", container.name)
 	else:
@@ -64,7 +65,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				if !drag_preview.get_dragged_item():
 					_select_item(index)
 		# Release dragged item when mouse is released
-		elif mouse_timer.is_stopped() and event.is_action_released("left_click"):
+		elif event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
 				if target_slot >= 0:
 					_drag_item(target_slot)
@@ -74,7 +75,6 @@ func _start_drag(index: int) -> void:
 	print("Timer Action Detected")
 	if Input.is_action_pressed("left_click"):
 		print("Left Click Detected")
-		_select_item(index)
 		_drag_item(index)
 		_hide_tooltip()
 
@@ -104,12 +104,12 @@ func _drag_item(index: int) -> void:
 
 
 func _split_item(index: int) -> void:
-	var target_inventory = target_slot_container.get_inventory()
-	var inventory_item = target_inventory.get_item_at(index)
-	var dragged_item = drag_preview.get_dragged_item()
+	var target_inventory: Inventory = target_slot_container.get_inventory()
+	var inventory_item: InventorySlot = target_inventory.get_item_at(index)
+	var dragged_item: InventorySlot = drag_preview.get_dragged_item()
 	var split_amount: int = 0
 	# If no item in slot or item not stackable, then fail split attempt
-	if inventory_item and (!inventory_item.is_stackable() or !inventory_item.get_item()):
+	if inventory_item and !inventory_item.can_split():
 		return
 	# Find size of stack that will be split off target item
 	if inventory_item and inventory_item.get_item():

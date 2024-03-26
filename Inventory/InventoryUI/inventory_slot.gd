@@ -71,8 +71,14 @@ func is_stackable() -> bool:
 		return true
 	return false
 
+# Return true if amount is slot has no item or has invalid amount
 func is_empty() -> bool:
-	if item == null or amount >= 0:
+	if item == null or amount <= 0:
 		return true
 	return false
 
+# Return true if slot not empty and has enough amount to be split
+func can_split() -> bool:
+	if item and amount > 1:
+		return true
+	return false
