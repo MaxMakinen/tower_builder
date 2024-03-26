@@ -15,7 +15,7 @@ func _init(new_item: ItemResource = null, new_amount: int = 0) -> void:
 	item = new_item
 	amount = new_amount
 
-## Sets new item info
+# Sets new item info
 #func new_item(new_item: ItemResource, new_amount: int) -> void:
 #	item = new_item
 #	amount = new_amount
