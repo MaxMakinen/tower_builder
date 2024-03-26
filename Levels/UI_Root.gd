@@ -18,7 +18,7 @@ func _ready() -> void:
 	mouse_timer.one_shot = true
 	visible = true
 	_link_slot_container(ui_hotbar)
-	_link_slot_container(inventory_ui.get_slot_container())
+
 
 func _link_slot_container(slot_container: SlotContainer) -> void:
 	slot_container.mouse_entered.connect(_follow_slot_container.bind(slot_container))
@@ -43,6 +43,7 @@ func _unhandled_input(event) -> void:
 		if inventory_ui.visible and drag_preview.get_dragged_item() != null:
 			return
 		inventory_ui.toggle()
+		_link_slot_container(inventory_ui.get_slot_container())
 
 
 func _follow_mouse(index: int) -> void:

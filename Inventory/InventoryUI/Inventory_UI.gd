@@ -20,7 +20,7 @@ var _selected: int = -1
 func _ready() -> void:
 	close()
 	_display_default()
-	inventory_container.selected_changed.connect(_display_selected)
+	
 
 # Toggle if inventory open or closed
 func toggle() -> void:
@@ -50,11 +50,14 @@ func get_slot_container() -> SlotContainer:
 
 
 func open() -> void:
+	inventory_container.display_items()
+	inventory_container.selected_changed.connect(_display_selected)
 	visible = true
 	_is_open = true
 
 
 func close() -> void:
+	inventory_container.clear_items()
 	visible = false
 	_is_open = false
 
