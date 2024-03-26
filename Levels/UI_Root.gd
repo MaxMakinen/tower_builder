@@ -15,7 +15,6 @@ var target_slot_container: SlotContainer = null
 var left_mouse_pressed: bool = false
 
 func _ready() -> void:
-	mouse_timer.wait_time = 0.2
 	mouse_timer.one_shot = true
 	visible = true
 #	for item_slot in get_tree().get_nodes_in_group("item_slot"):
@@ -50,7 +49,8 @@ func _unhandled_input(event) -> void:
 		inventory_ui.toggle()
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("left_click"):
-			mouse_timer.start()
+			mouse_timer.one_shot = true
+			mouse_timer.start(0.2)
 
 
 func _follow_mouse(index: int) -> void:
