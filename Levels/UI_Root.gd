@@ -121,7 +121,7 @@ func _split_item(index: int) -> void:
 		split_amount = ceil(dragged_item.get_amount() / 2)
 		if dragged_item and (!inventory_item or !inventory_item.get_item()):
 			if split_amount > 0:
-				dragged_item.change_amount(-split_amount, 0)
+				drag_preview.change_amount(-split_amount)
 				target_inventory.insert_at(dragged_item.get_item(), index, split_amount)
 
 

@@ -18,7 +18,7 @@ func set_dragged_item(item: InventorySlot) -> void:
 	_dragged_item = item
 	if _dragged_item != null and _dragged_item.item != null:
 		item_icon.texture = item.item.texture
-		item_amount.text = str(item.amount) if item.is_stackable() else ""
+		item_amount.text = str(item.get_amount()) if item.is_stackable() else ""
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
@@ -26,6 +26,7 @@ func set_dragged_item(item: InventorySlot) -> void:
 # TODO : Possible that this is never used
 func change_amount(amount: int) -> void:
 	_dragged_item.change_amount(amount, 0)
+	item_amount.text = str(_dragged_item.get_amount())
 	if _dragged_item.get_amount() < 1:
 		set_dragged_item(null)
 
