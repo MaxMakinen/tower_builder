@@ -101,7 +101,7 @@ func _on_use_button_pressed() -> void:
 #			var item = inventory.item_slots[index]
 #			#if item.item:
 #			#	print("name : ", item.item.name)
-#			print("index : ", index," item : ", item.get_item_name(), " amount : ", item.amount)
+#			print("index : ", index," item : ", item.get_item_name(), " amount : ", item.get_amount()
 #		else:
 #			print("index : ", index, " Slot empty")
 

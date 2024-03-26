@@ -30,8 +30,9 @@ func _ready():
 # TODO : This feels dumb. Can it be better?
 func refresh()-> void:
 	for index in range(inventory_size):
-		if item_slots[index] and item_slots[index].amount <= 0:
-			remove_item(index)
+		if item_slots[index] != null and item_slots[index].get_amount() <= 0:
+			var temp = remove_item(index)
+			print("removed : ", temp.get_item_name())
 
 # Send signals
 func _signal_change(indices: Array[int]) -> void:
@@ -61,7 +62,7 @@ func get_inventory_size() -> int:
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item
-	item_slots[index].slot_empty.connect(remove_item)
+	item_slots[index].slot_empty.connect(remove_item.bind(index))
 	_signal_change([index])
 	return previous_item
 
@@ -85,10 +86,10 @@ func insert(new_item: ItemResource, amount: int = 1) -> bool:
 	for index in range(inventory_size):
 		# Look for first empty InventorySlot and remember its index
 		if empty_slot_index < 0:
-			if !item_slots[index] or !item_slots[index].item:
+			if !item_slots[index] or !item_slots[index].get_item():
 				empty_slot_index = index
 		# Look for existing InventorySlot with resource and increase amount if possible, then return to break loop
-		if item_slots[index] and item_slots[index].item == new_item and item_slots[index].amount < item_slots[index].item.max_stack_size:
+		if item_slots[index] and item_slots[index].get_item() == new_item and item_slots[index].get_amount() < item_slots[index].get_max_stack_size():
 			change_item_amount(index, amount)
 			return true
 	# No existing resource of type new_item found so add new item at index of first empty InventorySlot
@@ -115,7 +116,7 @@ func get_total_amount(target: ItemResource) -> int:
 	var total: int = 0
 	for item in item_slots:
 		if item.item == target:
-			total += item.amount
+			total += item.get_amount()
 	return total
 
 # Get list of unique ItemResources in inventory

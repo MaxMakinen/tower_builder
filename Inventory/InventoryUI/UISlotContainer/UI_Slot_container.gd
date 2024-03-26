@@ -36,9 +36,10 @@ func get_inventory() -> Inventory:
 # Updates display for item_slot referenced by index
 func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
-		if index >= 0 and index < inventory.inventory_size:
+		if index >= 0 and index < inventory.get_inventory_size():
 			var item_slot = get_child(index)
 			if item_slot:
+				print("Inv Update at index : ", index)
 				item_slot.display_item(inventory.get_item_at(index))
 			else:
 				pass

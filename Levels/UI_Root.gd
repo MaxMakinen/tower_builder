@@ -105,7 +105,7 @@ func _drag_item(index: int) -> void:
 	elif inventory_item and dragged_item:
 		# Stack item
 		if inventory_item.item == dragged_item.item and dragged_item.item != null:
-			target_inventory.change_item_amount(index, dragged_item.amount)
+			target_inventory.change_item_amount(index, dragged_item.get_amount())
 			drag_preview.set_dragged_item(null)
 		# Swap items
 		else:
@@ -130,7 +130,7 @@ func _split_item(index: int) -> void:
 			# Split off new Inventory slot duplicate and adjust amounts left
 		elif !dragged_item:
 			var item = inventory_item.duplicate()
-			item.amount = split_amount
+			item.set_amount(split_amount)
 			drag_preview.set_dragged_item(item)
 			target_inventory.change_item_amount(index, -split_amount)
 	# If slot below mouse is empty, split stack in dragged_item into it

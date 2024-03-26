@@ -9,7 +9,7 @@ var _selected: bool = false
 
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
-	if item != null and item.item != null:
+	if item != null and item.get_item() != null:
 		item_icon.texture = item.get_texture()
 		item_amount.text = str(item.get_amount()) if item.is_stackable() else ""
 		# TODO : Should we replace custom tooltip with built-in option and customize that?

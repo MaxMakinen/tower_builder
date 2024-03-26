@@ -37,15 +37,24 @@ func change_amount(new_amount: int) -> int:
 	slot_changed.emit()
 	return amount - item.max_stack_size
 
+# Return amount of items in slot
+func get_amount() -> int:
+	return amount
+
+# Set amount to specific number and return true. Ignore if invalid number and return false.
+func set_amount(new_amount: int = amount) -> bool:
+	if new_amount >= 0 and new_amount <= item.max_stack_size:
+		amount = new_amount
+		if amount == 0:
+			slot_empty.emit()
+		return true
+	return false
+
 # Return item texture. If no item present, return null
 func get_texture() -> Texture2D:
 	if item:
 		return item.texture
 	return null
-
-# Return amount of items in slot
-func get_amount() -> int:
-	return amount
 
 # Returns Max_stack_size of item. If no item present, return 0
 func get_max_stack_size() -> int:
