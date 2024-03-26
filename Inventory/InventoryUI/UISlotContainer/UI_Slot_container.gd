@@ -34,10 +34,13 @@ func _on_inventory_update(indices: Array[int]) -> void:
 # Set new value for selected
 func _set_selected(new_selected: int) -> void:
 	# If target is already selected, de-select target.
+	if _selected >= 0:
+		get_child(_selected).unselect()
 	if new_selected == _selected:
 		_selected = -1
 	else:
 		_selected = new_selected
+		get_child(_selected).select()
 	print("Selected = ", _selected)
 
 # Return selected as Int

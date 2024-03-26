@@ -17,6 +17,8 @@ func display_item(item: InventorySlot) -> void:
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
+	# TODO : Might be better to move selected bool from inventory to slot container.
+	# If slot selected and in hotbar, modulate accordingly
 	if get_parent() and get_parent().name == "UIHotbar":
 		if get_index() == get_parent().inventory.selected:
 			modulate = Color(0.8, 0.8, 0.8)
@@ -25,12 +27,18 @@ func display_item(item: InventorySlot) -> void:
 
 # Toggle whether slot is selected, modulate color accordingly
 func select() -> void:
-	_selected = !_selected
-	if _selected:
-		modulate = Color(1, 0.8, 0.8)
-	else:
-		modulate = Color(1, 1, 1)
-	pass
+	_selected = true
+	modulate = Color(1, 0.8, 0.8)
+#	if _selected:
+#		modulate = Color(1, 0.8, 0.8)
+#	else:
+#		modulate = Color(1, 1, 1)
+
+
+func unselect() -> void:
+	_selected = false
+	modulate = Color(1, 1, 1)
+
 
 # TODO : This might be useless
 #Return selected status of slot

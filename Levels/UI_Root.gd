@@ -42,14 +42,11 @@ func _unhandled_input(event) -> void:
 		if inventory_ui.visible and drag_preview.get_dragged_item() != null:
 			return
 		inventory_ui.toggle()
-	if event is InputEventMouseButton:
-		if event.is_action_pressed("left_click"):
-			mouse_timer.start(0.2)
 
 
 func _follow_mouse(index: int) -> void:
 	target_slot = index
-	print("Target slot : ", target_slot)
+	#print("Target slot : ", target_slot)
 
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
@@ -63,8 +60,9 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		# Drag item while button is being held
 		elif event.is_action_pressed("left_click"):
 			if inventory_ui.visible:
-				_drag_item(index)
-				_hide_tooltip()
+				get_tree().create_timer(0.2).timeout.connect(_start_drag.bind(index))
+				if !drag_preview.get_dragged_item():
+					_select_item(index)
 		# Release dragged item when mouse is released
 		elif mouse_timer.is_stopped() and event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
@@ -72,8 +70,18 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 					_drag_item(target_slot)
 
 
+func _start_drag(index: int) -> void:
+	print("Timer Action Detected")
+	if Input.is_action_pressed("left_click"):
+		print("Left Click Detected")
+		_select_item(index)
+		_drag_item(index)
+		_hide_tooltip()
+
+
 func _select_item(index: int) -> void:
-	player.inventory.set_selected(index)
+	target_slot_container._set_selected(index)
+	#player.inventory.set_selected(index)
 
 func _drag_item(index: int) -> void:
 	var target_inventory = target_slot_container.get_inventory()
@@ -116,7 +124,7 @@ func _split_item(index: int) -> void:
 			item.amount = split_amount
 			drag_preview.set_dragged_item(item)
 			target_inventory.increase_item_amount(index, -split_amount)
-
+	# If slot below mouse is empty, split stack in dragged_item into it
 	elif dragged_item and (!inventory_item or !inventory_item.get_item()):
 		split_amount = ceil(dragged_item.get_amount() / 2)
 		if dragged_item and (!inventory_item or !inventory_item.get_item()):
