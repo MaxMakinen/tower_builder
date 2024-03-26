@@ -12,6 +12,9 @@ signal selected_changed(index)
 
 # TODO : Will we implement rows and cols for more grid control?
 
+func _ready() -> void:
+	pass
+
 # Populate slot container with item_slots according to inventory size and display all items in inventory
 func display_items() -> void:
 	inventory.refresh()
@@ -35,7 +38,12 @@ func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
 		if index >= 0 and index < inventory.inventory_size:
 			var item_slot = get_child(index)
-			item_slot.display_item(inventory.get_item_at(index))
+			if item_slot:
+				item_slot.display_item(inventory.get_item_at(index))
+			else:
+				pass
+				# TODO : Something weird going on here
+				print("SHOTS FYCKED")
 
 # Set new value for selected
 func _set_selected(new_selected: int) -> void:

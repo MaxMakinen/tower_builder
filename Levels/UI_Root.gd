@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@onready var pickup = preload("res://Item/pickup.tscn")
 
 @onready var inventory_ui: Control = %Inventory_UI
 @onready var player: PersistentState = %Player
@@ -12,6 +13,7 @@ var tooltip: Tooltip = null
 
 var target_slot: int = 0
 var target_slot_container: SlotContainer = null
+var previous_slot_container: SlotContainer = null
 var left_mouse_pressed: bool = false
 
 func _ready() -> void:
@@ -30,13 +32,15 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 		item_slot.mouse_entered.connect(_show_tooltip.bind(item_slot.get_index()))
 		item_slot.mouse_exited.connect(_hide_tooltip)
 
+# Follow mouse to get slot_container currently under the mouse
 func _follow_slot_container(container: SlotContainer) -> void:
+	target_slot_container = container
 	if !Input.is_action_pressed("left_click"):
-		target_slot_container = container
-	if container:
-		print("Entering Container : ", container.name)
-	else:
-		print("Leaving Container")
+		previous_slot_container = container
+#	if container:
+#		print("Entering Container : ", container.name)
+#	else:
+#		print("Leaving Container")
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
@@ -85,7 +89,11 @@ func _select_item(index: int) -> void:
 	#player.inventory.set_selected(index)
 
 func _drag_item(index: int) -> void:
-	var target_inventory = target_slot_container.get_inventory()
+	var target_inventory: Inventory
+	if target_slot_container != previous_slot_container:
+		target_inventory = previous_slot_container.get_inventory()
+	else:
+		target_inventory = target_slot_container.get_inventory()
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
 	# Pick item

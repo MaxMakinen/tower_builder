@@ -63,12 +63,20 @@ func close() -> void:
 
 
 func _on_drop_button_pressed() -> void:
-	pass # Replace with function body.
-
+	if _selected >= 0:
+		var world = get_parent().get_parent()
+		var pickup = Global.pickup.instantiate()
+		pickup.spawn_item(inventory_container.get_inventory().remove_item(_selected).get_item(), self.global_position)
+		world.add_child(pickup)
+	else:
+		print("Nothing selected")
+	#print(get_tree_string_pretty())
+#drag_preview.set_dragged_item(target_inventory.remove_item(index))
 
 func _on_use_button_pressed() -> void:
-	if !inventory_container.get_inventory().get_item_at(_selected).use_item():
-		print("Item not consumable")
+	if _selected >= 0:
+		if !inventory_container.get_inventory().get_item_at(_selected).use_item():
+			print("Item not consumable")
 	
 #	print("Inventory size : ", inventory.get_inventory_size())
 #	print("Inventory contents : ")

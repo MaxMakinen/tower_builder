@@ -22,15 +22,16 @@ func _init(size: int = inventory_size) -> void:
 func _ready():
 	if item_slots.size() != inventory_size:
 		item_slots.resize(inventory_size)
-	refresh()
+	for index in range(inventory_size):
+		if item_slots[index] != null:
+			item_slots[index].slot_empty.connect(remove_item.bind(index))
+
 
 # TODO : This feels dumb. Can it be better?
 func refresh()-> void:
 	for index in range(inventory_size):
 		if item_slots[index] and item_slots[index].amount <= 0:
 			remove_item(index)
-		if item_slots[index] != null:
-			item_slots[index].slot_empty.connect(remove_item.bind(index))
 
 # Send signals
 func _signal_change(indices: Array[int]) -> void:
