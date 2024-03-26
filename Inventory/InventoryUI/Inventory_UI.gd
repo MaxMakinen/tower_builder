@@ -66,7 +66,9 @@ func _on_drop_button_pressed() -> void:
 	if _selected >= 0:
 		var world = get_parent().get_parent()
 		var pickup = Global.pickup.instantiate()
-		pickup.spawn_item(inventory_container.get_inventory().remove_item(_selected).get_item(), self.global_position)
+		var target_inventory = inventory_container.get_inventory()
+		target_inventory.change_item_amount(_selected, -1)
+		pickup.spawn_item(target_inventory.get_item_at(_selected).get_item(), self.global_position)
 		world.add_child(pickup)
 	else:
 		print("Nothing selected")
