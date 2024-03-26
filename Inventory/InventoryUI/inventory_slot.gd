@@ -28,6 +28,7 @@ func change_amount(new_amount: int) -> int:
 	if !item:
 		return 0
 	if amount <= 0:
+		print("Slot empty singal emitted")
 		slot_empty.emit()
 		return 0
 	elif amount == item.max_stack_size:

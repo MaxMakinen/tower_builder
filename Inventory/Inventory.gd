@@ -27,7 +27,7 @@ func _ready():
 			item_slots[index].slot_empty.connect(remove_item.bind(index))
 
 
-# TODO : This feels dumb. Can it be better?
+# TODO : This feels dumb. Can it be better?	  
 func refresh()-> void:
 	for index in range(inventory_size):
 		if item_slots[index] != null and item_slots[index].get_amount() <= 0:
