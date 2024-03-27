@@ -58,7 +58,7 @@ animations = [{
 radius = 13.0384
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xkd0"]
-radius = 30.0167
+radius = 30.0
 
 [node name="OreResourceNode" type="StaticBody2D"]
 collision_mask = 0
