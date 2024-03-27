@@ -71,12 +71,14 @@ func _unhandled_input(event) -> void:
 func _show_inventory() -> void:
 		if inventory_ui.visible and drag_preview.get_dragged_item() != null:
 			return
-		_open_inventory()
+#		_open_inventory()
 		inventory_ui.toggle()
 		if inventory_ui.visible:
 			_link_slot_container(inventory_ui.get_slot_container())
 
 func _open_inventory() -> void:
+	if inventory_ui.visible and drag_preview.get_dragged_item() != null:
+			return
 	inventory_ui.open()
 	_link_slot_container(inventory_ui.get_slot_container())
 
