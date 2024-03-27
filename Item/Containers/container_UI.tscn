@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1qhifidqyrc6"]
+
+[ext_resource type="Theme" uid="uid://2u22t484dthy" path="res://Inventory/InventoryUI/inventory_theme.tres" id="1_erj8u"]
+[ext_resource type="Script" path="res://Item/Containers/container_UI.gd" id="2_4f3qu"]
+[ext_resource type="PackedScene" uid="uid://bmy7n8gq75pij" path="res://Inventory/InventoryUI/UIInvSlotContainer/UI_inv_slot_container.tscn" id="3_babki"]
+
+[node name="Container_UI" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_erj8u")
+script = ExtResource("2_4f3qu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleBar" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UIInvSlotContainer" parent="VBoxContainer" instance=ExtResource("3_babki")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Take" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Take"
+
+[node name="TakeAll" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Take All"

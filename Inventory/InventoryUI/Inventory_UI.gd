@@ -1,9 +1,5 @@
 extends Control
 
-# EXPORT VARIABLES
-@export var inventory: Inventory
-@export var slot_scene: PackedScene
-
 # ONREADY VARIABLES
 @onready var inventory_container: GridContainer = %UIInvSlotContainer
 @onready var item_name: Label = %ItemName
@@ -97,14 +93,4 @@ func _on_use_button_pressed() -> void:
 		print("Nothing selected")
 	get_tree().create_timer(1).timeout.connect(_display_selected)
 
-#	print("Inventory size : ", inventory.get_inventory_size())
-#	print("Inventory contents : ")
-#	for index in inventory.get_inventory_size():
-#		if inventory.item_slots[index]:
-#			var item = inventory.item_slots[index]
-#			#if item.item:
-#			#	print("name : ", item.item.name)
-#			print("index : ", index," item : ", item.get_item_name(), " amount : ", item.get_amount()
-#		else:
-#			print("index : ", index, " Slot empty")
 
