@@ -21,7 +21,6 @@ func _init(new_item: ItemResource = null, new_amount: int = 0) -> void:
 #	item = new_item
 #	amount = new_amount
 
-# TODO : needs better variable names, too confusing
 # Change amout of current slot, emit signal with index of current placement in inventory array if amount reaches 0 or if max_stack_size reached
 func change_amount(new_amount: int) -> int:
 	amount += new_amount
