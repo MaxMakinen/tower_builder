@@ -47,5 +47,10 @@ func close() -> void:
 func set_inventory(new_inventory: Inventory) -> void:
 	inventory_container.set_inventory(new_inventory)
 
+
 func set_container_name(new_name: String) -> void:
 	title_bar.text = new_name
+
+
+func get_slot_container() -> SlotContainer:
+	return inventory_container
