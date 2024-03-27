@@ -98,9 +98,8 @@ func _drag_item(index: int, target_inventory: Inventory) -> void:
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
 	# Pick item
-	var pickup_target = previous_slot_container.get_inventory()
-	if pickup_target.get_item_at(index) and !dragged_item:
-		drag_preview.set_dragged_item(pickup_target.remove_item(index))
+	if target_inventory.get_item_at(index) and !dragged_item:
+		drag_preview.set_dragged_item(target_inventory.remove_item(index))
 	# Drop item
 	if !inventory_item and dragged_item:
 		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))

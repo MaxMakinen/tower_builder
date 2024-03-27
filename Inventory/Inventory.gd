@@ -16,8 +16,9 @@ var selected: int = -1
 # PRIVATE FUNCTIONS
 func _init(size: int = inventory_size) -> void:
 	inventory_size = size
-	for index in inventory_size:
-		item_slots.append(InventorySlot.new())
+	item_slots.resize(inventory_size)
+#	for index in inventory_size:
+#		item_slots.append(InventorySlot.new())
 
 func _ready():
 	if item_slots.size() != inventory_size:
