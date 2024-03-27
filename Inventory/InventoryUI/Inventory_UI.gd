@@ -70,9 +70,11 @@ func _on_drop_button_pressed() -> void:
 			target_inventory.change_item_amount(selected, -1)
 			world.add_child(pickup)
 		else:
-			print("Slot empty")
+			item_description.text = "Slot empty"
+			#print("Slot empty")
 	else:
-		print("Nothing selected")
+		item_description.text = "Nothing selected"
+		#print("Nothing selected")
 	#print(get_tree_string_pretty())
 #drag_preview.set_dragged_item(target_inventory.remove_item(index))
 
@@ -83,14 +85,14 @@ func _on_use_button_pressed() -> void:
 		if !item:
 			item_description.text = "Slot empty"
 			#get_tree().create_timer(1).timeout.connect(_display_selected)
-			print("Slot empty")
+			#print("Slot empty")
 		elif !item or !item.use_item():
 			item_description.text = "Item not consumable"
-			print("Item not consumable")
+			#print("Item not consumable")
 			#get_tree().create_timer(1).timeout.connect(_display_selected)
 	else:
 		item_description.text = "Nothing selected"
-		print("Nothing selected")
+		#print("Nothing selected")
 	get_tree().create_timer(1).timeout.connect(_display_selected)
 
 
