@@ -3,7 +3,7 @@ extends Resource
 class_name Inventory
 
 
-@export var item_slots: Array[InventorySlot]
+@export var item_slots: Array[InventorySlot] = []
 @export var inventory_size: int = 16
 
 signal inventory_update(indices: Array[int])
