@@ -2,7 +2,7 @@ extends SlotContainer
 
 class_name UIHotbar
 
-var hotbar_size = 8
+var hotbar_size = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,10 +40,10 @@ func _input(event: InputEvent) -> void:
 			inventory.set_selected(4)
 		if event.is_action_pressed("6"):
 			inventory.set_selected(5)
-		if event.is_action_pressed("7"):
-			inventory.set_selected(6)
-		if event.is_action_pressed("8"):
-			inventory.set_selected(7)
-		if event.is_action_pressed("9"):
-			inventory.set_selected(8)
+#		if event.is_action_pressed("7"):
+#			inventory.set_selected(6)
+#		if event.is_action_pressed("8"):
+#			inventory.set_selected(7)
+#		if event.is_action_pressed("9"):
+#			inventory.set_selected(8)
 

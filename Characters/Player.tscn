@@ -1,7 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0cwspakcxxok"]
+[gd_scene load_steps=23 format=3 uid="uid://c0cwspakcxxok"]
 
 [ext_resource type="Script" path="res://Characters/Player.gd" id="1_k6q6l"]
-[ext_resource type="Resource" uid="uid://cs46dag621l4e" path="res://Inventory/InventoryResources/player_inventory.tres" id="3_7c1jx"]
 [ext_resource type="Texture2D" uid="uid://daiyrsyyiy1vu" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/1out/char_a_p1_1out_pfpn_v04.png" id="3_20o8w"]
 [ext_resource type="PackedScene" uid="uid://b58owa2ykccsv" path="res://Player State Machine/StateMachine.tscn" id="3_obw4k"]
 [ext_resource type="Texture2D" uid="uid://db73depc0bi7i" path="res://Assets/Willibab's Simple Weapon Icons/Hand_axe.png" id="4_ampx0"]
@@ -2011,7 +2010,6 @@ size = Vector2(14.4186, 14.4186)
 position = Vector2(0, -4)
 collision_layer = 2
 script = ExtResource("1_k6q6l")
-inventory = ExtResource("3_7c1jx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
