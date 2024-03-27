@@ -45,22 +45,29 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("4_yr8sc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TitleBar" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="TitleBar" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/TitleBar"]
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TitleBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 text = "Inventory"
 horizontal_alignment = 1
 
-[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer/TitleBar"]
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TitleBar"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
@@ -68,21 +75,21 @@ theme_override_fonts/font = ExtResource("5_eytcr")
 theme_override_font_sizes/font_size = 12
 text = "X"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ItemDescription" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 300)
+[node name="ItemDescription" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("6_rdw0m")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ItemName" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+[node name="ItemName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
@@ -91,7 +98,7 @@ text = "Default Description"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ItemDescription" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+[node name="ItemDescription" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
@@ -99,34 +106,26 @@ size_flags_vertical = 3
 text = "Default Description"
 autowrap_mode = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
 alignment = 1
 
-[node name="UseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
+[node name="UseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Use"
 
-[node name="DropButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
+[node name="DropButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Drop"
 
-[node name="UIInvSlotContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("7_m35h1")]
+[node name="UIInvSlotContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("7_m35h1")]
 unique_name_in_owner = true
 layout_mode = 2
 inventory = ExtResource("2_mrbwc")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer/UseButton" to="." method="_on_use_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer/DropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer/UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ItemDescription/VBoxContainer/ButtonContainer/DropButton" to="." method="_on_drop_button_pressed"]
