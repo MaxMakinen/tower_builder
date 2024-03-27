@@ -41,8 +41,8 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 # Follow mouse to get slot_container currently under the mouse
 func _follow_slot_container(container: SlotContainer) -> void:
 	target_slot_container = container
-	if !Input.is_action_pressed("left_click"):
-		previous_slot_container = container
+#	if !Input.is_action_pressed("left_click"):
+#		previous_slot_container = container
 #	if container:
 #		print("Entering Container : ", container.name)
 #	else:
@@ -73,6 +73,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		# Drag item while button is being held
 		elif event.is_action_pressed("left_click"):
 			if inventory_ui.visible:
+				previous_slot_container = target_slot_container
 				get_tree().create_timer(0.2).timeout.connect(_start_drag.bind(index))
 				if !drag_preview.get_dragged_item():
 					_select_item(index)
@@ -80,36 +81,30 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		elif event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
 				if target_slot >= 0:
-					_drag_item(target_slot)
+					_drag_item(target_slot, target_slot_container.get_inventory())
 
 
 func _start_drag(index: int) -> void:
-	print("Timer Action Detected")
 	if Input.is_action_pressed("left_click"):
-		print("Left Click Detected")
-		_drag_item(index)
+		_drag_item(index, previous_slot_container.get_inventory())
 		_hide_tooltip()
 
 
 func _select_item(index: int) -> void:
 	target_slot_container._set_selected(index)
-	#player.inventory.set_selected(index)
 
-func _drag_item(index: int) -> void:
-	var target_inventory: Inventory
-	if target_slot_container != previous_slot_container:
-		target_inventory = previous_slot_container.get_inventory()
-	else:
-		target_inventory = target_slot_container.get_inventory()
+
+func _drag_item(index: int, target_inventory: Inventory) -> void:
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
 	# Pick item
-	if inventory_item and !dragged_item:
-		drag_preview.set_dragged_item(target_inventory.remove_item(index))
+	var pickup_target = previous_slot_container.get_inventory()
+	if pickup_target.get_item_at(index) and !dragged_item:
+		drag_preview.set_dragged_item(pickup_target.remove_item(index))
 	# Drop item
-	elif !inventory_item and dragged_item:
+	if !inventory_item and dragged_item:
 		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
-	elif inventory_item and dragged_item:
+	if inventory_item and dragged_item:
 		# Stack item
 		if inventory_item.item == dragged_item.item and dragged_item.item != null:
 			target_inventory.change_item_amount(index, dragged_item.get_amount())
