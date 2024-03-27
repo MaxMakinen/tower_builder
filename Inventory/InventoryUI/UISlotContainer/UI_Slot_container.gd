@@ -19,8 +19,7 @@ func _init(new_inventory: Inventory = inventory) -> void:
 
 
 func _ready() -> void:
-	pass
-	#connect_to_inventory()
+	connect_to_inventory()
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory
 func display_items() -> void:

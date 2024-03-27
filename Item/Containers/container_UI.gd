@@ -16,7 +16,6 @@ var _is_open: bool = false
 
 func _ready() -> void:
 	close()
-	inventory_container.connect_to_inventory()
 	inventory_container.selected_changed.connect(_display_selected)
 
 func _display_selected(index: int = -1) -> void:

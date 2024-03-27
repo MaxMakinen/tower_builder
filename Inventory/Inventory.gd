@@ -64,7 +64,7 @@ func get_inventory_size() -> int:
 # Insert item stack into array at index
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
-	item_slots[index] = item
+	item_slots[index] = item.duplicate()
 	item_slots[index].slot_empty.connect(remove_item.bind(index))
 	_signal_change([index])
 	return previous_item
