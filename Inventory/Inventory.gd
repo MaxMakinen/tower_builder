@@ -31,8 +31,12 @@ func _ready():
 func refresh()-> void:
 	for index in range(inventory_size):
 		if item_slots[index] != null and item_slots[index].get_amount() <= 0:
-			var temp = remove_item(index)
-			print("removed : ", temp.get_item_name())
+			remove_item(index)
+		if item_slots[index] != null and !item_slots[index].is_connected("slot_empty", remove_item):
+			item_slots[index].slot_empty.connect(remove_item.bind(index))
+		elif item_slots[index] != null and item_slots[index].is_connected("slot_empty", remove_item):
+			print("slot index : ", index, " is connected")
+
 
 # Send signals
 func _signal_change(indices: Array[int]) -> void:
