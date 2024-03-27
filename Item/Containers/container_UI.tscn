@@ -46,6 +46,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "TitleBar"
+horizontal_alignment = 1
 
 [node name="ContainerContents" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_babki")]
 unique_name_in_owner = true

@@ -130,17 +130,18 @@ offset_bottom = 10.0
 unique_name_in_owner = true
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 117.11)
+position = Vector2(460, 116.503)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 118.11)
+position = Vector2(524, 117.503)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 117.11)
+position = Vector2(488, 116.503)
 item = ExtResource("15_1tbrp")
 
 [node name="WorldItemContainer" parent="." instance=ExtResource("14_1mhw0")]
 position = Vector2(492, 215)
 _inventory = SubResource("Resource_ev3wk")
 _container_size = 8
+_container_name = "Chest"

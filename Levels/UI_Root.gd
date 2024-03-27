@@ -25,11 +25,12 @@ func _ready() -> void:
 	_link_mouse_to_containers(inventory_ui.get_slot_container())
 	_link_mouse_to_containers(container_ui.get_slot_container())
 	for cont in get_tree().get_nodes_in_group("world_item_container"):
-		cont.open_container.connect(_open_container_ui)
+		cont.open_container.connect(_open_container_ui.bind(cont))
 		cont.close_container.connect(_close_container_ui)
 
 
-func _open_container_ui(inventory: Inventory) -> void:
+func _open_container_ui(inventory: Inventory, container: WorldItemContainer) -> void:
+	container_ui.set_container_name(container.get_container_name())
 	container_ui.open(inventory)
 	_open_inventory()
 	_link_slot_container(container_ui.get_slot_container())

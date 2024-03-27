@@ -1,14 +1,10 @@
 extends Control
 
 
-
 # ONREADY VARIABLES
 @onready var inventory_container: GridContainer = %ContainerContents
 @onready var title_bar: Label = %TitleBar
 
-
-const DEFAULT_NAME: String = "ItemName"
-const DEFAULT_DESCRIPTION: String = "Lorem Ipsum Est"
 
 # Ensure inventory starts closed
 var _is_open: bool = false

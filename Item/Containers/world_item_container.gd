@@ -6,7 +6,7 @@ class_name WorldItemContainer
 # EXPORT VARIABLES
 @export var _inventory: Inventory
 @export var _container_size: int = 1
-@export var _container_name: String
+@export var _container_name: String = "Unnamed"
 
 
 # ONREADY VARIABLES
