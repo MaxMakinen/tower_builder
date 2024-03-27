@@ -142,13 +142,13 @@ func get_selected() -> InventorySlot:
 
 func sort() -> void:
 	item_slots.sort_custom(mysort)
-	var temp: Array[int] = [inventory_size]
-	inventory_update.emit(temp)
+	var temp: Array[int]
+	temp.assign(range(inventory_size))
+	_signal_change(temp)
+
 
 func mysort(a: InventorySlot, b: InventorySlot):
 	if a and b:
 		if a.get_item_name() < b.get_item_name():
 			return true
-	elif a:
-		return true
 	return false
