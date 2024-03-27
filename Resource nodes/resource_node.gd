@@ -14,18 +14,18 @@ var pickup = preload("res://Item/pickup.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
 
 # 
-func _on_interact():
+func _on_interact() -> void:
 	effect_animation.show()
 	effect_animation.play("PlayerMined")
 	interactable = false
 	harvest_timer.start(harvest_time)
 
 
-func _on_harvest_timer_timeout():
+func _on_harvest_timer_timeout() -> void:
 	interactable = true
 	effect_animation.stop()
 	effect_animation.hide()
