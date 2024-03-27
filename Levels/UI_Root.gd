@@ -123,7 +123,7 @@ func _split_item(index: int) -> void:
 		return
 	# Find size of stack that will be split off target item
 	if inventory_item and inventory_item.get_item():
-		split_amount = ceil(inventory_item.get_amount() / 2)
+		split_amount = ceil(inventory_item.get_amount() / 2.0)
 		if dragged_item and inventory_item.get_item() == dragged_item.get_item():
 			if split_amount > 0:
 				drag_preview.change_amount(split_amount)
@@ -136,7 +136,7 @@ func _split_item(index: int) -> void:
 			target_inventory.change_item_amount(index, -split_amount)
 	# If slot below mouse is empty, split stack in dragged_item into it
 	elif dragged_item and (!inventory_item or !inventory_item.get_item()):
-		split_amount = ceil(dragged_item.get_amount() / 2)
+		split_amount = ceil(dragged_item.get_amount() / 2.0)
 		if dragged_item and (!inventory_item or !inventory_item.get_item()):
 			if split_amount > 0:
 				drag_preview.change_amount(-split_amount)
