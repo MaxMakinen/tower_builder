@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b07m656il4p6p"]
+[gd_scene load_steps=7 format=3 uid="uid://b07m656il4p6p"]
 
+[ext_resource type="Script" path="res://Item/Containers/world_item_container.gd" id="1_bmhhc"]
 [ext_resource type="Texture2D" uid="uid://b1hgkt2qf2584" path="res://Assets/Fantasy Icons/chests.png" id="1_j5faa"]
 [ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="2_sn8wt"]
 
@@ -7,15 +8,24 @@
 atlas = ExtResource("1_j5faa")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ov06r"]
-radius = 50.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_3y7jj"]
+radius = 8.0
 
-[node name="ItemContainer" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ov06r"]
+radius = 30.0
+
+[node name="WorldItemContainer" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_bmhhc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_mwk1d")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3y7jj")
+
 [node name="InteractionArea" parent="." instance=ExtResource("2_sn8wt")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+visible = false
 shape = SubResource("CircleShape2D_ov06r")
