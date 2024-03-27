@@ -23,9 +23,9 @@ signal open_container(inventory)
 # PRIVATE FUNCTIONS
 
 # When constructing new container, adjust container size according to input or use default value of 1
-func _init(size: int = _container_size, name: String = "Unnamed container") -> void:
+func _init(size: int = _container_size, new_name: String = "Unnamed container") -> void:
 	_container_size = size
-	_container_name = name
+	_container_name = new_name
 	if _inventory == null:
 		_inventory = Inventory.new(_container_size)
 	else:
@@ -38,12 +38,12 @@ func _ready() -> void:
 	add_child(container_ui)
 	container_ui.set_inventory(_inventory)
 	container_ui.set_container_name(_container_name)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
 	if _inventory.get_inventory_size() != _container_size:
 		_inventory.set_inventory_size(_container_size)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 # Called when player interacts with interaction area
 func _on_interact():
@@ -82,8 +82,8 @@ func get_container_size() -> int:
 	return _container_size
 
 # Set container name
-func set_container_name(name: String) -> void:
-	_container_name = name
+func set_container_name(new_name: String) -> void:
+	_container_name = new_name
 
 # Get container name
 func get_container_name() -> String:

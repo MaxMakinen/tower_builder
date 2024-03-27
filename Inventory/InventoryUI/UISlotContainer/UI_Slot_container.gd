@@ -13,14 +13,14 @@ signal selected_changed(index)
 # TODO : Will we implement rows and cols for more grid control?
 
 func _init(new_inventory: Inventory = inventory) -> void:
+	inventory = new_inventory
 	if !inventory:
 		set_inventory(Inventory.new())
-	else:
-		connect_to_inventory()
 
 
 func _ready() -> void:
-	connect_to_inventory()
+	pass
+	#connect_to_inventory()
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory
 func display_items() -> void:
