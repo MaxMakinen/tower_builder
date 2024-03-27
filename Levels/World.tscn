@@ -91,6 +91,7 @@ position = Vector2(599, 145)
 unique_name_in_owner = true
 z_index = 1
 position = Vector2(501, 163)
+inventory = null
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -128,14 +129,14 @@ offset_bottom = 10.0
 unique_name_in_owner = true
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 117.86)
+position = Vector2(460, 117.696)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 118.86)
+position = Vector2(524, 118.696)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 117.86)
+position = Vector2(488, 117.696)
 item = ExtResource("15_1tbrp")
 
 [node name="WorldItemContainer" parent="." instance=ExtResource("14_1mhw0")]

@@ -41,7 +41,7 @@ func _display_selected(index: int = -1) -> void:
 
 func _display_default() -> void:
 	item_name.text = DEFAULT_NAME
-	item_description.text = DEFAULT_DESCRIPTION
+	item_description.text = DEFAULT_DESCRIPTION + "\nInventory Size : " + str(inventory_container.get_inventory_size())
 
 func get_slot_container() -> SlotContainer:
 	return inventory_container

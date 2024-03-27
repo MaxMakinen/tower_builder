@@ -43,6 +43,9 @@ func clear_items() -> void:
 func get_inventory() -> Inventory:
 	return inventory
 
+func get_inventory_size() -> int:
+	return inventory.get_inventory_size()
+
 func set_inventory(new_inventory: Inventory) -> void:
 	inventory = new_inventory
 	connect_to_inventory()

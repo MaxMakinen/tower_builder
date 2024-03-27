@@ -15,11 +15,14 @@ var state_machine = StateMachine.new()
 
 # Variables for inventory
 @export var inventory: Inventory
-
+@export var _inventory_size = 16
 
 func _ready():
-	inventory.set_inventory_size(16)
-	pass
+	if inventory == null:
+		inventory = Inventory.new(_inventory_size)
+	if inventory.get_inventory_size() != _inventory_size:
+		inventory.set_inventory_size(_inventory_size)
+
 
 func _physics_process(_delta):
 	direction = Vector2(Input.get_vector("left", "right", "up", "down"))

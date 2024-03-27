@@ -142,7 +142,7 @@ func get_selected() -> InventorySlot:
 
 func sort() -> void:
 	item_slots.sort_custom(mysort)
-	var temp: Array[int]
+	var temp: Array[int] = []
 	temp.assign(range(inventory_size))
 	_signal_change(temp)
 
