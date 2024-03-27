@@ -15,7 +15,7 @@ const DEFAULT_DESCRIPTION: String = "Lorem Ipsum Est"
 # Ensure inventory starts closed
 var _is_open: bool = false
 
-var _selected: int = -1
+#var _selected: int = -1
 
 func _ready() -> void:
 	close()
@@ -30,8 +30,8 @@ func toggle() -> void:
 	else:
 		open()
 
-func _display_selected(index: int = _selected) -> void:
-	_selected = index
+func _display_selected(index: int = -1) -> void:
+#	_selected = index
 	if index >= 0 and index < inventory_container.get_inventory().get_inventory_size():
 		var selected: InventorySlot = inventory_container.get_inventory().get_item_at(index)
 		if selected == null:
@@ -63,13 +63,14 @@ func close() -> void:
 
 
 func _on_drop_button_pressed() -> void:
-	if _selected >= 0:
+	var selected = inventory_container.get_selected()
+	if selected >= 0:
 		var target_inventory = inventory_container.get_inventory()
-		if target_inventory.get_item_at(_selected) != null:
+		if target_inventory.get_item_at(selected) != null:
 			var world = get_parent().get_parent()
 			var pickup = Global.pickup.instantiate()
-			target_inventory.change_item_amount(_selected, -1)
-			pickup.spawn_item(target_inventory.get_item_at(_selected).get_item(), self.global_position)
+			target_inventory.change_item_amount(selected, -1)
+			pickup.spawn_item(target_inventory.get_item_at(selected).get_item(), self.global_position)
 			world.add_child(pickup)
 		else:
 			print("Slot empty")
@@ -79,8 +80,9 @@ func _on_drop_button_pressed() -> void:
 #drag_preview.set_dragged_item(target_inventory.remove_item(index))
 
 func _on_use_button_pressed() -> void:
-	if _selected >= 0:
-		var item = inventory_container.get_inventory().get_item_at(_selected)
+	var selected = inventory_container.get_selected()
+	if selected >= 0:
+		var item = inventory_container.get_inventory().get_item_at(selected)
 		if !item:
 			item_description.text = "Slot empty"
 			#get_tree().create_timer(1).timeout.connect(_display_selected)
