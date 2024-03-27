@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=26 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
@@ -17,21 +17,42 @@
 [ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="15_1tbrp"]
 [ext_resource type="Resource" uid="uid://dk418qqwy0oky" path="res://Item/Items/Potion.tres" id="16_7wwy6"]
 [ext_resource type="Script" path="res://Inventory/InventoryUI/inventory_slot.gd" id="17_d3wrb"]
+[ext_resource type="Resource" uid="uid://oc6so0dcajpd" path="res://Item/Items/Copper.tres" id="18_uounl"]
 
 [sub_resource type="Resource" id="Resource_cpr44"]
 script = ExtResource("9_say5h")
 item_slots = Array[ExtResource("17_d3wrb")]([])
 inventory_size = 16
 
-[sub_resource type="Resource" id="Resource_bw8f8"]
+[sub_resource type="Resource" id="Resource_cfk10"]
 script = ExtResource("17_d3wrb")
 item = ExtResource("16_7wwy6")
 amount = 1
 
+[sub_resource type="Resource" id="Resource_gqh2m"]
+script = ExtResource("17_d3wrb")
+item = ExtResource("16_7wwy6")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_2cmtc"]
+script = ExtResource("17_d3wrb")
+item = ExtResource("18_uounl")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_gvuqs"]
+script = ExtResource("17_d3wrb")
+item = ExtResource("15_1tbrp")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_f0vaq"]
+script = ExtResource("17_d3wrb")
+item = ExtResource("14_qub3j")
+amount = 10
+
 [sub_resource type="Resource" id="Resource_ev3wk"]
 script = ExtResource("9_say5h")
-item_slots = Array[ExtResource("17_d3wrb")]([null, SubResource("Resource_bw8f8"), null, null])
-inventory_size = 4
+item_slots = Array[ExtResource("17_d3wrb")]([null, SubResource("Resource_cfk10"), SubResource("Resource_gqh2m"), SubResource("Resource_2cmtc"), SubResource("Resource_gvuqs"), SubResource("Resource_f0vaq"), null, null])
+inventory_size = 8
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -107,16 +128,17 @@ offset_bottom = 10.0
 unique_name_in_owner = true
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 118.354)
+position = Vector2(460, 117.86)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 119.354)
+position = Vector2(524, 118.86)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 118.354)
+position = Vector2(488, 117.86)
 item = ExtResource("15_1tbrp")
 
 [node name="WorldItemContainer" parent="." instance=ExtResource("14_1mhw0")]
 position = Vector2(492, 215)
 _inventory = SubResource("Resource_ev3wk")
+_container_size = 8

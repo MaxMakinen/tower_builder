@@ -94,3 +94,8 @@ func _on_use_button_pressed() -> void:
 	get_tree().create_timer(1).timeout.connect(_display_selected)
 
 
+
+
+func _on_sort_button_pressed() -> void:
+	inventory_container.get_inventory().sort()
+	pass # Replace with function body.

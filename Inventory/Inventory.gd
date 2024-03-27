@@ -140,3 +140,10 @@ func get_selected() -> InventorySlot:
 	return item_slots[selected]
 
 
+func sort() -> void:
+	item_slots.sort_custom(mysort)
+
+func mysort(a: InventorySlot, b: InventorySlot):
+	if a.get_name() < b.get_name():
+		return true
+	return false

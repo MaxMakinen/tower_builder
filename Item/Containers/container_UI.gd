@@ -54,3 +54,8 @@ func set_container_name(new_name: String) -> void:
 
 func get_slot_container() -> SlotContainer:
 	return inventory_container
+
+
+func _on_sort_pressed() -> void:
+	inventory_container.get_inventory().sort()
+
