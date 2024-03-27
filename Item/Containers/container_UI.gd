@@ -42,3 +42,7 @@ func close() -> void:
 	inventory_container.clear_items()
 	visible = false
 	_is_open = false
+
+
+func set_inventory(new_inventory: Inventory) -> void:
+	inventory_container.set_inventory(new_inventory)

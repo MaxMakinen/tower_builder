@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=16 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
 [ext_resource type="PackedScene" uid="uid://c0cwspakcxxok" path="res://Characters/Player.tscn" id="2_wednm"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ugmt28rldcf" path="res://Inventory/InventoryUI/inventory_UI.tscn" id="9_4pq7l"]
 [ext_resource type="Script" path="res://Inventory/Inventory.gd" id="9_say5h"]
 [ext_resource type="PackedScene" uid="uid://ceei6115mex87" path="res://UI/DragPreview/Drag_preview.tscn" id="11_6g0nj"]
+[ext_resource type="PackedScene" uid="uid://b07m656il4p6p" path="res://Item/Containers/world_item_container.tscn" id="14_1mhw0"]
 [ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="14_qub3j"]
 [ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="15_1tbrp"]
 
@@ -88,12 +89,15 @@ offset_bottom = 10.0
 unique_name_in_owner = true
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 122.842)
+position = Vector2(460, 122.309)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 123.842)
+position = Vector2(524, 123.309)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 122.842)
+position = Vector2(488, 122.309)
 item = ExtResource("15_1tbrp")
+
+[node name="WorldItemContainer" parent="." instance=ExtResource("14_1mhw0")]
+position = Vector2(492, 215)

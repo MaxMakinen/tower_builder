@@ -10,6 +10,7 @@ class_name WorldItemContainer
 
 # ONREADY VARIABLES
 @onready var interaction_area: InteractionArea = $InteractionArea
+@onready var container_ui: PanelContainer = $Container_UI
 
 # PRIVATE VARIABLES
 var _interactable: bool = true
@@ -31,8 +32,7 @@ func _init(size: int = _container_size, name: String = "Unnamed container") -> v
 # Called when the node enters the scene tree for the first time. connect to interaction area signal
 func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
-#	if inventory == null:
-#		inventory = Inventory.new(container_size)
+	container_ui.set_inventory(_inventory)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 
 # Called when player interacts with interaction area
 func _on_interact():
+	print("Interacting with chest")
 	if _interactable:
 		open_container.emit(_inventory)
 		_interactable = false
