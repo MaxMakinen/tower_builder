@@ -2057,6 +2057,3 @@ texture = ExtResource("4_u0jp0")
 hframes = 8
 vframes = 8
 frame = 48
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
