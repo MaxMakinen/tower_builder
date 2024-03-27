@@ -20,8 +20,8 @@ func _ready() -> void:
 	mouse_timer.one_shot = true
 	visible = true
 	_link_slot_container(ui_hotbar)
-	#_link_mouse_to_containers(ui_hotbar)
-	#_link_mouse_to_containers(inventory_ui.get_slot_container())
+	_link_mouse_to_containers(ui_hotbar)
+	_link_mouse_to_containers(inventory_ui.get_slot_container())
 
 
 func _link_mouse_to_containers(slot_container: SlotContainer) -> void:
@@ -29,9 +29,8 @@ func _link_mouse_to_containers(slot_container: SlotContainer) -> void:
 	slot_container.mouse_exited.connect(_follow_slot_container.bind(null))
 	pass
 
-
+# Link all item_slot signals from slot_container to observing functions.
 func _link_slot_container(slot_container: SlotContainer) -> void:
-	_link_mouse_to_containers(slot_container)
 	for item_slot in slot_container.get_children():
 		item_slot.gui_input.connect(_on_ItemSlot_gui_input.bind(item_slot.get_index()))
 		item_slot.mouse_entered.connect(_follow_mouse.bind(item_slot.get_index()))
