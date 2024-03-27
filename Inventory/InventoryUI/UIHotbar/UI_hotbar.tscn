@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cld084l5j3fg5"]
+[gd_scene load_steps=3 format=3 uid="uid://cld084l5j3fg5"]
 
 [ext_resource type="Script" path="res://Inventory/InventoryUI/UIHotbar/UI_hotbar.gd" id="1_vy736"]
+[ext_resource type="PackedScene" uid="uid://cmohyujnc8lx7" path="res://Inventory/InventoryUI/UIHotbar/UI_hotbar_slot.tscn" id="2_olq3v"]
 
 [node name="UIHotbar" type="GridContainer"]
 anchors_preset = 12
@@ -12,3 +13,4 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_vy736")
+item_slots = ExtResource("2_olq3v")

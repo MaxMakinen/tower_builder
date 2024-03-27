@@ -1,7 +1,8 @@
+class_name UIHotbar
 extends SlotContainer
 
-class_name UIHotbar
 
+#const UI_HOTBAR_SLOT = preload("res://Inventory/InventoryUI/UIHotbar/UI_hotbar_slot.tscn")
 var hotbar_size = 6
 
 # Called when the node enters the scene tree for the first time.

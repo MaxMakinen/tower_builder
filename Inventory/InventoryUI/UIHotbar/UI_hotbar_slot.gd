@@ -1,11 +1,8 @@
-class_name UIItemSlot
-extends TextureRect
+class_name UIHotbarSlot
+extends UIItemSlot
 
+@onready var selection: TextureRect = $Selection
 
-@onready var item_icon: TextureRect = %ItemIcon
-@onready var item_amount: Label = %ItemAmount
-
-var _selected: bool = false
 
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
@@ -19,25 +16,21 @@ func display_item(item: InventorySlot) -> void:
 		item_amount.text = ""
 	# TODO : Might be better to move selected bool from inventory to slot container.
 	# If slot selected and in hotbar, modulate accordingly
-	if get_parent() and get_parent().name == "UIHotbar":
-		if get_index() == get_parent().inventory.selected:
-			modulate = Color(0.8, 0.8, 0.8)
-		else:
-			modulate = Color(1, 1, 1)
+#	if get_parent() and get_parent().name == "UIHotbar":
+#		if get_index() == get_parent().inventory.selected:
+#			modulate = Color(0.8, 0.8, 0.8)
+#		else:
+#			modulate = Color(1, 1, 1)
 
 # Toggle whether slot is selected, modulate color accordingly
 func select() -> void:
 	_selected = true
-	modulate = Color(1, 0.8, 0.8)
-#	if _selected:
-#		modulate = Color(1, 0.8, 0.8)
-#	else:
-#		modulate = Color(1, 1, 1)
+	selection.visible = true
 
 
 func unselect() -> void:
 	_selected = false
-	modulate = Color(1, 1, 1)
+	selection.visible = false
 
 
 # TODO : This might be useless

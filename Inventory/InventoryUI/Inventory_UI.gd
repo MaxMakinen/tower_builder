@@ -17,7 +17,7 @@ func _ready() -> void:
 	inventory_container.set_inventory(player.get_inventory())
 	close()
 	_display_default()
-	inventory_container.connect_to_inventory()
+	#inventory_container.connect_to_inventory()
 	inventory_container.selected_changed.connect(_display_selected)
 	
 
