@@ -12,8 +12,6 @@ class_name WorldItemContainer
 # ONREADY VARIABLES
 @onready var interaction_area: InteractionArea = $InteractionArea
 
-var container_ui
-
 # PRIVATE VARIABLES
 var _interactable: bool = true
 
@@ -30,7 +28,7 @@ func _ready() -> void:
 	else:
 		_inventory.set_inventory_size(_container_size)
 	interaction_area.interact = Callable(self, "_on_interact")
-	owner.add_child(container_ui)
+
 
 # Called when player interacts with interaction area
 func _on_interact():
@@ -44,10 +42,6 @@ func _on_interact():
 
 
 # PUBLIC FUNCTIONS
-
-## Change flag to mark container as free to be interacted with again
-#func close_container() -> void:
-#	_interactable = true
 
 # Change container inventory to new inventory and change container size to match
 func set_inventory(new_inventory: Inventory) -> void:

@@ -3,7 +3,7 @@ extends Control
 
 
 # ONREADY VARIABLES
-@onready var inventory_container: GridContainer = %UIInvSlotContainer
+@onready var inventory_container: GridContainer = %ContainerContents
 @onready var title_bar: Label = %TitleBar
 
 

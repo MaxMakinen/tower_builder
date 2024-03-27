@@ -26,13 +26,15 @@ func _ready() -> void:
 	_link_mouse_to_containers(container_ui.get_slot_container())
 	for cont in get_tree().get_nodes_in_group("world_item_container"):
 		cont.open_container.connect(_open_container_ui)
+		cont.open_container.connect(_open_inventory)
 		cont.close_container.connect(_close_container_ui)
+		cont.close_container.connect(inventory_ui.close)
 #signal open_container(inventory)
 #signal close_container()
 
 func _open_container_ui(inventory: Inventory) -> void:
-	_link_slot_container(container_ui.get_slot_container())
 	container_ui.open(inventory)
+	_link_slot_container(container_ui.get_slot_container())
 
 
 func _close_container_ui() -> void:
@@ -41,7 +43,7 @@ func _close_container_ui() -> void:
 func _link_mouse_to_containers(slot_container: SlotContainer) -> void:
 	slot_container.mouse_entered.connect(_follow_slot_container.bind(slot_container))
 	slot_container.mouse_exited.connect(_follow_slot_container.bind(null))
-	pass
+
 
 # Link all item_slot signals from slot_container to observing functions.
 func _link_slot_container(slot_container: SlotContainer) -> void:
@@ -55,19 +57,28 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 # Follow mouse to get slot_container currently under the mouse
 func _follow_slot_container(container: SlotContainer) -> void:
 	target_slot_container = container
+	if target_slot_container:
+		print("container name : ", target_slot_container.name)
 
+func _follow_mouse(index: int) -> void:
+	target_slot = index
+	print("target slot = ", target_slot)
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
+		_show_inventory()
+
+func _show_inventory() -> void:
 		if inventory_ui.visible and drag_preview.get_dragged_item() != null:
 			return
+		_open_inventory()
 		inventory_ui.toggle()
 		if inventory_ui.visible:
 			_link_slot_container(inventory_ui.get_slot_container())
 
-
-func _follow_mouse(index: int) -> void:
-	target_slot = index
+func _open_inventory() -> void:
+	inventory_ui.open()
+	_link_slot_container(inventory_ui.get_slot_container())
 
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
