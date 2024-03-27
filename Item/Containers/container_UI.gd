@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 
 
@@ -13,7 +13,6 @@ const DEFAULT_DESCRIPTION: String = "Lorem Ipsum Est"
 # Ensure inventory starts closed
 var _is_open: bool = false
 
-#var _selected: int = -1
 
 func _ready() -> void:
 	close()
@@ -46,3 +45,6 @@ func close() -> void:
 
 func set_inventory(new_inventory: Inventory) -> void:
 	inventory_container.set_inventory(new_inventory)
+
+func set_container_name(new_name: String) -> void:
+	title_bar.text = new_name

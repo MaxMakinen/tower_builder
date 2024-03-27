@@ -18,6 +18,7 @@ radius = 30.0
 [node name="WorldItemContainer" type="StaticBody2D" groups=["world_item_container"]]
 collision_mask = 0
 script = ExtResource("1_j5tg3")
+_container_ui = ExtResource("4_xuvun")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_mwk1d")
@@ -30,6 +31,3 @@ shape = SubResource("CircleShape2D_3y7jj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 visible = false
 shape = SubResource("CircleShape2D_ov06r")
-
-[node name="Container_UI" parent="." instance=ExtResource("4_xuvun")]
-visible = false

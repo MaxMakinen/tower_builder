@@ -7,10 +7,12 @@ class_name WorldItemContainer
 @export var _inventory: Inventory
 @export var _container_size: int = 1
 @export var _container_name: String
+@export var _container_ui: PackedScene
 
 # ONREADY VARIABLES
 @onready var interaction_area: InteractionArea = $InteractionArea
-@onready var container_ui: PanelContainer = $Container_UI
+
+var container_ui
 
 # PRIVATE VARIABLES
 var _interactable: bool = true
@@ -32,7 +34,12 @@ func _init(size: int = _container_size, name: String = "Unnamed container") -> v
 # Called when the node enters the scene tree for the first time. connect to interaction area signal
 func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
+	container_ui = _container_ui.instantiate()
+	add_child(container_ui)
 	container_ui.set_inventory(_inventory)
+	container_ui.set_container_name(_container_name)
+	if _inventory.get_inventory_size() != _container_size:
+		_inventory.set_inventory_size(_container_size)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -43,7 +50,11 @@ func _on_interact():
 	print("Interacting with chest")
 	if _interactable:
 		open_container.emit(_inventory)
+		container_ui.open()
 		_interactable = false
+	else:
+		container_ui.close()
+		_interactable = true
 
 
 # PUBLIC FUNCTIONS
