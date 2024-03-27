@@ -38,3 +38,6 @@ func _physics_process(_delta):
 func add_to_inventory(item: ItemResource) -> bool:
 	return inventory.insert(item)
 
+func get_inventory() -> Inventory:
+	return inventory
+

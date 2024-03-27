@@ -5,9 +5,9 @@ class_name Inventory
 
 @export var item_slots: Array[InventorySlot] = []
 @export var inventory_size: int = 16
-
 signal inventory_update(indices: Array[int])
 signal selected_changed(selected: int)
+
 
 # TODO : Should we care? Can it be exported to the UI?
 # Keep track of selected slot

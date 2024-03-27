@@ -4,6 +4,7 @@ extends Control
 @onready var inventory_container: GridContainer = %UIInvSlotContainer
 @onready var item_name: Label = %ItemName
 @onready var item_description: Label = %ItemDescription
+@onready var player = get_tree().get_first_node_in_group("player")
 
 const DEFAULT_NAME: String = "ItemName"
 const DEFAULT_DESCRIPTION: String = "Lorem Ipsum Est"
@@ -11,9 +12,9 @@ const DEFAULT_DESCRIPTION: String = "Lorem Ipsum Est"
 # Ensure inventory starts closed
 var _is_open: bool = false
 
-#var _selected: int = -1
 
 func _ready() -> void:
+	inventory_container.set_inventory(player.get_inventory())
 	close()
 	_display_default()
 	inventory_container.connect_to_inventory()
