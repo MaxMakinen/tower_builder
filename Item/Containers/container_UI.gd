@@ -30,7 +30,9 @@ func _display_selected(index: int = -1) -> void:
 #		_display_default()
 
 
-func open() -> void:
+func open(new_inventory: Inventory) -> void:
+	if inventory_container.get_inventory() != new_inventory:
+		inventory_container.set_inventory(new_inventory)
 	inventory_container.display_items()
 	visible = true
 	_is_open = true

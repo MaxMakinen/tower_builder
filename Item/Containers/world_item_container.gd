@@ -7,7 +7,7 @@ class_name WorldItemContainer
 @export var _inventory: Inventory
 @export var _container_size: int = 1
 @export var _container_name: String
-@export var _container_ui: PackedScene
+
 
 # ONREADY VARIABLES
 @onready var interaction_area: InteractionArea = $InteractionArea
@@ -19,49 +19,35 @@ var _interactable: bool = true
 
 # SIGNALS
 signal open_container(inventory)
+signal close_container()
 
 # PRIVATE FUNCTIONS
 
-# When constructing new container, adjust container size according to input or use default value of 1
-func _init(size: int = _container_size, new_name: String = "Unnamed container") -> void:
-	_container_size = size
-	_container_name = new_name
+# Called when the node enters the scene tree for the first time. connect to interaction area signal
+func _ready() -> void:
 	if _inventory == null:
 		_inventory = Inventory.new(_container_size)
 	else:
 		_inventory.set_inventory_size(_container_size)
-
-# Called when the node enters the scene tree for the first time. connect to interaction area signal
-func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
-	container_ui = _container_ui.instantiate()
-	container_ui.set_inventory(_inventory)
-	container_ui.set_container_name(_container_name)
 	owner.add_child(container_ui)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if _inventory.get_inventory_size() != _container_size:
-		_inventory.set_inventory_size(_container_size)
-
 
 # Called when player interacts with interaction area
 func _on_interact():
 	print("Interacting with chest")
 	if _interactable:
 		open_container.emit(_inventory)
-		container_ui.open()
 		_interactable = false
 	else:
-		container_ui.close()
+		close_container.emit()
 		_interactable = true
 
 
 # PUBLIC FUNCTIONS
 
-# Change flag to mark container as free to be interacted with again
-func close_container() -> void:
-	_interactable = true
+## Change flag to mark container as free to be interacted with again
+#func close_container() -> void:
+#	_interactable = true
 
 # Change container inventory to new inventory and change container size to match
 func set_inventory(new_inventory: Inventory) -> void:

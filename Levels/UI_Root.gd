@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var drag_preview: DragPreview = %DragPreview
 @onready var ui_hotbar: UIHotbar = %UIHotbar
 @onready var mouse_timer: Timer = %MouseTimer
+@onready var container_ui: Control = %Container_UI
 
 @export var tooltip_scene: PackedScene = preload("res://UI/Tooltip/tooltip.tscn")
 var tooltip: Tooltip = null
@@ -22,7 +23,18 @@ func _ready() -> void:
 	_link_slot_container(ui_hotbar)
 	_link_mouse_to_containers(ui_hotbar)
 	_link_mouse_to_containers(inventory_ui.get_slot_container())
+	for cont in get_tree().get_nodes_in_group("world_item_container"):
+		cont.open_container.connect(_open_container_ui)
+		cont.close_container.connect(_close_container_ui)
+#signal open_container(inventory)
+#signal close_container()
 
+func _open_container_ui(inventory: Inventory) -> void:
+	container_ui.open(inventory)
+
+
+func _close_container_ui() -> void:
+	container_ui.close()
 
 func _link_mouse_to_containers(slot_container: SlotContainer) -> void:
 	slot_container.mouse_entered.connect(_follow_slot_container.bind(slot_container))

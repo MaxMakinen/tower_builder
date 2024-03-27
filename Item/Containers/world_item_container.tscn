@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b07m656il4p6p"]
+[gd_scene load_steps=7 format=3 uid="uid://b07m656il4p6p"]
 
 [ext_resource type="Script" path="res://Item/Containers/world_item_container.gd" id="1_j5tg3"]
 [ext_resource type="Texture2D" uid="uid://b1hgkt2qf2584" path="res://Assets/Fantasy Icons/chests.png" id="2_ku5el"]
 [ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="3_y2fu1"]
-[ext_resource type="PackedScene" uid="uid://b1qhifidqyrc6" path="res://Item/Containers/container_UI.tscn" id="4_xuvun"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwk1d"]
 atlas = ExtResource("2_ku5el")
@@ -18,7 +17,7 @@ radius = 30.0
 [node name="WorldItemContainer" type="StaticBody2D" groups=["world_item_container"]]
 collision_mask = 0
 script = ExtResource("1_j5tg3")
-_container_ui = ExtResource("4_xuvun")
+_container_size = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_mwk1d")
