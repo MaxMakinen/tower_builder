@@ -35,9 +35,9 @@ func _init(size: int = _container_size, new_name: String = "Unnamed container") 
 func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
 	container_ui = _container_ui.instantiate()
-	add_child(container_ui)
 	container_ui.set_inventory(_inventory)
 	container_ui.set_container_name(_container_name)
+	owner.add_child(container_ui)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

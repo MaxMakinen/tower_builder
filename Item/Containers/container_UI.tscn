@@ -17,7 +17,8 @@ offset_right = 65.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_erj8u")
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("2_4f3qu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -33,6 +34,8 @@ offset_right = 65.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_erj8u")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -40,6 +43,7 @@ layout_mode = 2
 [node name="TitleBar" type="Label" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "TitleBar"
 
 [node name="UIInvSlotContainer" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_babki")]
 unique_name_in_owner = true
