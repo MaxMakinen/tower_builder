@@ -12,11 +12,15 @@ signal selected_changed(index)
 
 # TODO : Will we implement rows and cols for more grid control?
 
-func _ready() -> void:
+func _init(new_inventory: Inventory = inventory) -> void:
 	if !inventory:
-		inventory = Inventory.new()
-	inventory.inventory_update.connect(_on_inventory_update)
-	inventory.selected_changed.connect(_set_selected)
+		set_inventory(Inventory.new())
+	else:
+		connect_to_inventory()
+
+
+func _ready() -> void:
+	connect_to_inventory()
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory
 func display_items() -> void:
@@ -40,6 +44,10 @@ func clear_items() -> void:
 func get_inventory() -> Inventory:
 	return inventory
 
+func set_inventory(new_inventory: Inventory) -> void:
+	inventory = new_inventory
+	connect_to_inventory()
+
 # Updates display for item_slot referenced by index
 func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
@@ -48,7 +56,6 @@ func _on_inventory_update(indices: Array[int]) -> void:
 			if item_slot:
 				item_slot.display_item(inventory.get_item_at(index))
 				#print("Inv Update at index : ", index)
-
 
 # Set new value for selected
 func _set_selected(new_selected: int) -> void:
@@ -65,3 +72,7 @@ func _set_selected(new_selected: int) -> void:
 # Return selected as Int
 func get_selected() -> int:
 	return _selected
+
+# Return item from inventory at index
+func get_item_at(index: int) -> InventorySlot:
+	return inventory.get_item_at(index)

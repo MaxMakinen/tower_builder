@@ -1,7 +1,6 @@
 extends PanelContainer
 
-# EXPORT VARIABLES
-@export var slot_scene: PackedScene
+
 
 # ONREADY VARIABLES
 @onready var inventory_container: GridContainer = %UIInvSlotContainer

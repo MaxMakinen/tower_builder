@@ -139,8 +139,8 @@ func _split_item(index: int) -> void:
 
 func _show_tooltip(index: int) -> void:
 	var inventory_item: ItemResource = null
-	if player.inventory.item_slots[index]:
-		inventory_item = player.inventory.item_slots[index].item
+	if target_slot_container.get_item_at(index):
+		inventory_item = target_slot_container.get_item_at(index).get_item()
 	if inventory_item and !drag_preview.get_dragged_item():
 		tooltip = tooltip_scene.instantiate()
 		add_child(tooltip)
