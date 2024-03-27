@@ -41,12 +41,7 @@ func _link_slot_container(slot_container: SlotContainer) -> void:
 # Follow mouse to get slot_container currently under the mouse
 func _follow_slot_container(container: SlotContainer) -> void:
 	target_slot_container = container
-#	if !Input.is_action_pressed("left_click"):
-#		previous_slot_container = container
-#	if container:
-#		print("Entering Container : ", container.name)
-#	else:
-#		print("Leaving Container")
+
 
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
@@ -59,7 +54,6 @@ func _unhandled_input(event) -> void:
 
 func _follow_mouse(index: int) -> void:
 	target_slot = index
-	#print("Target slot : ", target_slot)
 
 
 func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
