@@ -26,12 +26,12 @@ func display_items() -> void:
 		add_child(item_slot)
 		item_slot.display_item(inventory.get_item_at(index))
 
-# connect to inventory signals
+# Connect to inventory signals
 func connect_to_inventory() -> void:
 	inventory.inventory_update.connect(_on_inventory_update)
 	inventory.selected_changed.connect(_set_selected)
 
-
+# Remove all child item_slot nodes
 func clear_items() -> void:
 	for child in get_children():
 		child.queue_free()
@@ -43,15 +43,12 @@ func get_inventory() -> Inventory:
 # Updates display for item_slot referenced by index
 func _on_inventory_update(indices: Array[int]) -> void:
 	for index in indices:
-		if index >= 0 and index < inventory.get_inventory_size():
+		if get_child_count() == inventory.get_inventory_size() and index >= 0 and index < inventory.get_inventory_size():
 			var item_slot = get_child(index)
 			if item_slot:
 				print("Inv Update at index : ", index)
 				item_slot.display_item(inventory.get_item_at(index))
-			else:
-				pass
-				# TODO : Something weird going on here
-				print("SHOTS FYCKED in slot container with indices : ", indices)
+
 
 # Set new value for selected
 func _set_selected(new_selected: int) -> void:
