@@ -28,15 +28,27 @@ func _ready() -> void:
 	else:
 		_inventory.set_inventory_size(_container_size)
 	interaction_area.interact = Callable(self, "_on_interact")
-
+	interaction_area.player_exited.connect(_close_container)
 
 # Called when player interacts with interaction area
 func _on_interact():
-	print("Interacting with chest")
 	if _interactable:
-		open_container.emit(_inventory)
-		_interactable = false
+		_open_container()
+#		open_container.emit(_inventory)
+#		_interactable = false
 	else:
+		_close_container()
+#		close_container.emit()
+#		_interactable = true
+
+
+func _open_container() -> void:
+	open_container.emit(_inventory)
+	_interactable = false
+
+
+func _close_container() -> void:
+	if _interactable == false:
 		close_container.emit()
 		_interactable = true
 

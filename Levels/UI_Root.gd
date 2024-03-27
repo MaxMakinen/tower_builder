@@ -26,18 +26,17 @@ func _ready() -> void:
 	_link_mouse_to_containers(container_ui.get_slot_container())
 	for cont in get_tree().get_nodes_in_group("world_item_container"):
 		cont.open_container.connect(_open_container_ui)
-		cont.open_container.connect(_open_inventory)
 		cont.close_container.connect(_close_container_ui)
-		cont.close_container.connect(inventory_ui.close)
-#signal open_container(inventory)
-#signal close_container()
+
 
 func _open_container_ui(inventory: Inventory) -> void:
 	container_ui.open(inventory)
+	_open_inventory()
 	_link_slot_container(container_ui.get_slot_container())
 
 
 func _close_container_ui() -> void:
+	inventory_ui.close()
 	container_ui.close()
 
 func _link_mouse_to_containers(slot_container: SlotContainer) -> void:
@@ -75,10 +74,12 @@ func _show_inventory() -> void:
 		inventory_ui.toggle()
 		if inventory_ui.visible:
 			_link_slot_container(inventory_ui.get_slot_container())
+		else:
+			container_ui.close()
 
 func _open_inventory() -> void:
-	if inventory_ui.visible and drag_preview.get_dragged_item() != null:
-			return
+	if inventory_ui.visible or drag_preview.get_dragged_item() != null:
+		return
 	inventory_ui.open()
 	_link_slot_container(inventory_ui.get_slot_container())
 
