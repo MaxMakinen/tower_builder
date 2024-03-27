@@ -25,8 +25,12 @@ func display_items() -> void:
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)
 		item_slot.display_item(inventory.get_item_at(index))
+
+# connect to inventory signals
+func connect_to_inventory() -> void:
 	inventory.inventory_update.connect(_on_inventory_update)
 	inventory.selected_changed.connect(_set_selected)
+
 
 func clear_items() -> void:
 	for child in get_children():
