@@ -6,6 +6,7 @@ extends TextureRect
 @onready var item_amount: Label = %ItemAmount
 
 var _slot_type: SlotManager.SlotType = SlotManager.SlotType.INVENTORY
+var _contents: InventorySlot = null
 
 signal selected_changed()
 var _selected: bool = false:
@@ -13,8 +14,10 @@ var _selected: bool = false:
 		selected_changed.emit()
 		_selected = new_selected
 
+# TODO : Change into two separate functions: set_contents and display_contents
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
+	_contents = item
 	if item != null and item.get_item() != null:
 		item_icon.texture = item.get_texture()
 		item_amount.text = str(item.get_amount()) if item.is_stackable() else ""
@@ -56,3 +59,10 @@ func _on_mouse_exited() -> void:
 
 func get_type() -> SlotManager.SlotType:
 	return _slot_type
+
+# TODO: Display_item needs to be replaced by a display contents function
+func pickup_slot() -> InventorySlot:
+	var temp = _contents.duplicate()
+	_contents.empty()
+	display_item(_contents)
+	return temp

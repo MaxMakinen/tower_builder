@@ -20,3 +20,4 @@ func get_slot_under_mouse() -> UIItemSlot:
 
 func get_type_under_mouse() -> SlotType:
 	return _slot_under_mouse.get_type()
+

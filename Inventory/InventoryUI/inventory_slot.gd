@@ -106,3 +106,14 @@ func use_item() -> bool:
 		print("Item : ", item.name, " Consumed")
 		return true
 	return false
+
+func empty() -> void:
+	item = null
+	amount = 0
+	slot_empty.emit()
+
+func copy_slot(new_slot: InventorySlot) -> void:
+	item = new_slot.get_item()
+	amount = new_slot.get_amount()
+	slot_changed.emit()
+

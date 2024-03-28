@@ -5,6 +5,8 @@ class_name DragPreview
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
+var _contained_slot: UIItemSlot = null
+var _previous_slot: UIItemSlot = null
 var _dragged_item: InventorySlot = null
 
 # If we are dragging an item, _dragged_item is not null, make node follow mouse position
@@ -36,4 +38,8 @@ func get_amount() -> int:
 
 func get_dragged_item() -> InventorySlot:
 	return _dragged_item
+
+func pickup_slot(slot: UIItemSlot) -> void:
+	set_dragged_item(slot.pickup_slot())
+	_previous_slot = slot
 
