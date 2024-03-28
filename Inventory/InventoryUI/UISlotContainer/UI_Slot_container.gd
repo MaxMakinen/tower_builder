@@ -6,7 +6,7 @@ class_name SlotContainer
 @export var inventory: Inventory = null
 
 
-var _selected: int = -1
+var _selected: int = -1: set = _set_selected
 
 signal selected_changed(index)
 
@@ -62,9 +62,10 @@ func _on_inventory_update(indices: Array[int]) -> void:
 
 # Set new value for selected
 func _set_selected(new_selected: int) -> void:
-	# If target is already selected, de-select target.
+	# If there is already a selected slot, unselect slot.
 	if _selected >= 0:
 		get_child(_selected).unselect()
+	# If target is already selected, de-select target.
 	if new_selected == _selected:
 		_selected = -1
 	else:
