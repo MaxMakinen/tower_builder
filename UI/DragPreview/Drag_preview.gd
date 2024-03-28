@@ -32,6 +32,8 @@ func set_dragged_item(item: InventorySlot, id: drag_ID) -> void:
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
+		previous_inventory = null
+		previous_index = 0
 
 func set_backup(inventory: Inventory, index: int) -> void:
 	previous_inventory = inventory
