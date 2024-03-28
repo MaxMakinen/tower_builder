@@ -16,6 +16,7 @@ var target_slot: int = 0
 var target_slot_container: SlotContainer = null
 var previous_slot_container: SlotContainer = null
 var left_mouse_pressed: bool = false
+var previous_slot: UIItemSlot = null
 
 func _ready() -> void:
 	mouse_timer.one_shot = true
@@ -62,6 +63,7 @@ func _follow_slot_container(container: SlotContainer) -> void:
 
 func _follow_mouse(index: int) -> void:
 	target_slot = index
+#	print("Slot manager finds : ", SlotManager.get_slot_under_mouse())
 	#print("target slot = ", target_slot)
 
 func _unhandled_input(event) -> void:
@@ -97,6 +99,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		elif event.is_action_pressed("left_click"):
 			if inventory_ui.visible:
 				previous_slot_container = target_slot_container
+				previous_slot = SlotManager.get_slot_under_mouse()
 				get_tree().create_timer(0.2).timeout.connect(_start_drag.bind(index))
 				if !drag_preview.get_dragged_item():
 					_select_item(index)
@@ -106,7 +109,8 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				if target_slot >= 0:
 					if target_slot < ui_hotbar.hotbar_size and target_slot_container == ui_hotbar:
 						_drag_hotbar_item(target_slot)
-					_drag_item(target_slot, target_slot_container.get_inventory())
+					_nu_drag(SlotManager.get_slot_under_mouse())
+					#_drag_item(target_slot, target_slot_container.get_inventory())
 
 
 func _start_drag(index: int) -> void:
@@ -114,7 +118,8 @@ func _start_drag(index: int) -> void:
 		_drag_hotbar_item(index)
 		_hide_tooltip()
 	elif Input.is_action_pressed("left_click"):
-		_drag_item(index, previous_slot_container.get_inventory())
+		#_drag_item(index, previous_slot_container.get_inventory())
+		_nu_drag(previous_slot)
 		_hide_tooltip()
 
 
@@ -134,6 +139,19 @@ func _drag_hotbar_item(index: int) -> void:
 	if ui_hotbar.get_slot_content(index) and !dragged_item:
 		drag_preview.set_dragged_item(ui_hotbar.get_slot_content(index))
 		pass
+
+
+func _nu_drag(target_slot: UIItemSlot) -> void:
+	# Attempt to pick up item
+	if !target_slot.is_empty() and drag_preview.is_empty():
+		drag_preview.pickup_slot(target_slot)
+	# Attempt to drop item
+	elif target_slot.is_empty() and !drag_preview.is_empty():
+		drag_preview.drop_slot(target_slot)
+	# Attempt to swap item
+	elif !target_slot.is_empty() and !drag_preview.is_empty():
+		drag_preview.swap_slot(target_slot)
+
 
 
 # TODO : Should porpably only work if dragged item is inventory item

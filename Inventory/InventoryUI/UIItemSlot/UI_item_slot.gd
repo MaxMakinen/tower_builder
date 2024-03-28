@@ -15,6 +15,18 @@ var _selected: bool = false:
 		_selected = new_selected
 
 # TODO : Change into two separate functions: set_contents and display_contents
+func set_contents(item: InventorySlot) -> void:
+	_contents = item
+
+func display_contents() -> void:
+	if _contents != null and _contents.get_item() != null:
+		item_icon.texture = _contents.get_texture()
+		item_amount.text = str(_contents.get_amount()) if _contents.is_stackable() else ""
+	else:
+		item_icon.texture = null
+		item_amount.text = ""
+
+
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
 	_contents = item
@@ -64,5 +76,20 @@ func get_type() -> SlotManager.SlotType:
 func pickup_slot() -> InventorySlot:
 	var temp = _contents.duplicate()
 	_contents.empty()
-	display_item(_contents)
+	display_contents()
 	return temp
+
+# TODO : We might want to rename these things
+func copy_slot(slot: InventorySlot) -> void:
+	if _contents:
+		_contents.copy_slot(slot)
+	else:
+		_contents = slot.duplicate()
+	display_contents()
+
+# Return true if slot empty
+func is_empty() -> bool:
+	if _contents == null or _contents.is_empty():
+		return true
+	return false
+

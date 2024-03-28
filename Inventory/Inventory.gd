@@ -34,7 +34,10 @@ func refresh()-> void:
 		if item_slots[index] != null and item_slots[index].get_amount() <= 0:
 			remove_item(index)
 		if item_slots[index] != null and !item_slots[index].is_connected("slot_empty", remove_item):
-			item_slots[index].slot_empty.connect(remove_item.bind(index))
+			pass
+		#	item_slots[index].slot_empty.connect(remove_item.bind(index))
+		if item_slots[index] == null:
+			item_slots[index] = InventorySlot.new()
 
 
 # Send signals
@@ -65,14 +68,14 @@ func get_inventory_size() -> int:
 func set_item(index: int, item: InventorySlot):
 	var previous_item = item_slots[index]
 	item_slots[index] = item.duplicate()
-	item_slots[index].slot_empty.connect(remove_item.bind(index))
+	#item_slots[index].slot_empty.connect(remove_item.bind(index))
 	_signal_change([index])
 	return previous_item
 
 # Remove item stack from array at index
 func remove_item(index: int) -> InventorySlot:
 	var previous_item = item_slots[index].duplicate()
-	item_slots[index] = null
+	item_slots[index].empty()
 	_signal_change([index])
 	return previous_item
 

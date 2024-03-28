@@ -110,7 +110,7 @@ func use_item() -> bool:
 func empty() -> void:
 	item = null
 	amount = 0
-	slot_empty.emit()
+#	slot_empty.emit()
 
 func copy_slot(new_slot: InventorySlot) -> void:
 	item = new_slot.get_item()

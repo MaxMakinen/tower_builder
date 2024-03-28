@@ -38,7 +38,26 @@ func get_amount() -> int:
 func get_dragged_item() -> InventorySlot:
 	return _dragged_item
 
+# Duplicate slot information from target and then empties target. logs previous slot reference.
 func pickup_slot(slot: UIItemSlot) -> void:
 	set_dragged_item(slot.pickup_slot())
 	_previous_slot = slot
+
+func drop_slot(target: UIItemSlot) -> void:
+	target.copy_slot(_dragged_item)
+	set_dragged_item(null)
+
+func swap_slot(target: UIItemSlot) -> void:
+	var temp = _dragged_item.duplicate()
+	set_dragged_item(target.pickup_slot())
+	target.copy_slot(temp)
+
+
+func undo_drag() -> void:
+	drop_slot(_previous_slot)
+
+func is_empty() -> bool:
+	if _dragged_item == null:
+		return true
+	return false
 
