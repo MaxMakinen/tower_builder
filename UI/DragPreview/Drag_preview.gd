@@ -5,7 +5,6 @@ class_name DragPreview
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
-var _contained_slot: UIItemSlot = null
 var _previous_slot: UIItemSlot = null
 var _dragged_item: InventorySlot = null
 
