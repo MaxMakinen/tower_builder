@@ -72,12 +72,9 @@ func _on_drop_button_pressed() -> void:
 			world.add_child(pickup)
 		else:
 			item_description.text = "Slot empty"
-			#print("Slot empty")
 	else:
 		item_description.text = "Nothing selected"
-		#print("Nothing selected")
-	#print(get_tree_string_pretty())
-#drag_preview.set_dragged_item(target_inventory.remove_item(index))
+
 
 func _on_use_button_pressed() -> void:
 	var selected = inventory_container.get_selected()

@@ -151,31 +151,32 @@ func _nu_drag(target_slot: UIItemSlot) -> void:
 	# Attempt to swap item
 	elif !target_slot.is_empty() and !drag_preview.is_empty():
 		drag_preview.swap_slot(target_slot)
+	# TODO : Still need stacking! Maybe in drag_preview...
 
 
 
-# TODO : Should porpably only work if dragged item is inventory item
-func _drag_item(index: int, target_inventory: Inventory) -> void:
-	var inventory_item = target_inventory.get_item_at(index)
-	var dragged_item = drag_preview.get_dragged_item()
-	# if clicking oustide of valid slot conainter, delete dragged item
-	if dragged_item and target_slot_container != ui_hotbar:
-		drag_preview.set_dragged_item(null)
-	# Pick item
-	if target_inventory.get_item_at(index) and !dragged_item:
-		drag_preview.set_dragged_item(target_inventory.remove_item(index))
-	# Drop item
-	if !inventory_item and dragged_item:
-		# Drag_preview emptied out because contents flipped with null from target
-		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
-	if inventory_item and dragged_item:
-		# Stack item
-		if dragged_item.get_item() != null and inventory_item.get_item() == dragged_item.get_item():
-			target_inventory.change_item_amount(index, dragged_item.get_amount())
-			drag_preview.set_dragged_item(null)
-		# Swap items
-		else:
-			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+## TODO : Should porpably only work if dragged item is inventory item
+#func _drag_item(index: int, target_inventory: Inventory) -> void:
+#	var inventory_item = target_inventory.get_item_at(index)
+#	var dragged_item = drag_preview.get_dragged_item()
+#	# if clicking oustide of valid slot conainter, delete dragged item
+#	if dragged_item and target_slot_container != ui_hotbar:
+#		drag_preview.set_dragged_item(null)
+#	# Pick item
+#	if target_inventory.get_item_at(index) and !dragged_item:
+#		drag_preview.set_dragged_item(target_inventory.remove_item(index))
+#	# Drop item
+#	if !inventory_item and dragged_item:
+#		# Drag_preview emptied out because contents flipped with null from target
+#		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+#	if inventory_item and dragged_item:
+#		# Stack item
+#		if dragged_item.get_item() != null and inventory_item.get_item() == dragged_item.get_item():
+#			target_inventory.change_item_amount(index, dragged_item.get_amount())
+#			drag_preview.set_dragged_item(null)
+#		# Swap items
+#		else:
+#			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
 
 
 
