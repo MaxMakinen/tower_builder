@@ -21,6 +21,9 @@ func set_contents(item: InventorySlot) -> void:
 	_contents.slot_changed.connect(display_contents)
 	_contents.slot_empty.connect(display_contents)
 
+func get_contents() -> InventorySlot:
+	return _contents
+
 func display_contents() -> void:
 	if _contents != null and !_contents.is_empty():
 		item_icon.texture = _contents.get_texture()
