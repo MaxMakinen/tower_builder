@@ -5,7 +5,11 @@ extends TextureRect
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
-var _selected: bool = false
+signal selected_changed()
+var _selected: bool = false:
+	set(new_selected):
+		selected_changed.emit()
+		_selected = new_selected
 
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
@@ -17,22 +21,11 @@ func display_item(item: InventorySlot) -> void:
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
-	# TODO : Might be better to move selected bool from inventory to slot container.
-	# If slot selected and in hotbar, modulate accordingly
-	if get_parent() and get_parent().name == "UIHotbar":
-		if get_index() == get_parent().inventory.selected:
-			modulate = Color(0.8, 0.8, 0.8)
-		else:
-			modulate = Color(1, 1, 1)
 
 # Toggle whether slot is selected, modulate color accordingly
 func select() -> void:
 	_selected = true
-	modulate = Color(1, 0.8, 0.8)
-#	if _selected:
-#		modulate = Color(1, 0.8, 0.8)
-#	else:
-#		modulate = Color(1, 1, 1)
+	modulate = Color(0.9, 0.9, 0.9)
 
 
 func unselect() -> void:
@@ -44,3 +37,14 @@ func unselect() -> void:
 #Return selected status of slot
 func is_selected() -> bool:
 	return _selected
+
+# Highlight slot under mouse, unless the slot is already selected
+func _on_mouse_entered() -> void:
+	if !_selected:
+		modulate = Color(0.9, 1, 0.9)
+
+# Remove highlight when mouse leaves slot, unless the slot is already selected
+func _on_mouse_exited() -> void:
+	if !_selected:
+		modulate = Color(1, 1, 1)
+
