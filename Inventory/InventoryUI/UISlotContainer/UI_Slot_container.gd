@@ -6,7 +6,7 @@ class_name SlotContainer
 @export var inventory: Inventory = null
 
 
-var _selected: int = -1: set = _set_selected
+var _selected: int = -1: set = _set_selected, get = get_selected
 
 signal selected_changed(index)
 
