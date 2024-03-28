@@ -5,12 +5,22 @@ extends SlotContainer
 #const UI_HOTBAR_SLOT = preload("res://Inventory/InventoryUI/UIHotbar/UI_hotbar_slot.tscn")
 var hotbar_size = 6
 
+# Keep track of selected hotbar slot, send signal in case of change
+signal hotbar_changed(selection)
+var _hotbar_selection: int:
+	set(selection):
+		hotbar_changed.emit(selection)
+		_hotbar_selection = selection
+	get:
+		return _hotbar_selection
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	columns = hotbar_size
+	_selected = 0
 	if !inventory or !inventory.item_slots:
 		inventory = Inventory.new(hotbar_size)
-	inventory.set_selected(0) 
+	inventory.set_selected(_selected) 
 	connect_to_inventory()
 	display_items()
 
