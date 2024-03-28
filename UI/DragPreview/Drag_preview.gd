@@ -16,9 +16,12 @@ func _process(_delta: float) -> void:
 
 func set_dragged_item(item: InventorySlot) -> void:
 	_dragged_item = item
-	if _dragged_item != null and _dragged_item.item != null:
-		item_icon.texture = item.item.texture
-		item_amount.text = str(item.get_amount()) if item.is_stackable() else ""
+	display_dragged_item()
+
+func display_dragged_item() -> void:
+	if _dragged_item != null and _dragged_item.get_item() != null:
+		item_icon.texture = _dragged_item.get_texture()
+		item_amount.text = str(_dragged_item.get_amount()) if _dragged_item.is_stackable() else ""
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
@@ -57,9 +60,9 @@ func swap_slot(target: UIItemSlot) -> void:
 # Stack stackable items and empty _draggable if all items fit in one stack
 func stack_slot(target: InventorySlot) -> void:
 	var difference = target.change_amount(_dragged_item.get_amount())
-	print("Difference : ", difference)
 	if difference > 0:
 		_dragged_item.set_amount(difference)
+		display_dragged_item()
 	else:
 		set_dragged_item(null)
 
@@ -74,7 +77,7 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 			drop_slot(target_slot)
 		# Attempt to swap item
 		elif !target_slot.is_empty() and !is_empty():
-			if compare_slots(target_slot.get_contents()) and target_slot.get_contents().is_stackable():
+			if compare_slots(target_slot.get_contents()) and target_slot.get_contents().is_stackable() and !target_slot.get_contents().is_full():
 				stack_slot(target_slot.get_contents())
 			else:
 				swap_slot(target_slot)
