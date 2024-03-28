@@ -4,10 +4,12 @@ extends UIItemSlot
 @onready var selection: TextureRect = $Selection
 
 var total_amount: int
+var content: InventorySlot
 
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
 	if item != null and item.get_item() != null:
+		content = item
 		item_icon.texture = item.get_texture()
 		item_amount.text = str(total_amount) if item.is_stackable() else ""
 		# TODO : Should we replace custom tooltip with built-in option and customize that?
@@ -29,6 +31,10 @@ func select() -> void:
 func unselect() -> void:
 	_selected = false
 	selection.visible = false
+
+
+func get_content() -> InventorySlot:
+	return content
 
 # TODO : This might be useless
 # Return selected status of slot

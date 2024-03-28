@@ -110,15 +110,21 @@ func insert_at(new_item: ItemResource, index: int , amount: int = 1) -> bool:
 		set_item(index, new_slot)
 		print("new item : ", new_item, " amount : ", amount, " at index : ", index)
 		return true
-	else:
-		print("Insert failed at index : ", index, ", Slooot : ", item_slots[index])
+	print("Insert of ", new_item.name, " failed at index : ", index, ", Slooot : ", item_slots[index])
+	return false
+
+func attempt_insert_at(new_item: ItemResource, index: int , amount: int = 1) -> bool:
+	if item_slots[index] == null or item_slots[index].is_empty():
+		if insert_at(new_item, index, amount) or insert(new_item, amount):
+			return true
 	return false
 
 # Get total amount of all stacks of same item
 func get_total_amount(target: ItemResource) -> int:
 	var total: int = 0
 	for item in item_slots:
-		if item.item == target:
+		if item and item.get_item() == target:
+			print("Item found : ", item.get_item().name)
 			total += item.get_amount()
 	return total
 

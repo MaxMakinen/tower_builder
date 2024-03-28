@@ -37,11 +37,12 @@ func unselect() -> void:
 #Return selected status of slot
 func is_selected() -> bool:
 	return _selected
-
+	
 # Highlight slot under mouse, unless the slot is already selected
 func _on_mouse_entered() -> void:
 	if !_selected:
 		modulate = Color(0.9, 1, 0.9)
+
 
 # Remove highlight when mouse leaves slot, unless the slot is already selected
 func _on_mouse_exited() -> void:

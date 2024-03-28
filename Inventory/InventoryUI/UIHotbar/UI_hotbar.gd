@@ -1,20 +1,28 @@
 class_name UIHotbar
 extends SlotContainer
 
-
+@onready var player = get_tree().get_first_node_in_group("player")
 #const UI_HOTBAR_SLOT = preload("res://Inventory/InventoryUI/UIHotbar/UI_hotbar_slot.tscn")
 var hotbar_size = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	columns = hotbar_size
-	if !inventory or !inventory.item_slots:
-		inventory = Inventory.new(hotbar_size)
-	inventory.set_selected(_selected) 
-	connect_to_inventory()
+	set_inventory(player.get_inventory())
+#	if !inventory or !inventory.item_slots:
+#		inventory = player.get_inventory()
+	#inventory.set_selected(_selected) 
+	#connect_to_inventory()
 	display_items()
 	#_hotbar_selection = 0
 	_selected = 0
+
+# Populate slot container with item_slots according to inventory size and display all items in inventory
+func display_items() -> void:
+	for index in range(hotbar_size):
+		var item_slot = item_slots.instantiate()
+		add_child(item_slot)
+		item_slot.display_item(null)
 
 
 func set_hotbar_size(new_size: int) -> void:
@@ -39,14 +47,20 @@ func _set_selected(new_selected: int) -> void:
 	selected_changed.emit(_selected)
 
 
-func add_item(item: InventorySlot ,index: int) -> void:
+func add_item(item: InventorySlot, index: int) -> void:
+	if item == null:
+		get_child(index).display_item(null)
+		return
 	var target_child = get_child(index)
 	var total_amount = inventory.get_total_amount(item.get_item())
-	var hotbar_item = item.duplicate()
 	if total_amount > 0:
 		target_child.set_total_amount(total_amount)
-		target_child.display_item(hotbar_item)
+		target_child.display_item(item)
 
+
+func get_slot_content(index: int) -> InventorySlot:
+	var target = get_child(index).get_content()
+	return target
 
 # Highlight selected slot
 func _input(event: InputEvent) -> void:
