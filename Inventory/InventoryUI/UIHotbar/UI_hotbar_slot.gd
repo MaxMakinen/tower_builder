@@ -15,7 +15,6 @@ func display_item(item: InventorySlot) -> void:
 		item_icon.texture = null
 		item_amount.text = ""
 
-
 # Toggle whether slot is selected, modulate color accordingly
 func select() -> void:
 	_selected = true
