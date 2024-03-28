@@ -160,6 +160,6 @@ func mysort(a: InventorySlot, b: InventorySlot):
 	if a and b:
 		if a.get_item_name() < b.get_item_name():
 			return true
-	elif a:
+	elif !a:
 		return true
 	return false
