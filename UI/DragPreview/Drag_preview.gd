@@ -52,6 +52,19 @@ func swap_slot(target: UIItemSlot) -> void:
 	set_dragged_item(target.pickup_slot())
 	target.copy_slot(temp)
 
+func attempt_interaction(target_slot: UIItemSlot) -> void:
+	if target_slot:
+		# Attempt to pick up item
+		if !target_slot.is_empty() and is_empty():
+			pickup_slot(target_slot)
+		# Attempt to drop item
+		elif target_slot.is_empty() and !is_empty():
+			drop_slot(target_slot)
+		# Attempt to swap item
+		elif !target_slot.is_empty() and !is_empty():
+			swap_slot(target_slot)
+		# TODO : Still need stacking! Maybe in drag_preview...
+
 
 func undo_drag() -> void:
 	drop_slot(_previous_slot)

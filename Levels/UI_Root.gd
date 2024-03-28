@@ -119,17 +119,18 @@ func _select_item(index: int) -> void:
 
 # Only attempt to initiate drag if target not null
 func _drag(target_slot: UIItemSlot) -> void:
-	if target_slot:
-		# Attempt to pick up item
-		if !target_slot.is_empty() and drag_preview.is_empty():
-			drag_preview.pickup_slot(target_slot)
-		# Attempt to drop item
-		elif target_slot.is_empty() and !drag_preview.is_empty():
-			drag_preview.drop_slot(target_slot)
-		# Attempt to swap item
-		elif !target_slot.is_empty() and !drag_preview.is_empty():
-			drag_preview.swap_slot(target_slot)
-		# TODO : Still need stacking! Maybe in drag_preview...
+	drag_preview.attempt_interaction(target_slot)
+#	if target_slot:
+#		# Attempt to pick up item
+#		if !target_slot.is_empty() and drag_preview.is_empty():
+#			drag_preview.pickup_slot(target_slot)
+#		# Attempt to drop item
+#		elif target_slot.is_empty() and !drag_preview.is_empty():
+#			drag_preview.drop_slot(target_slot)
+#		# Attempt to swap item
+#		elif !target_slot.is_empty() and !drag_preview.is_empty():
+#			drag_preview.swap_slot(target_slot)
+#		# TODO : Still need stacking! Maybe in drag_preview...
 
 # TODO : Move to drag_preview
 func _split_item(index: int) -> void:
