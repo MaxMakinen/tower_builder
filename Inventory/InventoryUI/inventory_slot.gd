@@ -101,7 +101,7 @@ func can_split() -> bool:
 	return false
 
 func use_item() -> bool:
-	if item.consumable == true:
+	if item and item.consumable == true:
 		change_amount(-1)
 		print("Item : ", item.name, " Consumed")
 		return true

@@ -63,12 +63,12 @@ func close() -> void:
 func _on_drop_button_pressed() -> void:
 	var selected = inventory_container.get_selected()
 	if selected >= 0:
-		var target_inventory = inventory_container.get_inventory()
-		if target_inventory.get_item_at(selected) != null:
+		var target_slot = inventory_container.get_inventory().get_item_at(selected)
+		if !target_slot.is_empty():
 			var world = get_parent().get_parent()
 			var pickup = Global.pickup.instantiate()
-			pickup.spawn_item(target_inventory.get_item_at(selected).get_item(), self.global_position)
-			target_inventory.change_item_amount(selected, -1)
+			pickup.spawn_item(target_slot.get_item(), self.global_position)
+			target_slot.change_amount(-1)
 			world.add_child(pickup)
 		else:
 			item_description.text = "Slot empty"

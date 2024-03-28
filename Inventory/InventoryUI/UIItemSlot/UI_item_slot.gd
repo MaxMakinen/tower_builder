@@ -14,12 +14,15 @@ var _selected: bool = false:
 		selected_changed.emit()
 		_selected = new_selected
 
+
 # TODO : Change into two separate functions: set_contents and display_contents
 func set_contents(item: InventorySlot) -> void:
 	_contents = item
+	_contents.slot_changed.connect(display_contents)
+	_contents.slot_empty.connect(display_contents)
 
 func display_contents() -> void:
-	if _contents != null and _contents.get_item() != null:
+	if _contents != null and !_contents.is_empty():
 		item_icon.texture = _contents.get_texture()
 		item_amount.text = str(_contents.get_amount()) if _contents.is_stackable() else ""
 	else:
@@ -29,7 +32,7 @@ func display_contents() -> void:
 
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
-	_contents = item
+	set_contents(item)
 	if item != null and item.get_item() != null:
 		item_icon.texture = item.get_texture()
 		item_amount.text = str(item.get_amount()) if item.is_stackable() else ""
