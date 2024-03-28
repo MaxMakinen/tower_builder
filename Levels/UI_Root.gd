@@ -105,32 +105,18 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		# Release dragged item when mouse is released
 		elif event.is_action_released("left_click"):
 			if inventory_ui.visible and !drag_preview.is_empty():
-				_drag(SlotManager.get_slot_under_mouse())
+				drag_preview.attempt_interaction(SlotManager.get_slot_under_mouse())
 
 
 func _start_drag() -> void:
 	if Input.is_action_pressed("left_click"):
-		_drag(previous_slot)
+		drag_preview.attempt_interaction(previous_slot)
 		_hide_tooltip()
 
 
 func _select_item(index: int) -> void:
 	target_slot_container._set_selected(index)
 
-# Only attempt to initiate drag if target not null
-func _drag(target_slot: UIItemSlot) -> void:
-	drag_preview.attempt_interaction(target_slot)
-#	if target_slot:
-#		# Attempt to pick up item
-#		if !target_slot.is_empty() and drag_preview.is_empty():
-#			drag_preview.pickup_slot(target_slot)
-#		# Attempt to drop item
-#		elif target_slot.is_empty() and !drag_preview.is_empty():
-#			drag_preview.drop_slot(target_slot)
-#		# Attempt to swap item
-#		elif !target_slot.is_empty() and !drag_preview.is_empty():
-#			drag_preview.swap_slot(target_slot)
-#		# TODO : Still need stacking! Maybe in drag_preview...
 
 # TODO : Move to drag_preview
 func _split_item(index: int) -> void:
