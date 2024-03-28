@@ -12,12 +12,11 @@ var _previous_slot: UIItemSlot = null
 var _slot_under_mouse: UIItemSlot = null
 var _slot_type: SlotType = SlotType.INVENTORY
 
+func set_slot_under_mouse(slot: UIItemSlot) -> void:
+	_slot_under_mouse = slot
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func get_slot_under_mouse() -> UIItemSlot:
+	return _slot_under_mouse
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func get_type_under_mouse() -> SlotType:
+	return _slot_under_mouse.get_type()

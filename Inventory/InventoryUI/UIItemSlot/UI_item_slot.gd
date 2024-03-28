@@ -5,6 +5,8 @@ extends TextureRect
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_amount: Label = %ItemAmount
 
+var _slot_type: SlotManager.SlotType = SlotManager.SlotType.INVENTORY
+
 signal selected_changed()
 var _selected: bool = false:
 	set(new_selected):
@@ -40,12 +42,17 @@ func is_selected() -> bool:
 	
 # Highlight slot under mouse, unless the slot is already selected
 func _on_mouse_entered() -> void:
+	SlotManager.set_slot_under_mouse(self)
 	if !_selected:
 		modulate = Color(0.9, 1, 0.9)
 
 
 # Remove highlight when mouse leaves slot, unless the slot is already selected
 func _on_mouse_exited() -> void:
+	SlotManager.set_slot_under_mouse(null)
 	if !_selected:
 		modulate = Color(1, 1, 1)
 
+
+func get_type() -> SlotManager.SlotType:
+	return _slot_type
