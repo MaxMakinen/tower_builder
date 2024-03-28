@@ -39,6 +39,15 @@ func _set_selected(new_selected: int) -> void:
 	selected_changed.emit(_selected)
 
 
+func add_item(item: InventorySlot ,index: int) -> void:
+	var target_child = get_child(index)
+	var total_amount = inventory.get_total_amount(item.get_item())
+	var hotbar_item = item.duplicate()
+	if total_amount > 0:
+		target_child.set_total_amount(total_amount)
+		target_child.display_item(hotbar_item)
+
+
 # Highlight selected slot
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
