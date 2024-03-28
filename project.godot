@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Global="*res://Global/Global.gd"
 DamageNumbers="*res://Global/DamageNumbers.gd"
 InteractionManager="*res://Interaction/InteractionManager.tscn"
+SlotManager="*res://Global/slot_manager.gd"
 
 [editor]
 
