@@ -52,6 +52,16 @@ func swap_slot(target: UIItemSlot) -> void:
 	set_dragged_item(target.pickup_slot())
 	target.copy_slot(temp)
 
+func stack_slot(target: InventorySlot) -> void:
+	var difference = target.change_amount(_dragged_item.get_amount())
+	if difference > 0:
+		_dragged_item.set_amount(difference)
+	else:
+		set_dragged_item(null)
+
+
+
+# TODO : Might need some visual queues. Add in Tweens, red for failed interactions like stacking unstackables
 func attempt_interaction(target_slot: UIItemSlot) -> void:
 	if target_slot:
 		# Attempt to pick up item
@@ -62,9 +72,15 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 			drop_slot(target_slot)
 		# Attempt to swap item
 		elif !target_slot.is_empty() and !is_empty():
-			swap_slot(target_slot)
-		# TODO : Still need stacking! Maybe in drag_preview...
+			if compare_slots(target_slot.get_contents()) and target_slot.get_contents().is_stackable():
+				stack_slot(target_slot.get_contents())
+			else:
+				swap_slot(target_slot)
 
+func compare_slots(slot: InventorySlot) -> bool:
+	if slot.get_item() == _dragged_item.get_item():
+		return true
+	return false
 
 func undo_drag() -> void:
 	drop_slot(_previous_slot)
