@@ -13,6 +13,10 @@ enum drag_ID {
 	}
 var _dragged_ID: drag_ID
 
+var previous_inventory: Inventory = null
+var previous_index: int = 0
+
+
 # If we are dragging an item, _dragged_item is not null, make node follow mouse position
 func _process(_delta: float) -> void:
 	if _dragged_item != null:
@@ -28,6 +32,10 @@ func set_dragged_item(item: InventorySlot, id: drag_ID) -> void:
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
+
+func set_backup(inventory: Inventory, index: int) -> void:
+	previous_inventory = inventory
+	previous_index = index
 
 func get_drag_id() -> int:
 	return _dragged_ID
