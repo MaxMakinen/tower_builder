@@ -14,18 +14,22 @@ func _ready() -> void:
 	connect_to_inventory()
 	display_items()
 
+
 func set_hotbar_size(new_size: int) -> void:
 	hotbar_size = new_size
 	columns = hotbar_size
-	
+
+
 func get_hotbar_size() -> int:
 	return hotbar_size
+
 
 func load_hotbar(new_inventory: Inventory) -> void:
 	inventory = new_inventory
 	columns = inventory.get_inventory_size()
 	display_items()
 
+# TODO : Needs to reference slots, not inventory
 # Highlight selected slot
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
