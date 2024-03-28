@@ -157,9 +157,9 @@ func sort() -> void:
 
 
 func mysort(a: InventorySlot, b: InventorySlot):
-	if a and b:
+	if !a.is_empty() and !b.is_empty():
 		if a.get_item_name() < b.get_item_name():
 			return true
-	elif !a:
-		return true
+	elif a.is_empty():
+		return false
 	return false
