@@ -28,7 +28,8 @@ func display_items() -> void:
 	for index in range(inventory.get_inventory_size()):
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)
-		item_slot.display_item(inventory.get_item_at(index))
+		item_slot.set_contents(inventory.get_item_at(index))
+		item_slot.display_contents()
 
 # Connect to inventory signals
 func connect_to_inventory() -> void:
