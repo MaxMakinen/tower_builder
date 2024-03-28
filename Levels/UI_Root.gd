@@ -103,11 +103,17 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		# Release dragged item when mouse is released
 		elif event.is_action_released("left_click"):
 			if inventory_ui.visible and drag_preview.get_dragged_item():
+				if target_slot >= 0 and target_slot_container == ui_hotbar:
+					_drag_hotbar_item(index)
 				if target_slot >= 0:
 					_drag_item(target_slot, target_slot_container.get_inventory())
 
 
 func _start_drag(index: int) -> void:
+	if Input.is_action_pressed("left_click") and previous_slot_container == ui_hotbar:
+		_drag_hotbar_item(index)
+		_hide_tooltip()
+		pass
 	if Input.is_action_pressed("left_click"):
 		_drag_item(index, previous_slot_container.get_inventory())
 		_hide_tooltip()
@@ -115,6 +121,15 @@ func _start_drag(index: int) -> void:
 
 func _select_item(index: int) -> void:
 	target_slot_container._set_selected(index)
+
+
+func _drag_hotbar_item(index: int) -> void:
+	var target_slot = ui_hotbar.get_child(index)
+	var dragged_item = drag_preview.get_dragged_item()
+	# Delete item if clicking outside hotbar
+	if dragged_item and target_slot_container != ui_hotbar:
+		pass
+	pass
 
 
 func _drag_item(index: int, target_inventory: Inventory) -> void:
