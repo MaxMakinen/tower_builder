@@ -99,7 +99,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 		elif event.is_action_pressed("left_click"):
 			if inventory_ui.visible:
 				previous_slot = SlotManager.get_slot_under_mouse()
-				get_tree().create_timer(0.2).timeout.connect(_start_drag.bind(index))
+				get_tree().create_timer(0.2).timeout.connect(_start_drag)
 				if drag_preview.is_empty():
 					_select_item(index)
 		# Release dragged item when mouse is released
@@ -108,7 +108,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				_drag(SlotManager.get_slot_under_mouse())
 
 
-func _start_drag(index: int) -> void:
+func _start_drag() -> void:
 	if Input.is_action_pressed("left_click"):
 		_drag(previous_slot)
 		_hide_tooltip()
