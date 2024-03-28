@@ -6,8 +6,6 @@ enum SlotType {
 	HOTBAR,
 }
 
-# TODO : Might be useless
-var _previous_slot: UIItemSlot = null
 
 var _slot_under_mouse: UIItemSlot = null
 var _slot_type: SlotType = SlotType.INVENTORY
