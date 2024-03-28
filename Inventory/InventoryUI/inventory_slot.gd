@@ -24,18 +24,16 @@ func _init(new_item: ItemResource = null, new_amount: int = 0) -> void:
 # Change amout of current slot, emit signal with index of current placement in inventory array if amount reaches 0 or if max_stack_size reached
 func change_amount(new_amount: int) -> int:
 	amount += new_amount
+	var difference = amount - item.max_stack_size
 	if !item:
 		return 0
 	if amount <= 0:
-		print("Slot empty singal emitted")
 		slot_empty.emit()
 		return 0
-	elif amount == item.max_stack_size:
-		slot_full.emit()
 	elif amount > item.max_stack_size:
 		amount = item.max_stack_size
 	slot_changed.emit()
-	return amount - item.max_stack_size
+	return difference
 
 # Return amount of items in slot
 func get_amount() -> int:

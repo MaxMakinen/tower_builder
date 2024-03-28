@@ -12,6 +12,6 @@ script = ExtResource("1_pfxyo")
 name = "Wood"
 type = "Wood"
 texture = SubResource("AtlasTexture_ut7t5")
-max_stack_size = 99
+max_stack_size = 10
 description = "Fibrous plant material"
 consumable = false

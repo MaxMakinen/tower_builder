@@ -43,23 +43,25 @@ func pickup_slot(slot: UIItemSlot) -> void:
 	set_dragged_item(slot.pickup_slot())
 	_previous_slot = slot
 
+# Copy dragged item information to target
 func drop_slot(target: UIItemSlot) -> void:
 	target.copy_slot(_dragged_item)
 	set_dragged_item(null)
 
+# Swap slot conents with target and _dragged item
 func swap_slot(target: UIItemSlot) -> void:
 	var temp = _dragged_item.duplicate()
 	set_dragged_item(target.pickup_slot())
 	target.copy_slot(temp)
 
+# Stack stackable items and empty _draggable if all items fit in one stack
 func stack_slot(target: InventorySlot) -> void:
 	var difference = target.change_amount(_dragged_item.get_amount())
+	print("Difference : ", difference)
 	if difference > 0:
 		_dragged_item.set_amount(difference)
 	else:
 		set_dragged_item(null)
-
-
 
 # TODO : Might need some visual queues. Add in Tweens, red for failed interactions like stacking unstackables
 func attempt_interaction(target_slot: UIItemSlot) -> void:
@@ -77,13 +79,16 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 			else:
 				swap_slot(target_slot)
 
+
 func compare_slots(slot: InventorySlot) -> bool:
 	if slot.get_item() == _dragged_item.get_item():
 		return true
 	return false
 
+
 func undo_drag() -> void:
 	drop_slot(_previous_slot)
+
 
 func is_empty() -> bool:
 	if _dragged_item == null:
