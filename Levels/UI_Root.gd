@@ -126,9 +126,11 @@ func _select_item(index: int) -> void:
 func _drag_hotbar_item(index: int) -> void:
 	var target_slot = ui_hotbar.get_child(index)
 	var dragged_item = drag_preview.get_dragged_item()
+	var dragged_id = drag_preview.get_drag_id()
 	# Delete item if clicking outside hotbar
 	if dragged_item and target_slot_container != ui_hotbar:
-		pass
+		drag_preview.set_dragged_item(null, 0)
+	# Place item in hotbar
 	pass
 
 
@@ -137,18 +139,21 @@ func _drag_item(index: int, target_inventory: Inventory) -> void:
 	var dragged_item = drag_preview.get_dragged_item()
 	# Pick item
 	if target_inventory.get_item_at(index) and !dragged_item:
-		drag_preview.set_dragged_item(target_inventory.remove_item(index))
+		drag_preview.set_dragged_item(target_inventory.remove_item(index), 1)
+		drag_preview.set_backup(target_inventory, index)
 	# Drop item
 	if !inventory_item and dragged_item:
-		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+		# Drag_preview emptied out because contents flipped with null from target
+		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item), 1)
 	if inventory_item and dragged_item:
 		# Stack item
-		if inventory_item.item == dragged_item.item and dragged_item.item != null:
+		if dragged_item.get_item() != null and inventory_item.get_item() == dragged_item.get_item():
 			target_inventory.change_item_amount(index, dragged_item.get_amount())
-			drag_preview.set_dragged_item(null)
+			drag_preview.set_dragged_item(null, 0)
 		# Swap items
 		else:
-			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item), 1)
+			drag_preview.set_backup(target_inventory, index)
 
 
 func _split_item(index: int) -> void:
@@ -170,7 +175,7 @@ func _split_item(index: int) -> void:
 		elif !dragged_item:
 			var item = inventory_item.duplicate()
 			item.set_amount(split_amount)
-			drag_preview.set_dragged_item(item)
+			drag_preview.set_dragged_item(item, 1)
 			target_inventory.change_item_amount(index, -split_amount)
 	# If slot below mouse is empty, split stack in dragged_item into it
 	elif dragged_item and (!inventory_item or !inventory_item.get_item()):
