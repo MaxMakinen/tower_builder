@@ -109,7 +109,7 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 				if target_slot >= 0:
 					if target_slot < ui_hotbar.hotbar_size and target_slot_container == ui_hotbar:
 						_drag_hotbar_item(target_slot)
-					_nu_drag(SlotManager.get_slot_under_mouse())
+					_drag(SlotManager.get_slot_under_mouse())
 					#_drag_item(target_slot, target_slot_container.get_inventory())
 
 
@@ -119,7 +119,7 @@ func _start_drag(index: int) -> void:
 		_hide_tooltip()
 	elif Input.is_action_pressed("left_click"):
 		#_drag_item(index, previous_slot_container.get_inventory())
-		_nu_drag(previous_slot)
+		_drag(previous_slot)
 		_hide_tooltip()
 
 
@@ -141,7 +141,7 @@ func _drag_hotbar_item(index: int) -> void:
 		pass
 
 
-func _nu_drag(target_slot: UIItemSlot) -> void:
+func _drag(target_slot: UIItemSlot) -> void:
 	# Attempt to pick up item
 	if !target_slot.is_empty() and drag_preview.is_empty():
 		drag_preview.pickup_slot(target_slot)
@@ -153,33 +153,7 @@ func _nu_drag(target_slot: UIItemSlot) -> void:
 		drag_preview.swap_slot(target_slot)
 	# TODO : Still need stacking! Maybe in drag_preview...
 
-
-
-## TODO : Should porpably only work if dragged item is inventory item
-#func _drag_item(index: int, target_inventory: Inventory) -> void:
-#	var inventory_item = target_inventory.get_item_at(index)
-#	var dragged_item = drag_preview.get_dragged_item()
-#	# if clicking oustide of valid slot conainter, delete dragged item
-#	if dragged_item and target_slot_container != ui_hotbar:
-#		drag_preview.set_dragged_item(null)
-#	# Pick item
-#	if target_inventory.get_item_at(index) and !dragged_item:
-#		drag_preview.set_dragged_item(target_inventory.remove_item(index))
-#	# Drop item
-#	if !inventory_item and dragged_item:
-#		# Drag_preview emptied out because contents flipped with null from target
-#		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
-#	if inventory_item and dragged_item:
-#		# Stack item
-#		if dragged_item.get_item() != null and inventory_item.get_item() == dragged_item.get_item():
-#			target_inventory.change_item_amount(index, dragged_item.get_amount())
-#			drag_preview.set_dragged_item(null)
-#		# Swap items
-#		else:
-#			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
-
-
-
+# TODO : Move to drag_preview
 func _split_item(index: int) -> void:
 	var target_inventory: Inventory = target_slot_container.get_inventory()
 	var inventory_item: InventorySlot = target_inventory.get_item_at(index)

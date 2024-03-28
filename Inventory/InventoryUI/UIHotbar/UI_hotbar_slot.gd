@@ -6,6 +6,9 @@ extends UIItemSlot
 var total_amount: int
 var content: InventorySlot
 
+func _ready() -> void:
+	_slot_type = SlotManager.SlotType.HOTBAR
+
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
 	if item != null and item.get_item() != null:
