@@ -107,8 +107,6 @@ func _on_ItemSlot_gui_input(event: InputEvent, index: int) -> void:
 					if target_slot < ui_hotbar.hotbar_size and target_slot_container == ui_hotbar:
 						_drag_hotbar_item(target_slot)
 					_drag_item(target_slot, target_slot_container.get_inventory())
-				elif drag_preview.get_dragID() == 2:
-					drag_preview.set_dragged_item(null, 0)
 
 
 func _start_drag(index: int) -> void:
@@ -126,21 +124,15 @@ func _select_item(index: int) -> void:
 
 func _drag_hotbar_item(index: int) -> void:
 	var dragged_item = drag_preview.get_dragged_item()
-	var dragged_id = drag_preview.get_dragID()
 	# Delete item if clicking outside hotbar
-	if dragged_item and dragged_id == 2 and target_slot_container != ui_hotbar:
-		drag_preview.set_dragged_item(null, 0)
+	if dragged_item and target_slot_container != ui_hotbar:
+		drag_preview.set_dragged_item(null)
 	# Place item in hotbar
 	if dragged_item and target_slot_container == ui_hotbar:
-		if drag_preview.get_dragID() != 2:
-			drag_preview.return_backup()
-		if drag_preview.get_dragID() == 2:
-			ui_hotbar.add_item(null, index)
-		else:
 			ui_hotbar.add_item(dragged_item, index)
 	# Pick item
 	if ui_hotbar.get_slot_content(index) and !dragged_item:
-		drag_preview.set_dragged_item(ui_hotbar.get_slot_content(index), 2)
+		drag_preview.set_dragged_item(ui_hotbar.get_slot_content(index))
 		pass
 
 
@@ -149,25 +141,24 @@ func _drag_item(index: int, target_inventory: Inventory) -> void:
 	var inventory_item = target_inventory.get_item_at(index)
 	var dragged_item = drag_preview.get_dragged_item()
 	# if clicking oustide of valid slot conainter, delete dragged item
-	if dragged_item and drag_preview.get_dragID() == 2 and target_slot_container != ui_hotbar:
-		drag_preview.set_dragged_item(null, 0)
+	if dragged_item and target_slot_container != ui_hotbar:
+		drag_preview.set_dragged_item(null)
 	# Pick item
 	if target_inventory.get_item_at(index) and !dragged_item:
-		drag_preview.set_dragged_item(target_inventory.remove_item(index), 1)
-		drag_preview.set_backup(target_inventory, index)
+		drag_preview.set_dragged_item(target_inventory.remove_item(index))
 	# Drop item
-	if !inventory_item and dragged_item and drag_preview.get_dragID() == 1:
+	if !inventory_item and dragged_item:
 		# Drag_preview emptied out because contents flipped with null from target
-		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item), 1)
-	if inventory_item and dragged_item and drag_preview.get_dragID() == 1:
+		drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+	if inventory_item and dragged_item:
 		# Stack item
 		if dragged_item.get_item() != null and inventory_item.get_item() == dragged_item.get_item():
 			target_inventory.change_item_amount(index, dragged_item.get_amount())
-			drag_preview.set_dragged_item(null, 0)
+			drag_preview.set_dragged_item(null)
 		# Swap items
 		else:
-			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item), 1)
-			drag_preview.set_backup(target_inventory, index)
+			drag_preview.set_dragged_item(target_inventory.set_item(index, dragged_item))
+
 
 
 func _split_item(index: int) -> void:
@@ -189,7 +180,7 @@ func _split_item(index: int) -> void:
 		elif !dragged_item:
 			var item = inventory_item.duplicate()
 			item.set_amount(split_amount)
-			drag_preview.set_dragged_item(item, 1)
+			drag_preview.set_dragged_item(item)
 			target_inventory.change_item_amount(index, -split_amount)
 	# If slot below mouse is empty, split stack in dragged_item into it
 	elif dragged_item and (!inventory_item or !inventory_item.get_item()):
