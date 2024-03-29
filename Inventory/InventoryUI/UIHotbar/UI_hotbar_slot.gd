@@ -3,6 +3,7 @@ extends UIItemSlot
 
 @onready var selection: TextureRect = $Selection
 
+# Keeps track of total amount of items of same type in inventory
 var total_amount: int
 var content: InventorySlot
 
@@ -21,9 +22,9 @@ func display_item(item: InventorySlot) -> void:
 		item_icon.texture = null
 		item_amount.text = ""
 
-
-func set_total_amount(amount: int) -> void:
-	total_amount = amount
+# Sets total amount to new value
+func set_total_amount(new_amount: int) -> void:
+	total_amount = new_amount
 
 # Toggle whether slot is selected, modulate color accordingly
 func select() -> void:
