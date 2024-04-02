@@ -25,9 +25,7 @@ func display_contents() -> void:
 
 func set_hotbar_slot(item: InventorySlot) -> void:
 	_total_amount = get_parent().get_total_amount(item)
-	_contents = item
-	_contents.slot_changed.connect(display_contents)
-	_contents.slot_empty.connect(display_contents)
+	set_contents(item)
 	new_content.emit(self)
 	display_contents()
 
@@ -36,7 +34,7 @@ func set_total_amount(new_amount: int) -> void:
 	_total_amount = new_amount
 	display_contents()
 
-# Returns total amouint as int
+# Returns total amount as int
 func get_total_amount() -> int:
 	return _total_amount
 
