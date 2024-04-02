@@ -7,6 +7,7 @@ extends TextureRect
 
 var _slot_type: SlotManager.SlotType = SlotManager.SlotType.INVENTORY
 var _contents: InventorySlot = null
+var _ghost: bool = false
 
 signal selected_changed()
 var _selected: bool = false:
