@@ -113,7 +113,7 @@ func get_item_type() -> ItemResource:
 	return _contents.get_item()
 
 func slot_moved() -> void:
-	if _ghost && _contents:
+	if _ghost and _contents:
 		_contents.empty()
 	unghost()
 

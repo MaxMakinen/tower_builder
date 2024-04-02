@@ -17,12 +17,12 @@ func _ready() -> void:
 func put_item(item: InventorySlot) -> InventorySlot:
 	# If no contents, set new item as contents and return null
 	if (!content or content.is_empty()) and item != null:
-		set_hotbar_slot(item)
+		set_contents(item)
 		return null
 	# If there is contents, swap with new item and return old contents
 	if (content or !content.is_empty()) and item != null:
 		var temp = _contents.duplicate()
-		set_hotbar_slot(item)
+		set_contents(item)
 		return temp
 	#If new item is the same as contents, attempt to stack and return whatever is left over
 	if item.get_item_name() == _contents.get_item_name():
@@ -40,17 +40,15 @@ func display_contents() -> void:
 		item_icon.texture = null
 		item_amount.text = ""
 
-# Setter for Hotbar slot with signal emit
-func set_hotbar_slot(item: InventorySlot) -> void:
+
+# Overload Setter for Hotbar slot with signal emit
+func set_contents(item: InventorySlot) -> void:
 	_total_amount = Global.player_inventory.get_total_amount(item.get_item())
-	set_contents(item)
+	_contents = item
+	if _contents and !_contents.is_connected("slot_changed", display_contents):
+		_contents.slot_changed.connect(display_contents)
 	new_content.emit(self)
 	display_contents()
-
-func slot_moved() -> void:
-	if _ghost && _contents:
-		set_hotbar_slot(null)
-	unghost()
 
 
 # Sets total amount to new value

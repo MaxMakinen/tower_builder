@@ -103,7 +103,10 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 			#drop_slot(target_slot)
 		else:
 			set_dragged_item(target_slot.put_item(_dragged_item))
-			_previous_slot.slot_moved()
+			if target_slot.get_type() == SlotManager.SlotType.INVENTORY:
+				_previous_slot.slot_moved()
+			else:
+				undo_drag()
 	#	# Attempt to swap item
 	#	elif !target_slot.is_empty() and !is_empty() and target_slot.get_type() == SlotManager.SlotType.HOTBAR:
 	#		swap_slot(target_slot)
