@@ -7,6 +7,9 @@ extends UIItemSlot
 var _total_amount: int
 var content: InventorySlot
 
+# Hotbar signals
+signal hotbar_slot_changed()
+
 func _ready() -> void:
 	_slot_type = SlotManager.SlotType.HOTBAR
 
@@ -25,6 +28,7 @@ func display_item(item: InventorySlot) -> void:
 # Sets total amount to new value
 func set_total_amount(new_amount: int) -> void:
 	_total_amount = new_amount
+	display_contents()
 
 # Returns total amouint as int
 func get_total_amount() -> int:
