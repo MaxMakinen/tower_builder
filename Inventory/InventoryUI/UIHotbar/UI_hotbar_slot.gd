@@ -47,10 +47,6 @@ func set_hotbar_slot(item: InventorySlot) -> void:
 	new_content.emit(self)
 	display_contents()
 
-func unghost() -> void:
-	_ghost = false
-	display_contents()
-
 func slot_moved() -> void:
 	if _ghost && _contents:
 		set_hotbar_slot(null)

@@ -34,23 +34,24 @@ func put_item(item: InventorySlot) -> InventorySlot:
 			print("Item put4")
 			return _attempt_stack(item)
 		else:
-			print("Item put3")
-			var temp = _contents.duplicate()
-			set_contents(item)
-			return temp
+			return _swap_content(item)
 	return item
 
+func _swap_content(item: InventorySlot) -> InventorySlot:
+	print("Item Swappie")
+	var temp = _contents.duplicate()
+	set_contents(item)
+	return temp
 
 func _attempt_stack(item:InventorySlot) -> InventorySlot:
-	if _contents.is_stackable():
+	if _contents.is_stackable() and !_contents.is_full():
 		# If there is anything left over after attempting to stack, return stack with leftovers. Otherwise return null.
 		var difference = _contents.change_amount(item.get_amount())
-		print("Stack difference : ", difference, " Item amount : ", item.get_amount())
 		if difference > 0:
 			item.set_amount(difference)
 			return item
 		return null
-	return item
+	return _swap_content(item)
 
 
 # TODO : Change into two separate functions: set_contents and display_contents
