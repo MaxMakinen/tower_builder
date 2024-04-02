@@ -32,7 +32,7 @@ func display_contents() -> void:
 		item_icon.texture = null
 		item_amount.text = ""
 
-
+# TODO : Old code, maybe delete?
 # Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
 func display_item(item: InventorySlot) -> void:
 	set_contents(item)
