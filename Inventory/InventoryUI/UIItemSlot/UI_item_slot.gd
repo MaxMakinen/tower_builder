@@ -19,9 +19,9 @@ var _selected: bool = false:
 # TODO : Change into two separate functions: set_contents and display_contents
 func set_contents(item: InventorySlot) -> void:
 	_contents = item
-	if _contents:
+	if _contents and !_contents.is_connected("slot_changed", display_contents):
 		_contents.slot_changed.connect(display_contents)
-		_contents.slot_empty.connect(display_contents)
+
 
 func get_contents() -> InventorySlot:
 	return _contents
@@ -31,9 +31,9 @@ func display_contents() -> void:
 		item_icon.texture = _contents.get_texture()
 		item_amount.text = str(_contents.get_amount()) if _contents.is_stackable() else ""
 		if _ghost:
-			modulate = Color(0.2, 0.2, 0.2)
+			item_icon.modulate = Color(1, 1, 1, 0.2)
 		elif !_ghost:
-			modulate = Color(1, 1, 1)
+			item_icon.modulate = Color(1, 1, 1, 1)
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
@@ -74,12 +74,25 @@ func get_type() -> SlotManager.SlotType:
 func get_item_type() -> ItemResource:
 	return _contents.get_item()
 
+func slot_moved() -> void:
+	if _ghost && _contents:
+		_contents.empty()
+	unghost()
+
+
+func unghost() -> void:
+	_ghost = false
+	display_contents()
+
+func is_ghost() -> bool:
+	return _ghost
 
 func pickup_slot() -> InventorySlot:
-	var temp = _contents.duplicate()
-	_contents.empty()
+	#var temp = _contents.duplicate()
+	#_contents.empty()
+	_ghost = true
 	display_contents()
-	return temp
+	return _contents
 
 # TODO : We might want to rename these things
 func copy_slot(slot: InventorySlot) -> void:
@@ -87,7 +100,8 @@ func copy_slot(slot: InventorySlot) -> void:
 		_contents.copy_slot(slot)
 	else:
 		_contents = slot.duplicate()
-	display_contents()
+	# TODO : should be unecessary. signal emit should handle display
+	#display_contents()
 
 # Return true if slot empty
 func is_empty() -> bool:

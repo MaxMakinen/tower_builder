@@ -30,6 +30,16 @@ func set_hotbar_slot(item: InventorySlot) -> void:
 	new_content.emit(self)
 	display_contents()
 
+func unghost() -> void:
+	_ghost = false
+	display_contents()
+
+func slot_moved() -> void:
+	if _ghost && _contents:
+		set_hotbar_slot(null)
+	unghost()
+
+
 # Sets total amount to new value
 func set_total_amount(new_amount: int) -> void:
 	_total_amount = new_amount
