@@ -30,19 +30,10 @@ func display_contents() -> void:
 	if _contents != null and !_contents.is_empty():
 		item_icon.texture = _contents.get_texture()
 		item_amount.text = str(_contents.get_amount()) if _contents.is_stackable() else ""
-	else:
-		item_icon.texture = null
-		item_amount.text = ""
-
-# TODO : Old code, maybe delete?
-# Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
-func display_item(item: InventorySlot) -> void:
-	set_contents(item)
-	if item != null and item.get_item() != null:
-		item_icon.texture = item.get_texture()
-		item_amount.text = str(item.get_amount()) if item.is_stackable() else ""
-		# TODO : Should we replace custom tooltip with built-in option and customize that?
-		#set_tooltip_text(item.item.name)
+		if _ghost:
+			modulate = Color(0.2, 0.2, 0.2)
+		elif !_ghost:
+			modulate = Color(1, 1, 1)
 	else:
 		item_icon.texture = null
 		item_amount.text = ""
@@ -84,7 +75,6 @@ func get_item_type() -> ItemResource:
 	return _contents.get_item()
 
 
-# TODO: Display_item needs to be replaced by a display contents function
 func pickup_slot() -> InventorySlot:
 	var temp = _contents.duplicate()
 	_contents.empty()
