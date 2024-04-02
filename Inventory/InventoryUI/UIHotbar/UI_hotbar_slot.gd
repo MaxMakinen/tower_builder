@@ -4,7 +4,7 @@ extends UIItemSlot
 @onready var selection: TextureRect = $Selection
 
 # Keeps track of total amount of items of same type in inventory
-var total_amount: int
+var _total_amount: int
 var content: InventorySlot
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func display_item(item: InventorySlot) -> void:
 	if item != null and item.get_item() != null:
 		content = item
 		item_icon.texture = item.get_texture()
-		item_amount.text = str(total_amount) if item.is_stackable() else ""
+		item_amount.text = str(_total_amount) if item.is_stackable() else ""
 		# TODO : Should we replace custom tooltip with built-in option and customize that?
 		#set_tooltip_text(item.item.name)
 	else:
@@ -24,7 +24,11 @@ func display_item(item: InventorySlot) -> void:
 
 # Sets total amount to new value
 func set_total_amount(new_amount: int) -> void:
-	total_amount = new_amount
+	_total_amount = new_amount
+
+# Returns total amouint as int
+func get_total_amount() -> int:
+	return _total_amount
 
 # Toggle whether slot is selected, modulate color accordingly
 func select() -> void:
