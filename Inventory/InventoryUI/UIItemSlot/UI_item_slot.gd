@@ -78,6 +78,10 @@ func _on_mouse_exited() -> void:
 func get_type() -> SlotManager.SlotType:
 	return _slot_type
 
+func get_item_type() -> ItemResource:
+	return _contents.get_item()
+
+
 # TODO: Display_item needs to be replaced by a display contents function
 func pickup_slot() -> InventorySlot:
 	var temp = _contents.duplicate()
