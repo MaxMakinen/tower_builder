@@ -13,17 +13,30 @@ func _ready() -> void:
 #		inventory = player.get_inventory()
 	#inventory.set_selected(_selected) 
 	#connect_to_inventory()
-	display_items()
+	instantiate_hotbar()
 	#_hotbar_selection = 0
 	_selected = 0
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory
-func display_items() -> void:
+func instantiate_hotbar() -> void:
 	for index in range(hotbar_size):
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)
 		item_slot.display_contents()
 
+# Clear all chioldren of hotbar
+func clear_hotbar() -> void:
+	for child in get_children():
+		child.queue_free()
+
+func in_hotbar(item: ItemResource) -> bool:
+	for child in get_children():
+		if child.get_item_type() == item:
+			return true
+	return false
+
+func refresh_hotbar() -> void:
+	pass
 
 func set_hotbar_size(new_size: int) -> void:
 	hotbar_size = new_size
@@ -37,7 +50,7 @@ func get_hotbar_size() -> int:
 func load_hotbar(new_inventory: Inventory) -> void:
 	inventory = new_inventory
 	columns = inventory.get_inventory_size()
-	display_items()
+	instantiate_hotbar()
 
 # Overload parent version. Set new value for selected
 func _set_selected(new_selected: int) -> void:
