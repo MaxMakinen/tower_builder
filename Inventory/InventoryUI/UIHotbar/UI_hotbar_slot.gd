@@ -14,6 +14,7 @@ signal new_content(slot)
 func _ready() -> void:
 	_slot_type = SlotManager.SlotType.HOTBAR
 
+# Override to change item_amount.text to total amount instead of stack size
 func display_contents() -> void:
 	if _contents != null and !_contents.is_empty():
 		item_icon.texture = _contents.get_texture()
@@ -22,7 +23,7 @@ func display_contents() -> void:
 		item_icon.texture = null
 		item_amount.text = ""
 
-
+# Setter for Hotbar slot with signal emit
 func set_hotbar_slot(item: InventorySlot) -> void:
 	_total_amount = get_parent().get_total_amount(item)
 	set_contents(item)
