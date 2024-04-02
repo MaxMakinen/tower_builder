@@ -24,7 +24,7 @@ func instantiate_hotbar() -> void:
 		add_child(item_slot)
 		item_slot.display_contents()
 
-# Clear all chioldren of hotbar
+# Clear all children of hotbar
 func clear_hotbar() -> void:
 	for child in get_children():
 		child.queue_free()
