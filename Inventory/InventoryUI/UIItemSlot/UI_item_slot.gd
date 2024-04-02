@@ -18,8 +18,9 @@ var _selected: bool = false:
 # TODO : Change into two separate functions: set_contents and display_contents
 func set_contents(item: InventorySlot) -> void:
 	_contents = item
-	_contents.slot_changed.connect(display_contents)
-	_contents.slot_empty.connect(display_contents)
+	if _contents:
+		_contents.slot_changed.connect(display_contents)
+		_contents.slot_empty.connect(display_contents)
 
 func get_contents() -> InventorySlot:
 	return _contents
