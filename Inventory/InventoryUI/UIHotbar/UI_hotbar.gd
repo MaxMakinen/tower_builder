@@ -22,7 +22,7 @@ func display_items() -> void:
 	for index in range(hotbar_size):
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)
-		item_slot.display_item(null)
+		item_slot.display_contents()
 
 
 func set_hotbar_size(new_size: int) -> void:
