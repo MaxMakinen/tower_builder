@@ -57,6 +57,9 @@ func add_item(item: InventorySlot, index: int) -> void:
 		target_child.set_total_amount(total_amount)
 		target_child.display_item(item)
 
+func get_total_amount(item: InventorySlot) -> int:
+	return inventory.get_total_amount(item.get_item())
+
 
 func get_slot_content(index: int) -> InventorySlot:
 	var target = get_child(index).get_content()
