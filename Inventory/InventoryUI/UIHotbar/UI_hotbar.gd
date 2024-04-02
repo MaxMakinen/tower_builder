@@ -14,6 +14,7 @@ func _ready() -> void:
 	#inventory.set_selected(_selected) 
 	#connect_to_inventory()
 	instantiate_hotbar()
+	refresh_hotbar()
 	#_hotbar_selection = 0
 	_selected = 0
 
@@ -22,21 +23,29 @@ func instantiate_hotbar() -> void:
 	for index in range(hotbar_size):
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)
-		item_slot.display_contents()
+		item_slot.new_content.connect(new_slot)
+
 
 # Clear all children of hotbar
 func clear_hotbar() -> void:
 	for child in get_children():
 		child.queue_free()
 
-func in_hotbar(item: ItemResource) -> bool:
+func in_hotbar(item: UIHotbarSlot) -> bool:
 	for child in get_children():
-		if child.get_item_type() == item:
+		if child != item and child.get_item_type() == item.get_item_type():
 			return true
 	return false
 
+func new_slot(slot: UIHotbarSlot) -> void:
+	if !slot.is_empty() and in_hotbar(slot):
+		slot.set_contents(null)
+	#slot.set_total_amount(get_total_amount(slot.get_content()))
+	
+
 func refresh_hotbar() -> void:
-	pass
+	for child in get_children():
+		child.display_contents()
 
 func set_hotbar_size(new_size: int) -> void:
 	hotbar_size = new_size
