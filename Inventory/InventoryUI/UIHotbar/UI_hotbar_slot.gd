@@ -44,7 +44,7 @@ func select() -> void:
 	_selected = true
 	selection.visible = true
 
-
+# Toggle whether slot is unselected, modulate color accordingly
 func unselect() -> void:
 	_selected = false
 	selection.visible = false
