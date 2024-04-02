@@ -52,7 +52,8 @@ func drop_slot(target: UIItemSlot) -> void:
 		target.copy_slot(_dragged_item)
 	elif target.get_type() == SlotManager.SlotType.HOTBAR:
 		target.set_hotbar_slot(_dragged_item)
-		undo_drag()
+		if _previous_slot.get_type() == SlotManager.SlotType.INVENTORY:
+			_previous_slot.copy_slot(_dragged_item)
 	set_dragged_item(null)
 
 # Swap slot conents with target and _dragged item
