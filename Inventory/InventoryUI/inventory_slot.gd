@@ -27,9 +27,6 @@ func change_amount(new_amount: int) -> int:
 	var difference = amount - item.max_stack_size
 	if !item:
 		return 0
-	if amount <= 0:
-		slot_empty.emit()
-		return 0
 	elif amount > item.max_stack_size:
 		amount = item.max_stack_size
 	slot_changed.emit()

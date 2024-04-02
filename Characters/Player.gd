@@ -14,12 +14,11 @@ var state
 var state_machine = StateMachine.new()
 
 # Variables for inventory
-@export var inventory: Inventory
+#@export var inventory: Inventory = Global.player_inventory
 @export var _inventory_size = 16
+@onready var inventory: Inventory = Global.player_inventory
 
 func _ready():
-	if inventory == null:
-		inventory = Inventory.new(_inventory_size)
 	if inventory.get_inventory_size() != _inventory_size:
 		inventory.set_inventory_size(_inventory_size)
 

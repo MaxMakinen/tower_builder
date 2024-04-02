@@ -95,18 +95,23 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 	if target_slot and !target_slot.is_ghost():# and target_slot.get_type() == SlotManager.SlotType.INVENTORY:
 		# Attempt to pick up item
 		if !target_slot.is_empty() and is_empty():
-			pickup_slot(target_slot)
+			#pickup_slot(target_slot)
+			_previous_slot = target_slot
+			set_dragged_item(target_slot.grab_item())
 		# Attempt to drop item
-		elif target_slot.is_empty() and !is_empty():
-			drop_slot(target_slot)
-		# Attempt to swap item
-		elif !target_slot.is_empty() and !is_empty() and target_slot.get_type() == SlotManager.SlotType.HOTBAR:
-			swap_slot(target_slot)
-		elif !target_slot.is_empty() and !is_empty() and target_slot.get_type():
-			if compare_slots(target_slot.get_contents()) and target_slot.get_contents().is_stackable() and !target_slot.get_contents().is_full():
-				stack_slot(target_slot.get_contents())
-			else:
-				swap_slot(target_slot)
+#		elif target_slot.is_empty() and !is_empty():
+			#drop_slot(target_slot)
+		else:
+			set_dragged_item(target_slot.put_item(_dragged_item))
+			_previous_slot.slot_moved()
+	#	# Attempt to swap item
+	#	elif !target_slot.is_empty() and !is_empty() and target_slot.get_type() == SlotManager.SlotType.HOTBAR:
+	#		swap_slot(target_slot)
+	#	elif !target_slot.is_empty() and !is_empty() and target_slot.get_type():
+	#		if compare_slots(target_slot.get_contents()) and target_slot.get_contents().is_stackable() and !target_slot.get_contents().is_full():
+	#			stack_slot(target_slot.get_contents())
+	#		else:
+	#			swap_slot(target_slot)
 	elif target_slot:
 		undo_drag()
 	#if target_slot and target_slot.get_type() == SlotManager.SlotType.HOTBAR:

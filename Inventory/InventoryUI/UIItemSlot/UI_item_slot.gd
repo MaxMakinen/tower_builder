@@ -15,13 +15,50 @@ var _selected: bool = false:
 		selected_changed.emit()
 		_selected = new_selected
 
+func grab_item() -> InventorySlot:
+	_ghost = true
+	display_contents()
+	return _contents
+
+func put_item(item: InventorySlot) -> InventorySlot:
+	print("Item put")
+	# If no contents, set new item as contents and return null
+	if _contents.is_empty() and item != null:
+		print("Item put2")
+		set_contents(item)
+		return null
+	# If there is contents, swap with new item and return old contents
+	if !_contents.is_empty() and item != null:
+		# If new item is the same as contents, attempt to stack and return whatever is left over
+		if item.get_item_name() == _contents.get_item_name():
+			print("Item put4")
+			return _attempt_stack(item)
+		else:
+			print("Item put3")
+			var temp = _contents.duplicate()
+			set_contents(item)
+			return temp
+	return item
+
+
+func _attempt_stack(item:InventorySlot) -> InventorySlot:
+	if _contents.is_stackable():
+		# If there is anything left over after attempting to stack, return stack with leftovers. Otherwise return null.
+		var difference = _contents.change_amount(item.get_amount())
+		print("Stack difference : ", difference, " Item amount : ", item.get_amount())
+		if difference > 0:
+			item.set_amount(difference)
+			return item
+		return null
+	return item
+
 
 # TODO : Change into two separate functions: set_contents and display_contents
 func set_contents(item: InventorySlot) -> void:
 	_contents = item
 	if _contents and !_contents.is_connected("slot_changed", display_contents):
 		_contents.slot_changed.connect(display_contents)
-
+	display_contents()
 
 func get_contents() -> InventorySlot:
 	return _contents
