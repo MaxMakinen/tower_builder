@@ -48,7 +48,11 @@ func pickup_slot(slot: UIItemSlot) -> void:
 
 # Copy dragged item information to target
 func drop_slot(target: UIItemSlot) -> void:
-	target.copy_slot(_dragged_item)
+	if target.get_type() == SlotManager.SlotType.INVENTORY:
+		target.copy_slot(_dragged_item)
+	elif target.get_type() == SlotManager.SlotType.HOTBAR:
+		target.set_hotbar_slot(_dragged_item)
+		undo_drag()
 	set_dragged_item(null)
 
 # Swap slot conents with target and _dragged item
@@ -68,7 +72,7 @@ func stack_slot(target: InventorySlot) -> void:
 
 # TODO : Might need some visual queues. Add in Tweens, red for failed interactions like stacking unstackables
 func attempt_interaction(target_slot: UIItemSlot) -> void:
-	if target_slot:
+	if target_slot:# and target_slot.get_type() == SlotManager.SlotType.INVENTORY:
 		# Attempt to pick up item
 		if !target_slot.is_empty() and is_empty():
 			pickup_slot(target_slot)
@@ -81,6 +85,9 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 				stack_slot(target_slot.get_contents())
 			else:
 				swap_slot(target_slot)
+	#if target_slot and target_slot.get_type() == SlotManager.SlotType.HOTBAR:
+		# Attempt hotbar interaction
+	#	pass
 
 
 func compare_slots(slot: InventorySlot) -> bool:
