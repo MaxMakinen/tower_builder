@@ -13,19 +13,6 @@ signal hotbar_slot_changed()
 func _ready() -> void:
 	_slot_type = SlotManager.SlotType.HOTBAR
 
-## Display item sprite and amount that are found inside the InventorySlot If nothing found in slot then display empty
-#func display_item(item: InventorySlot) -> void:
-#	if item != null and item.get_item() != null:
-#		content = item
-#		item_icon.texture = item.get_texture()
-#		item_amount.text = str(_total_amount) if item.is_stackable() else ""
-#		# TODO : Should we replace custom tooltip with built-in option and customize that?
-#		#set_tooltip_text(item.item.name)
-#	else:
-#		item_icon.texture = null
-#		item_amount.text = ""
-
-
 func display_contents() -> void:
 	if _contents != null and !_contents.is_empty():
 		item_icon.texture = _contents.get_texture()
