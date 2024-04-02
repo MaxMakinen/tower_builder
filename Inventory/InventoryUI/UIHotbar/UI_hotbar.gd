@@ -31,15 +31,19 @@ func clear_hotbar() -> void:
 	for child in get_children():
 		child.queue_free()
 
-func in_hotbar(item: UIHotbarSlot) -> bool:
+func in_hotbar(item: UIHotbarSlot) -> UIHotbarSlot:
 	for child in get_children():
-		if child != item and child.get_item_type() == item.get_item_type():
-			return true
-	return false
+		if child != item and !child.is_empty() and child.get_item_type() == item.get_item_type():
+			return child
+	return null
 
 func new_slot(slot: UIHotbarSlot) -> void:
-	if !slot.is_empty() and in_hotbar(slot):
-		slot.set_contents(null)
+	if !slot.is_empty():
+		var prev_slot = in_hotbar(slot)
+		if prev_slot:
+			print("Frumppalump")
+			prev_slot.set_hotbar_slot(null)
+		print("new stuff in hoetbaer")
 	#slot.set_total_amount(get_total_amount(slot.get_content()))
 	
 
@@ -80,7 +84,9 @@ func add_item(item: InventorySlot, index: int) -> void:
 		target_child.display_item(item)
 
 func get_total_amount(item: InventorySlot) -> int:
-	return inventory.get_total_amount(item.get_item())
+	if item:
+		return inventory.get_total_amount(item.get_item())
+	return 0
 
 
 func get_slot_content(index: int) -> InventorySlot:
