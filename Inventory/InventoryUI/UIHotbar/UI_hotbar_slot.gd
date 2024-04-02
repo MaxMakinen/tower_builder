@@ -9,7 +9,7 @@ var content: InventorySlot
 
 # SIGNALS
 signal hotbar_slot_changed()
-signal new_content()
+signal new_content(slot)
 
 func _ready() -> void:
 	_slot_type = SlotManager.SlotType.HOTBAR
@@ -28,7 +28,7 @@ func set_hotbar_slot(item: InventorySlot) -> void:
 	_contents = item
 	_contents.slot_changed.connect(display_contents)
 	_contents.slot_empty.connect(display_contents)
-	new_content.emit()
+	new_content.emit(self)
 	display_contents()
 
 # Sets total amount to new value
