@@ -23,7 +23,6 @@ func grab_item() -> InventorySlot:
 func put_item(item: InventorySlot) -> InventorySlot:
 	print("Item put")
 	# If no contents, set new item as contents and return null
-	#if item != null or !item.is_empty():
 	if (!_contents or _contents.is_empty()) and item != null:
 		print("Item put2")
 		set_contents(item)
@@ -39,9 +38,6 @@ func put_item(item: InventorySlot) -> InventorySlot:
 	return item
 
 func _swap_content(item: InventorySlot) -> InventorySlot:
-	print("Item Swappie")
-#	var temp = _contents.duplicate()
-#	set_contents(item)
 	return _contents.swap_slot(item)
 
 func _attempt_stack(item:InventorySlot) -> InventorySlot:
