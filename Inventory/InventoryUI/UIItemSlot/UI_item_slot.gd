@@ -138,8 +138,6 @@ func copy_slot(slot: InventorySlot) -> void:
 		_contents.copy_slot(slot)
 	else:
 		_contents = slot.duplicate()
-	# TODO : should be unecessary. signal emit should handle display
-	#display_contents()
 
 # Return true if slot empty
 func is_empty() -> bool:
