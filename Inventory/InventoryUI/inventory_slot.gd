@@ -112,3 +112,19 @@ func copy_slot(new_slot: InventorySlot) -> void:
 	amount = new_slot.get_amount()
 	slot_changed.emit()
 
+
+func grab_slot() -> InventorySlot:
+	return self
+
+
+func put_slot(new_slot: InventorySlot) -> void:
+	item = new_slot.get_item()
+	amount = new_slot.get_amount()
+	slot_changed.emit()
+
+
+func swap_slot(new_slot: InventorySlot) -> InventorySlot:
+	var temp: InventorySlot = self.duplicate()
+	put_slot(new_slot)
+	return temp
+

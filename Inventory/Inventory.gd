@@ -3,8 +3,8 @@ extends Resource
 class_name Inventory
 
 
-@export var item_slots: Array[InventorySlot] = []
 @export var inventory_size: int = 16
+@export var item_slots: Array[InventorySlot]
 signal inventory_update(indices: Array[int])
 signal selected_changed(selected: int)
 
@@ -17,13 +17,16 @@ var selected: int = -1
 func _init(size: int = inventory_size) -> void:
 	inventory_size = size
 	item_slots.resize(inventory_size)
-#	for index in inventory_size:
-#		item_slots.append(InventorySlot.new())
+	for index in range(inventory_size):
+		if item_slots[index] == null:
+			item_slots[index] = InventorySlot.new()
 
 func _ready():
 	if item_slots.size() != inventory_size:
 		item_slots.resize(inventory_size)
 	for index in range(inventory_size):
+		if item_slots[index] == null:
+			item_slots[index] = InventorySlot.new()
 		if item_slots[index] != null:
 			item_slots[index].slot_empty.connect(remove_item.bind(index))
 

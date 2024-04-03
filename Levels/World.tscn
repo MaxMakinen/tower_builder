@@ -22,8 +22,8 @@
 
 [sub_resource type="Resource" id="Resource_cpr44"]
 script = ExtResource("9_say5h")
-item_slots = Array[ExtResource("17_d3wrb")]([])
 inventory_size = 16
+item_slots = Array[ExtResource("17_d3wrb")]([])
 
 [sub_resource type="Resource" id="Resource_cfk10"]
 script = ExtResource("17_d3wrb")
@@ -52,8 +52,8 @@ amount = 10
 
 [sub_resource type="Resource" id="Resource_ev3wk"]
 script = ExtResource("9_say5h")
-item_slots = Array[ExtResource("17_d3wrb")]([null, SubResource("Resource_cfk10"), SubResource("Resource_gqh2m"), SubResource("Resource_2cmtc"), SubResource("Resource_gvuqs"), SubResource("Resource_f0vaq"), null, null])
 inventory_size = 8
+item_slots = Array[ExtResource("17_d3wrb")]([null, SubResource("Resource_cfk10"), SubResource("Resource_gqh2m"), SubResource("Resource_2cmtc"), SubResource("Resource_gvuqs"), SubResource("Resource_f0vaq"), null, null])
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true

@@ -15,18 +15,19 @@ func _ready() -> void:
 	_slot_type = SlotManager.SlotType.HOTBAR
 
 func put_item(item: InventorySlot) -> InventorySlot:
-	# If no contents, set new item as contents and return null
-	if (!content or content.is_empty()) and item != null:
-		set_contents(item)
-		return null
-	# If there is contents, swap with new item and return old contents
-	if (content or !content.is_empty()) and item != null:
-		var temp = _contents.duplicate()
-		set_contents(item)
-		return temp
-	#If new item is the same as contents, attempt to stack and return whatever is left over
-	if item.get_item_name() == _contents.get_item_name():
-		return item
+	if item:
+		# If no contents, set new item as contents and return null
+		if (!content or content.is_empty()) and item != null:
+			set_contents(item)
+			return null
+		# If there is contents, swap with new item and return old contents
+		if content and !content.is_empty() and item != null:
+			var temp = _contents.duplicate()
+			set_contents(item)
+			return temp
+		#If new item is the same as contents, attempt to stack and return whatever is left over
+		if item.get_item_name() == _contents.get_item_name():
+			return item
 	return item
 
 

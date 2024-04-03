@@ -23,6 +23,7 @@ func _ready() -> void:
 
 # Toggle if inventory open or closed
 func toggle() -> void:
+	print("inv toggle")
 	if _is_open == true:
 		close()
 	else:
@@ -49,10 +50,15 @@ func get_slot_container() -> SlotContainer:
 
 
 func open() -> void:
-	print("INv: ", Global.player_inventory)
 	inventory_container.display_items()
 	visible = true
 	_is_open = true
+	print("Open inventory: ", Global.player_inventory)
+	print("contents: ")
+	for item in Global.player_inventory.get_items():
+		if item and !item.is_empty():
+			print("name : ", item.get_item_name())
+#	print("Done opening inv")
 
 
 func close() -> void:
@@ -65,7 +71,7 @@ func _on_drop_button_pressed() -> void:
 	var selected = inventory_container.get_selected()
 	if selected >= 0:
 		var target_slot = inventory_container.get_inventory().get_item_at(selected)
-		if !target_slot.is_empty():
+		if target_slot and !target_slot.is_empty():
 			var world = get_parent().get_parent()
 			var pickup = Global.pickup.instantiate()
 			pickup.spawn_item(target_slot.get_item(), self.global_position)
