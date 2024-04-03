@@ -30,7 +30,6 @@ func display_items() -> void:
 		item_slot.set_contents(item)
 		item_slot.display_contents()
 
-
 # Connect to inventory signals
 func connect_to_inventory() -> void:
 	inventory.inventory_update.connect(_on_inventory_update)
@@ -59,8 +58,6 @@ func _on_inventory_update(indices: Array[int]) -> void:
 			var item_slot = get_child(index)
 			if item_slot:
 				item_slot.display_contents()
-				#item_slot.display_item(inventory.get_item_at(index))
-				#print("Inv Update at index : ", index)
 
 # Set new value for selected
 func _set_selected(new_selected: int) -> void:
