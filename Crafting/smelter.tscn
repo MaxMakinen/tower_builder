@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cof5w3ucoacxn"]
+
+[ext_resource type="Script" path="res://Crafting/smelter.gd" id="1_nguwc"]
+[ext_resource type="Script" path="res://Interaction/InteractionArea/InteractionArea.gd" id="2_vk2bb"]
+[ext_resource type="Texture2D" uid="uid://can6dmu7s1imw" path="res://Assets/Pixel Art Top Down - Basic/Texture/TX Props.png" id="3_coerf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_228bb"]
+radius = 50.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t8o6"]
+atlas = ExtResource("3_coerf")
+region = Rect2(227, 9, 26, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lsjoj"]
+size = Vector2(26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2sy6"]
+atlas = ExtResource("3_coerf")
+region = Rect2(259, 9, 26, 52)
+
+[node name="Crafting_node" type="StaticBody2D"]
+script = ExtResource("1_nguwc")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(0, 13)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_vk2bb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_228bb")
+
+[node name="Column" type="Sprite2D" parent="."]
+modulate = Color(1, 0.364706, 0.184314, 1)
+texture = SubResource("AtlasTexture_6t8o6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_lsjoj")
+
+[node name="Glow" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.648895)
+position = Vector2(0, -2.0932e-20)
+texture = SubResource("AtlasTexture_a2sy6")
+
+[connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]

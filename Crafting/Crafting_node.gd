@@ -1,5 +1,6 @@
-@tool
 extends StaticBody2D
+
+class_name CraftingNode
 
 @onready var interaction_area: InteractionArea = $InteractionArea
 
@@ -11,9 +12,6 @@ func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
 	interaction_area.player_entered.connect(_animate)
 	interaction_area.player_exited.connect(_stop_animate)
-	if Engine.is_editor_hint():
-		_animate()
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
