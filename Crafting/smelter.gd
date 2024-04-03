@@ -12,7 +12,7 @@ var progress: float = 0.0# : set = _set_progress
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if progress_bar.visible:
 		progress_bar.value = progress - progress_timer.get_time_left()
 		pass
@@ -35,7 +35,7 @@ func init_progress(_work_time: float) -> void:
 	progress_timer.start(_work_time)
 
 
-func _set_progress(new_progress) -> void:
+func _set_progress(_new_progress) -> void:
 	pass
 
 func _on_progress_timer_timeout() -> void:
