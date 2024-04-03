@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://t7lrh8hhckqr"]
+[gd_scene load_steps=29 format=3 uid="uid://t7lrh8hhckqr"]
 
 [ext_resource type="Script" path="res://Levels/World.gd" id="1_e2lu0"]
 [ext_resource type="PackedScene" uid="uid://ob2f63kq6k6j" path="res://TileMaps/forest.tscn" id="1_syqqw"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Inventory/InventoryUI/inventory_slot.gd" id="17_d3wrb"]
 [ext_resource type="Resource" uid="uid://oc6so0dcajpd" path="res://Item/Items/Copper.tres" id="18_uounl"]
 [ext_resource type="PackedScene" uid="uid://ccpnd5mym7n62" path="res://Crafting/crafting_node.tscn" id="20_t02du"]
+[ext_resource type="PackedScene" uid="uid://cof5w3ucoacxn" path="res://Crafting/smelter.tscn" id="21_r618h"]
 
 [sub_resource type="Resource" id="Resource_cpr44"]
 script = ExtResource("9_say5h")
@@ -131,14 +132,14 @@ offset_bottom = 10.0
 unique_name_in_owner = true
 
 [node name="Pickup2" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(460, 115.494)
+position = Vector2(460, 115.188)
 
 [node name="Pickup" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(524, 116.494)
+position = Vector2(524, 116.188)
 item = ExtResource("14_qub3j")
 
 [node name="Pickup3" parent="." instance=ExtResource("6_v6yus")]
-position = Vector2(488, 115.494)
+position = Vector2(488, 115.188)
 item = ExtResource("15_1tbrp")
 
 [node name="WorldItemContainer" parent="." instance=ExtResource("14_1mhw0")]
@@ -149,3 +150,6 @@ _container_name = "Chest"
 
 [node name="Crafting_node" parent="." instance=ExtResource("20_t02du")]
 position = Vector2(581, 199)
+
+[node name="Crafting_node2" parent="." instance=ExtResource("21_r618h")]
+position = Vector2(417, 216)
