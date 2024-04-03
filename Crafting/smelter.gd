@@ -21,12 +21,15 @@ func _process(_delta: float) -> void:
 # Called when player interacts with interaction area
 func _on_interact():
 	var ore = Global.player_inventory.in_inventory(COPPER)
-	if ore:
-		print("Can Smelt")
-		ore.change_amount(-2)
-		init_progress(3.0)
+	if progress_timer.is_stopped():
+		if ore and ore.get_amount() >= 2:
+			print("Can Smelt")
+			ore.change_amount(-2)
+			init_progress(3.0)
+		else:
+			print("Can't do Shit")
 	else:
-		print("Can't do Shit")
+		print("Busy prosessing")
 
 func init_progress(_work_time: float) -> void:
 	progress_bar.max_value = _work_time
