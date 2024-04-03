@@ -52,7 +52,7 @@ func _process(_delta: float) -> void:
 # Attempt to insert item into inventory. If succesful, queue_free() this node
 func _on_body_entered(body: Node2D) -> void:
 	if body is PersistentState:
-		var error = player.add_to_inventory(item)
+		var error = Global.player_inventory.insert(item)
 		if error == true:
 			var tween = create_tween()
 			tween.tween_property(self, "position", position + Vector2(0, -5), 0.1).set_ease(tween.EASE_OUT)

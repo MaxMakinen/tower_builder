@@ -14,7 +14,7 @@ var _is_open: bool = false
 
 
 func _ready() -> void:
-	inventory_container.set_inventory(player.get_inventory())
+	inventory_container.set_inventory(Global.player_inventory)
 	close()
 	_display_default()
 	#inventory_container.connect_to_inventory()
@@ -30,8 +30,8 @@ func toggle() -> void:
 
 func _display_selected(index: int = -1) -> void:
 #	_selected = index
-	if index >= 0 and index < inventory_container.get_inventory().get_inventory_size():
-		var selected: InventorySlot = inventory_container.get_inventory().get_item_at(index)
+	if index >= 0 and index < Global.player_inventory.get_inventory_size():
+		var selected: InventorySlot = Global.player_inventory.get_item_at(index)
 		if selected == null:
 			_display_default()
 			return
@@ -49,6 +49,7 @@ func get_slot_container() -> SlotContainer:
 
 
 func open() -> void:
+	print("INv: ", Global.player_inventory)
 	inventory_container.display_items()
 	visible = true
 	_is_open = true

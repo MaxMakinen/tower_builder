@@ -24,7 +24,6 @@ func _ready() -> void:
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory
 func display_items() -> void:
-	inventory.refresh()
 	for index in range(inventory.get_inventory_size()):
 		var item_slot = item_slots.instantiate()
 		add_child(item_slot)

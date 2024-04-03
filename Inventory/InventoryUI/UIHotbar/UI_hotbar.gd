@@ -8,14 +8,9 @@ var hotbar_size = 6
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	columns = hotbar_size
-	set_inventory(player.get_inventory())
-#	if !inventory or !inventory.item_slots:
-#		inventory = player.get_inventory()
-	#inventory.set_selected(_selected) 
-	#connect_to_inventory()
+	set_inventory(Global.player_inventory)
 	instantiate_hotbar()
 	refresh_hotbar()
-	#_hotbar_selection = 0
 	_selected = 0
 
 # Populate slot container with item_slots according to inventory size and display all items in inventory

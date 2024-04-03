@@ -23,12 +23,12 @@ func grab_item() -> InventorySlot:
 func put_item(item: InventorySlot) -> InventorySlot:
 	print("Item put")
 	# If no contents, set new item as contents and return null
-	if _contents.is_empty() and item != null:
+	if (!_contents or _contents.is_empty()) and item != null:
 		print("Item put2")
 		set_contents(item)
 		return null
 	# If there is contents, swap with new item and return old contents
-	if !_contents.is_empty() and item != null:
+	if _contents and !_contents.is_empty() and item != null:
 		# If new item is the same as contents, attempt to stack and return whatever is left over
 		if item.get_item_name() == _contents.get_item_name():
 			print("Item put4")

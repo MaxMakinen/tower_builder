@@ -103,7 +103,7 @@ func attempt_interaction(target_slot: UIItemSlot) -> void:
 			#drop_slot(target_slot)
 		else:
 			set_dragged_item(target_slot.put_item(_dragged_item))
-			if target_slot.get_type() == SlotManager.SlotType.INVENTORY:
+			if target_slot.get_type() == SlotManager.SlotType.INVENTORY and _previous_slot:
 				_previous_slot.slot_moved()
 			else:
 				undo_drag()
@@ -129,7 +129,8 @@ func compare_slots(slot: InventorySlot) -> bool:
 
 
 func undo_drag() -> void:
-	_previous_slot.unghost()
+	if _previous_slot:
+		_previous_slot.unghost()
 	set_dragged_item(null)
 	#drop_slot(_previous_slot)
 
