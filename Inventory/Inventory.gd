@@ -166,3 +166,10 @@ func mysort(a: InventorySlot, b: InventorySlot):
 	elif a.is_empty():
 		return false
 	return false
+
+
+func in_inventory(item: ItemResource) -> InventorySlot:
+	for slot in item_slots:
+		if slot.get_item() == item:
+			return slot
+	return null
