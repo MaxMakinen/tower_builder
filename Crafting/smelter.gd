@@ -31,6 +31,7 @@ func _on_interact():
 	else:
 		print("Busy prosessing")
 
+# Start smelting timer and display progress bar
 func init_progress(_work_time: float) -> void:
 	progress_bar.max_value = _work_time
 	progress = _work_time
@@ -41,6 +42,7 @@ func init_progress(_work_time: float) -> void:
 func _set_progress(_new_progress) -> void:
 	pass
 
+# After timer finishes we spawn a new pickup and reset and hide the progress bar
 func _on_progress_timer_timeout() -> void:
 	var item_temp = Global.pickup.instantiate()
 	item_temp.spawn_item(COPPER_INGOT, self.global_position)
