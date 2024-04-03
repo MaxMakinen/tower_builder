@@ -19,6 +19,7 @@ atlas = ExtResource("3_trl6s")
 region = Rect2(259, 9, 26, 52)
 
 [node name="Crafting_node" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource("1_tmwy1")
 
 [node name="InteractionArea" type="Area2D" parent="."]
