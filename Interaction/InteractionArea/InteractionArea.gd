@@ -6,7 +6,7 @@ class_name InteractionArea
 @onready var player = get_tree().get_first_node_in_group("player")
 
 
-#signal player_entered()
+signal player_entered()
 signal player_exited()
 
 var interact: Callable = func ():
@@ -15,7 +15,7 @@ var interact: Callable = func ():
 
 func _on_body_entered(body):
 	if body == player:
-#		player_entered.emit()
+		player_entered.emit()
 		InteractionManager.register_area(self)
 
 
