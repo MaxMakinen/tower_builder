@@ -13,16 +13,6 @@ var state
 @onready var animation = get_node("AnimationPlayer")
 var state_machine = StateMachine.new()
 
-# Variables for inventory
-#@export var inventory: Inventory = Global.player_inventory
-@export var _inventory_size = 16
-@onready var inventory: Inventory = Global.player_inventory
-
-func _ready():
-	if inventory.get_inventory_size() != _inventory_size:
-		inventory.set_inventory_size(_inventory_size)
-
-
 func _physics_process(_delta):
 	direction = Vector2(Input.get_vector("left", "right", "up", "down"))
 	if direction.x == 0 && direction.y == 0:
@@ -32,11 +22,4 @@ func _physics_process(_delta):
 	velocity.x = move_toward(velocity.x, speed * direction.x, acceleration)
 	velocity.y = move_toward(velocity.y, speed * direction.y, acceleration)
 	move_and_slide()
-
-
-func add_to_inventory(item: ItemResource) -> bool:
-	return inventory.insert(item)
-
-func get_inventory() -> Inventory:
-	return inventory
 
