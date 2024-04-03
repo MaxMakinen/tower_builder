@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://dyq346h6iw810"]
+
+[ext_resource type="Script" path="res://Item/Item_resource.gd" id="1_8qiyx"]
+[ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="2_k5xvc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwl77"]
+atlas = ExtResource("2_k5xvc")
+region = Rect2(47, 120, 25, 25)
+
+[resource]
+script = ExtResource("1_8qiyx")
+name = "Copper Ingot"
+type = "Ingot"
+texture = SubResource("AtlasTexture_wwl77")
+max_stack_size = 10
+description = "Smelted Copper Ingot"
+consumable = false
