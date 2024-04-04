@@ -47,7 +47,6 @@ func _on_progress_timer_timeout() -> void:
 	var item_temp = Global.pickup.instantiate()
 	item_temp.spawn_item(COPPER_INGOT, self.global_position)
 	owner.add_child(item_temp)
-	
 	progress_bar.hide()
 	progress = 0.0
 
