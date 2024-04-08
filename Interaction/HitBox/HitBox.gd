@@ -2,31 +2,27 @@ extends Area2D
 
 enum OWNER_TYPE {RESOURCE, INTERACTABLE, ENEMY, NPC}
 @export var owner_type : OWNER_TYPE
+var is_target: bool = false : set = _set_target
+
 
 signal attempt_harvest
+signal targeted(is_target)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _set_target(target: bool) -> void:
+	is_target = target
+	targeted.emit(is_target)
 
 # Detect incoming interaction attempt and respond accordingly
 func _on_area_entered(area: Area2D) -> void:
 	print("Area Entry detected")
-	print("area name : ", area.name)
-	if area.visible:
-		if owner_type == OWNER_TYPE.RESOURCE and area.name == "StrikeArea":
-			print("Resource Gathering Attack")
-			#attempt_harvest.emit()
-			pass
-	pass # Replace with function body.
+	if owner_type == OWNER_TYPE.RESOURCE and area.name == "StrikeArea":
+		is_target = true
+		print("Resource Gathering Attack")
 
 
 func _on_area_exited(area: Area2D) -> void:
+	if is_target == true:
+		is_target = false
 	pass # Replace with function body.
 
 func interact() -> void:
