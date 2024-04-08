@@ -6,6 +6,7 @@ var is_target: bool = false : set = _set_target
 
 
 signal attempt_harvest
+signal attempt_interaction
 signal targeted(is_target)
 
 func _set_target(target: bool) -> void:
@@ -15,9 +16,8 @@ func _set_target(target: bool) -> void:
 # Detect incoming interaction attempt and respond accordingly
 func _on_area_entered(area: Area2D) -> void:
 	print("Area Entry detected")
-	if owner_type == OWNER_TYPE.RESOURCE and area.name == "StrikeArea":
+	if area.name == "StrikeArea":
 		is_target = true
-		print("Resource Gathering Attack")
 
 
 func _on_area_exited(_area: Area2D) -> void:
@@ -28,3 +28,6 @@ func _on_area_exited(_area: Area2D) -> void:
 func interact() -> void:
 	if owner_type == OWNER_TYPE.RESOURCE:
 		attempt_harvest.emit()
+	if owner_type == OWNER_TYPE.INTERACTABLE:
+		print("Attempt interact")
+		attempt_interaction.emit()
