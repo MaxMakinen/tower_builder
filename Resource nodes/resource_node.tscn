@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://gkh7og6gkhf8"]
+[gd_scene load_steps=12 format=3 uid="uid://gkh7og6gkhf8"]
 
 [ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_j1teo"]
 [ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="2_6tjj1"]
 [ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_knls8"]
-[ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="4_aqrxi"]
+[ext_resource type="PackedScene" uid="uid://bdurrbm2y0qgt" path="res://Interaction/HitBox/hit_box.tscn" id="4_e3xjo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhkjc"]
 atlas = ExtResource("3_knls8")
@@ -56,9 +56,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_klmbj"]
 radius = 13.0384
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4xkd0"]
-radius = 30.0167
-
 [node name="TestResourceNode" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource("1_j1teo")
@@ -83,16 +80,14 @@ visible = false
 position = Vector2(2, 0)
 shape = SubResource("CircleShape2D_klmbj")
 
-[node name="InteractionArea" parent="." instance=ExtResource("4_aqrxi")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-visible = false
-shape = SubResource("CircleShape2D_4xkd0")
-
 [node name="HarvestTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="NumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -20)
+
+[node name="HitBox" parent="." instance=ExtResource("4_e3xjo")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 
 [connection signal="timeout" from="HarvestTimer" to="." method="_on_harvest_timer_timeout"]
