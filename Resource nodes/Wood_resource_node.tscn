@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcby2itgxncpx"]
+[gd_scene load_steps=16 format=3 uid="uid://bcby2itgxncpx"]
 
 [ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_ois48"]
 [ext_resource type="Resource" uid="uid://dltmj65nst8rk" path="res://Item/Items/Wood_log.tres" id="2_cllgu"]
 [ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="2_rhy5g"]
 [ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_ubfux"]
 [ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="4_widce"]
+[ext_resource type="PackedScene" uid="uid://bdurrbm2y0qgt" path="res://Interaction/HitBox/hit_box.tscn" id="6_gdvjh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhkjc"]
 atlas = ExtResource("3_ubfux")
@@ -55,10 +56,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klmbj"]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xkd0"]
 radius = 30.0167
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qkm4o"]
+radius = 5.0
 
 [node name="WoodResourceNode" type="StaticBody2D"]
 collision_mask = 0
@@ -66,7 +70,7 @@ script = ExtResource("1_ois48")
 resource = ExtResource("2_cllgu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -19)
+position = Vector2(0, -20)
 texture = ExtResource("2_rhy5g")
 region_enabled = true
 region_rect = Rect2(306.051, 287.54, 29.053, 46.7551)
@@ -86,6 +90,7 @@ frame_progress = 0.938884
 shape = SubResource("CircleShape2D_klmbj")
 
 [node name="InteractionArea" parent="." instance=ExtResource("4_widce")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_4xkd0")
@@ -95,5 +100,10 @@ one_shot = true
 
 [node name="NumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -20)
+
+[node name="HitBox" parent="." instance=ExtResource("6_gdvjh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_qkm4o")
 
 [connection signal="timeout" from="HarvestTimer" to="." method="_on_harvest_timer_timeout"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dj47x0fv27j0j"]
+[gd_scene load_steps=16 format=3 uid="uid://dj47x0fv27j0j"]
 
 [ext_resource type="Script" path="res://Resource nodes/resource_node.gd" id="1_ehq0h"]
 [ext_resource type="Texture2D" uid="uid://bn0pplkl13oog" path="res://Assets/Forest BETA V3/Forest Props.png" id="2_tylaq"]
 [ext_resource type="Resource" uid="uid://cd4twvjxbitca" path="res://Item/Items/Stone.tres" id="2_w3oyx"]
 [ext_resource type="Texture2D" uid="uid://7e5kf36sd4el" path="res://Assets/Neon Icons Effect Pack 2/Neon Icons Effect Pack 2 A.png" id="3_juigd"]
 [ext_resource type="PackedScene" uid="uid://cvourmku1gt62" path="res://Interaction/InteractionArea/InteractionArea.tscn" id="4_1u4nc"]
+[ext_resource type="PackedScene" uid="uid://bdurrbm2y0qgt" path="res://Interaction/HitBox/hit_box.tscn" id="6_5bcov"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhkjc"]
 atlas = ExtResource("3_juigd")
@@ -61,6 +62,9 @@ height = 26.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xkd0"]
 radius = 30.0167
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y6xvc"]
+radius = 12.0
+
 [node name="StoneResourceNode" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource("1_ehq0h")
@@ -98,5 +102,11 @@ one_shot = true
 
 [node name="NumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -20)
+
+[node name="HitBox" parent="." instance=ExtResource("6_5bcov")]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_y6xvc")
 
 [connection signal="timeout" from="HarvestTimer" to="." method="_on_harvest_timer_timeout"]

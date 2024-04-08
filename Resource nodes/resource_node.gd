@@ -7,6 +7,7 @@ class_name ResourceNode
 @onready var effect_animation = $Effects
 @onready var numbers_origin = $NumbersOrigin
 @export var resource: ItemResource
+@onready var hit_box: Area2D = $HitBox
 
 var interactable: bool = true
 var harvest_time: float = 0.5
@@ -15,6 +16,7 @@ var harvest_time: float = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	interaction_area.interact = Callable(self, "_on_interact")
+	hit_box.attempt_harvest.connect(_on_interact)
 
 # 
 func _on_interact() -> void:
