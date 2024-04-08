@@ -20,8 +20,6 @@ func strike() -> void:
 	pass
 
 func _on_area_entered(area: Area2D) -> void:
-	print("Something found")
-	print("Found a : ", area.name)
 	if area.name == "HitBox":
 		print("Found HitBox")
 		target = area
@@ -30,6 +28,7 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_area_exited(area: Area2D) -> void:
-	if area:
-		area = null
+	print("Area left")
+	if target != null:
+		target = null
 	pass # Replace with function body.
