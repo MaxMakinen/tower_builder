@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaterialResource" load_steps=4 format=3 uid="uid://k7wtdld1w5yw"]
+
+[ext_resource type="Script" path="res://Crafting/CraftingMaterials/MaterialResource.gd" id="1_ighmu"]
+[ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="2_qygo1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jxvg"]
+atlas = ExtResource("2_qygo1")
+region = Rect2(0, 0, 23, 23)
+
+[resource]
+script = ExtResource("1_ighmu")
+name = "Wood"
+type = "Wood"
+texture = SubResource("AtlasTexture_3jxvg")
+max_stack_size = 99
+description = "Fibrous wood"
