@@ -101,6 +101,7 @@ one_shot = true
 position = Vector2(0, -20)
 
 [node name="HitBox" parent="." instance=ExtResource("6_1p5x0")]
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_ca4rj")
