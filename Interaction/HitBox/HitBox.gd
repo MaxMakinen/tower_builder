@@ -20,7 +20,7 @@ func _on_area_entered(area: Area2D) -> void:
 		print("Resource Gathering Attack")
 
 
-func _on_area_exited(area: Area2D) -> void:
+func _on_area_exited(_area: Area2D) -> void:
 	if is_target == true:
 		is_target = false
 	pass # Replace with function body.
