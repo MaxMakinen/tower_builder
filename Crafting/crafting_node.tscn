@@ -32,6 +32,7 @@ shape = SubResource("RectangleShape2D_lsjoj")
 
 [node name="Glow" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0.648895)
 position = Vector2(0, -2.0932e-20)
 texture = SubResource("AtlasTexture_a2sy6")
