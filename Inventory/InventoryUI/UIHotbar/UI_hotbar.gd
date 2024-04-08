@@ -35,9 +35,9 @@ func in_hotbar(item: UIHotbarSlot) -> UIHotbarSlot:
 func new_slot(slot: UIHotbarSlot) -> void:
 	if !slot.is_empty():
 		var prev_slot: UIHotbarSlot = in_hotbar(slot)
-		if prev_slot:
+		if prev_slot != null:
 			print("Frumppalump")
-			prev_slot.set_hotbar_slot(null)
+			prev_slot.set_contents(null)
 		print("new stuff in hoetbaer")
 	#slot.set_total_amount(get_total_amount(slot.get_content()))
 	

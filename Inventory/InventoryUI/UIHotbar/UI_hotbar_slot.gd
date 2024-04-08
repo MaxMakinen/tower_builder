@@ -44,10 +44,14 @@ func display_contents() -> void:
 
 # Overload Setter for Hotbar slot with signal emit
 func set_contents(item: InventorySlot) -> void:
-	_total_amount = Global.player_inventory.get_total_amount(item.get_item())
-	_contents = item
-	if _contents and !_contents.is_connected("slot_changed", display_contents):
-		_contents.slot_changed.connect(display_contents)
+	if item != null:
+		_total_amount = Global.player_inventory.get_total_amount(item.get_item())
+		_contents = item
+		if _contents and !_contents.is_connected("slot_changed", display_contents):
+			_contents.slot_changed.connect(display_contents)
+	else:
+		_contents = null
+		_total_amount = 0
 	new_content.emit(self)
 	display_contents()
 
