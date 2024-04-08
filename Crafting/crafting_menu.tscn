@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5fg837qm0t00"]
+
+[ext_resource type="Theme" uid="uid://2u22t484dthy" path="res://Inventory/InventoryUI/inventory_theme.tres" id="1_mardj"]
+[ext_resource type="Theme" uid="uid://clr1uetrq7vum" path="res://Inventory/InventoryUI/description_theme.tres" id="2_qj3gd"]
+[ext_resource type="Script" path="res://Crafting/crafting_menu.gd" id="2_xde0t"]
+[ext_resource type="FontFile" uid="uid://b61ct7pq2o716" path="res://Assets/Fonts/VecTerminus12Medium.otf" id="3_v0rmp"]
+
+[node name="CraftingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_mardj")
+script = ExtResource("2_xde0t")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.5
+offset_top = -204.5
+offset_right = 375.5
+offset_bottom = 204.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Crafting menu"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_qj3gd")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="CraftingTitle" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v0rmp")
+theme_override_font_sizes/font_size = 24
+text = "Crafting Title"
+horizontal_alignment = 1
+
+[node name="CraftingDetails" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Crafting details"
+horizontal_alignment = 1
+
+[node name="CraftButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Craft"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecibesLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v0rmp")
+theme_override_font_sizes/font_size = 24
+text = "Recipes"
+horizontal_alignment = 1
+
+[node name="MenuBar" type="MenuBar" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
