@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0cwspakcxxok"]
+[gd_scene load_steps=25 format=3 uid="uid://c0cwspakcxxok"]
 
 [ext_resource type="Script" path="res://Characters/Player.gd" id="1_k6q6l"]
 [ext_resource type="Texture2D" uid="uid://daiyrsyyiy1vu" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/1out/char_a_p1_1out_pfpn_v04.png" id="3_20o8w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://db73depc0bi7i" path="res://Assets/Willibab's Simple Weapon Icons/Hand_axe.png" id="4_ampx0"]
 [ext_resource type="Texture2D" uid="uid://cpdgjhxbnm5bp" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/char_a_p1_0bas_humn_v01.png" id="4_mtkeh"]
 [ext_resource type="Texture2D" uid="uid://bmddjfh8fkua5" path="res://Assets/FREE Mana Seed Character Base Demo/char_a_p1/5hat/char_a_p1_5hat_pnty_v04.png" id="4_u0jp0"]
+[ext_resource type="Script" path="res://Characters/StrikeArea.gd" id="7_jwcfw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4eia"]
 radius = 4.0
@@ -2282,6 +2283,7 @@ visible = false
 position = Vector2(0, -13)
 collision_layer = 10
 collision_mask = 0
+script = ExtResource("7_jwcfw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea"]
 shape = SubResource("CircleShape2D_gjiw4")
@@ -2299,3 +2301,6 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0.486275, 0.258824)
+
+[connection signal="area_entered" from="StrikeArea" to="StrikeArea" method="_on_area_entered"]
+[connection signal="area_exited" from="StrikeArea" to="StrikeArea" method="_on_area_exited"]

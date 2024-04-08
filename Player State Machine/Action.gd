@@ -5,13 +5,15 @@ const anim := "Action"
 var dir: String
 var event
 
+#signal take_action
+
 func enter(_msg := {}) -> void:
 	#owner.speed = 0
 	#owner.velocity = Vector2.ZERO
 	#owner.direction = Vector2.ZERO
 	_check_facing()
 	owner.animation.play(anim + dir)
-	
+	get_parent().take_action.emit()
 	#owner.action_animation.play("Action")
 
 
