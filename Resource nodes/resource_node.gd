@@ -15,6 +15,7 @@ var harvest_time: float = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hit_box.attempt_harvest.connect(_on_interact)
+	hit_box.targeted.connect(highlight)
 
 # 
 func _on_interact() -> void:
@@ -38,4 +39,8 @@ func _on_harvest_timer_timeout() -> void:
 	owner.add_child(item_temp)
 
 
-
+func highlight(state: bool) -> void:
+	if state == true:
+		modulate = Color(1.1, 1.1, 1.1)
+	else:
+		modulate = Color(1, 1, 1)
