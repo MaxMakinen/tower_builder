@@ -18,8 +18,17 @@ func _process(_delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	print("Area Entry detected")
 	print("area name : ", area.name)
-	if owner_type == OWNER_TYPE.RESOURCE and area.name == "StrikeArea":
-		print("Resource Gathering Attack")
-		attempt_harvest.emit()
-		pass
+	if area.visible:
+		if owner_type == OWNER_TYPE.RESOURCE and area.name == "StrikeArea":
+			print("Resource Gathering Attack")
+			#attempt_harvest.emit()
+			pass
 	pass # Replace with function body.
+
+
+func _on_area_exited(area: Area2D) -> void:
+	pass # Replace with function body.
+
+func interact() -> void:
+	if owner_type == OWNER_TYPE.RESOURCE:
+		attempt_harvest.emit()
