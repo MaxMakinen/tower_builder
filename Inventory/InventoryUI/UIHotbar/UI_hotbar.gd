@@ -26,35 +26,36 @@ func clear_hotbar() -> void:
 	for child in get_children():
 		child.queue_free()
 
+# Checks if there are duplicate contents of hotbat slot in hotbar. Returns slot if found, otherwise returns null
 func in_hotbar(item: UIHotbarSlot) -> UIHotbarSlot:
 	for child in get_children():
 		if child != item and !child.is_empty() and child.get_item_type() == item.get_item_type():
 			return child
 	return null
 
+# Checks if slot has new content, if its not wmpty, checks if there are pre-existing slots with same content and empties them if fond.
 func new_slot(slot: UIHotbarSlot) -> void:
 	if !slot.is_empty():
 		var prev_slot: UIHotbarSlot = in_hotbar(slot)
 		if prev_slot != null:
-			print("Frumppalump")
 			prev_slot.set_contents(null)
-		print("new stuff in hoetbaer")
-	#slot.set_total_amount(get_total_amount(slot.get_content()))
-	
 
+# Goes thorugh all hotbar slots and displays current contents
 func refresh_hotbar() -> void:
 	for child in get_children():
 		child.display_contents()
 
+# Changes lenght of hotbar
 func set_hotbar_size(new_size: int) -> void:
 	hotbar_size = new_size
 	columns = hotbar_size
 
-
+# Returns size of hotbar
 func get_hotbar_size() -> int:
 	return hotbar_size
 
-
+# creates new hotbar based on loaded inventory file
+# TODO : No idea if this actually works
 func load_hotbar(new_inventory: Inventory) -> void:
 	inventory = new_inventory
 	columns = inventory.get_inventory_size()
