@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://2u22t484dthy" path="res://Inventory/InventoryUI/inventory_theme.tres" id="1_mardj"]
 [ext_resource type="Theme" uid="uid://clr1uetrq7vum" path="res://Inventory/InventoryUI/description_theme.tres" id="2_qj3gd"]
-[ext_resource type="Script" path="res://Crafting/crafting_menu.gd" id="2_xde0t"]
+[ext_resource type="Script" path="res://Crafting/CraftingMenu/crafting_menu.gd" id="2_xde0t"]
 [ext_resource type="FontFile" uid="uid://b61ct7pq2o716" path="res://Assets/Fonts/VecTerminus12Medium.otf" id="3_v0rmp"]
 
 [node name="CraftingMenu" type="Control"]
