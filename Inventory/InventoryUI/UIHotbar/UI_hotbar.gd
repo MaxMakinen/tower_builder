@@ -34,7 +34,7 @@ func in_hotbar(item: UIHotbarSlot) -> UIHotbarSlot:
 
 func new_slot(slot: UIHotbarSlot) -> void:
 	if !slot.is_empty():
-		var prev_slot = in_hotbar(slot)
+		var prev_slot: UIHotbarSlot = in_hotbar(slot)
 		if prev_slot:
 			print("Frumppalump")
 			prev_slot.set_hotbar_slot(null)
