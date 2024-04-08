@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var ui_hotbar: UIHotbar = %UIHotbar
 @onready var mouse_timer: Timer = %MouseTimer
 @onready var container_ui: Control = %Container_UI
+@onready var crafting_menu: Control = %CraftingMenu
 
 @export var tooltip_scene: PackedScene = preload("res://UI/Tooltip/tooltip.tscn")
 var tooltip: Tooltip = null
@@ -69,6 +70,15 @@ func _follow_mouse(index: int) -> void:
 func _unhandled_input(event) -> void:
 	if event.is_action_released("inventory"):
 		_show_inventory()
+	if event.is_action_released("crafting_menu"):
+		_show_crafting_menu()
+
+func _show_crafting_menu() -> void:
+	if crafting_menu.visible:
+		crafting_menu.hide()
+	else:
+		crafting_menu.show()
+
 
 func _show_inventory() -> void:
 		if inventory_ui.visible and !drag_preview.is_empty():
