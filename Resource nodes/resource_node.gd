@@ -38,7 +38,7 @@ func _on_harvest_timer_timeout() -> void:
 
 	owner.add_child(item_temp)
 
-
+# Highlights node when hitbox reports that it's under player StrikeBox
 func highlight(state: bool) -> void:
 	if state == true:
 		modulate = Color(1.1, 1.1, 1.1)
