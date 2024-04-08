@@ -2281,8 +2281,8 @@ frame = 48
 [node name="StrikeArea" type="Area2D" parent="."]
 visible = false
 position = Vector2(0, -13)
-collision_layer = 10
-collision_mask = 0
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("7_jwcfw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea"]
