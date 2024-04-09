@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://cd4twvjxbitca"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=5 format=3 uid="uid://cd4twvjxbitca"]
 
+[ext_resource type="Resource" uid="uid://dgqqpf6qoh3nk" path="res://Crafting/CraftingMaterials/MaterialStone.tres" id="1_mcf8b"]
 [ext_resource type="Script" path="res://Item/Item_resource.gd" id="1_um2kn"]
 [ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="2_qigdk"]
 
@@ -10,7 +11,8 @@ region = Rect2(24, 24, 24, 24)
 [resource]
 script = ExtResource("1_um2kn")
 name = "Stone"
-type = "Stone"
+type = "CHUNK"
+material = ExtResource("1_mcf8b")
 texture = SubResource("AtlasTexture_sacdf")
 max_stack_size = 99
 description = "Raw Stone"

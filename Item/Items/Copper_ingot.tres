@@ -10,7 +10,7 @@ region = Rect2(47, 120, 25, 25)
 [resource]
 script = ExtResource("1_8qiyx")
 name = "Copper Ingot"
-type = "Ingot"
+type = "INGOT"
 texture = SubResource("AtlasTexture_wwl77")
 max_stack_size = 10
 description = "Smelted Copper Ingot"

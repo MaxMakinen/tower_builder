@@ -10,7 +10,7 @@ region = Rect2(96, 72, 24, 24)
 [resource]
 script = ExtResource("1_a30o7")
 name = "Copper"
-type = "Ore"
+type = "ORE"
 texture = SubResource("AtlasTexture_w0bqh")
 max_stack_size = 99
 description = "Copper ore"

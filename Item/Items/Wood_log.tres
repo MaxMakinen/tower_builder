@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://dltmj65nst8rk"]
+[gd_resource type="Resource" script_class="ItemResource" load_steps=5 format=3 uid="uid://dltmj65nst8rk"]
 
+[ext_resource type="Resource" uid="uid://k7wtdld1w5yw" path="res://Crafting/CraftingMaterials/MaterialWood.tres" id="1_jer8y"]
 [ext_resource type="Script" path="res://Item/Item_resource.gd" id="1_pfxyo"]
 [ext_resource type="Texture2D" uid="uid://cfhibljup6nmc" path="res://Assets/crafting_materials/resources_basic.png" id="2_k00eu"]
 
@@ -10,7 +11,8 @@ region = Rect2(0, 0, 24, 24)
 [resource]
 script = ExtResource("1_pfxyo")
 name = "Wood"
-type = "Wood"
+type = "LOG"
+material = ExtResource("1_jer8y")
 texture = SubResource("AtlasTexture_ut7t5")
 max_stack_size = 10
 description = "Fibrous plant material"

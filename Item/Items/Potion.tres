@@ -11,7 +11,7 @@ margin = Rect2(1, 1, 2, 2)
 [resource]
 script = ExtResource("1_kghlw")
 name = "Potion"
-type = "misc"
+type = "MISC"
 texture = SubResource("AtlasTexture_t00i6")
 max_stack_size = 2
 description = "Magical Potion"
