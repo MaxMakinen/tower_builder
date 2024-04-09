@@ -41,8 +41,10 @@ func _on_craft_button_pressed() -> void:
 	if target == 1:
 		slots = Global.player_inventory.type_in_inventory(ingredients)
 		if !slots.is_empty():
-			slots[0].change_amount(-ingredient_amount)
-			Global.player_inventory.insert(output)
+			if Global.player_inventory.consume(slots[0].get_item(), ingredient_amount):
+				Global.player_inventory.insert(output)
+			else:
+				print("Not enough ingredients")
 		else:
 			print("No ingredients found")
 	else:
