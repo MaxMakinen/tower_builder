@@ -128,7 +128,7 @@ func attempt_insert_at(new_item: ItemResource, index: int , amount: int = 1) -> 
 func get_total_amount(target: ItemResource) -> int:
 	var total: int = 0
 	for item in item_slots:
-		if item and item.get_item() == target:
+		if !item.is_empty() and item.get_item() == target:
 			total += item.get_amount()
 	return total
 
