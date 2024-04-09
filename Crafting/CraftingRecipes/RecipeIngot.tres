@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RecipeResource" load_steps=3 format=3 uid="uid://c4u48d2p5cv0o"]
+
+[ext_resource type="Resource" uid="uid://dyq346h6iw810" path="res://Item/Items/Copper_ingot.tres" id="1_rypk0"]
+[ext_resource type="Script" path="res://Crafting/CraftingRecipes/RecipeResource.gd" id="2_wnq6n"]
+
+[resource]
+script = ExtResource("2_wnq6n")
+output = ExtResource("1_rypk0")
+name = "Ingot"
+description = "Smelt ingot from Ore"
+required_flags = {
+"AMOUNT": 3,
+"NATURE": ["METAL"],
+"SOLIDITY": ["SOLID"],
+"TYPE": ["ORE"]
+}
