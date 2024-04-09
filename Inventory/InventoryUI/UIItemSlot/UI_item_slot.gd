@@ -44,8 +44,8 @@ func _attempt_stack(item:InventorySlot) -> InventorySlot:
 	if _contents.is_stackable() and !_contents.is_full():
 		# If there is anything left over after attempting to stack, return stack with leftovers. Otherwise return null.
 		var difference = _contents.change_amount(item.get_amount())
-		if difference > 0:
-			item.set_amount(difference)
+		if difference < 0:
+			item.set_amount(-difference)
 			return item
 		return null
 	return _swap_content(item)
