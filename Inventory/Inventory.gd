@@ -182,8 +182,8 @@ func type_in_inventory(type: String) -> Array[InventorySlot]:
 
 
 func consume(item: ItemResource, amount: int) -> bool:
-	print("Totes : ", get_total_amount(item))
-	print("Amount : ", amount)
+#	print("Totes : ", get_total_amount(item))
+#	print("Amount : ", amount)
 	if get_total_amount(item) >= amount:
 		var slots : Array[InventorySlot] = []
 		amount = -amount
@@ -192,7 +192,7 @@ func consume(item: ItemResource, amount: int) -> bool:
 				slots.append(slot)
 		for slot in slots:
 			var diff = slot.change_amount(amount)
-			print("Diff : ", diff, " amount : ", amount)
+#			print("Diff : ", diff, " amount : ", amount)
 			if diff < 0:
 				amount = diff
 			elif diff >= 0:
