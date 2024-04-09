@@ -9,6 +9,11 @@ extends Control
 @onready var amount: Label = $PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Amount
 
 const RECIPE_INGOT = preload("res://Crafting/CraftingRecipes/RecipeIngot.tres")
+var target: int = 0
+var output: ItemResource
+var ingredients: String
+var ingredient_amount: int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,18 +24,28 @@ func _ready() -> void:
 
 
 func _on_option_button_item_selected(index: int) -> void:
-	print("Int sent by signal : ", index)
 	if index == 1:
-		print("Ingot")
-		crafting_title.text = "Ingot"
-		var details: String = "smelt ingot from ore"
-		var reqs = RECIPE_INGOT.required_flags["TYPE"][0]
-		
-		requirements.text = "Requirements: " + reqs
+		target = index
+		output = RECIPE_INGOT.output
+		ingredients = RECIPE_INGOT.required_flags["TYPE"][0]
+		ingredient_amount = RECIPE_INGOT.required_flags["AMOUNT"]
+		crafting_title.text = RECIPE_INGOT.name
+		crafting_details.text = RECIPE_INGOT.description
+		requirements.text = "Requirements: " + RECIPE_INGOT.required_flags["TYPE"][0]
 		amount.text = "Amount: " + str(RECIPE_INGOT.required_flags["AMOUNT"])
-		crafting_details.text = details 
-	pass # Replace with function body.
+
 
 
 func _on_craft_button_pressed() -> void:
-	pass # Replace with function body.
+	var slots: Array[InventorySlot]
+	if target == 1:
+		slots = Global.player_inventory.type_in_inventory(ingredients)
+		if !slots.is_empty():
+			slots[0].change_amount(-ingredient_amount)
+			Global.player_inventory.insert(output)
+		else:
+			print("No ingredients found")
+	else:
+		print("NO CRAEFT!")
+
+
