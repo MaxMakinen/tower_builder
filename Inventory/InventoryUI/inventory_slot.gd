@@ -25,6 +25,8 @@ func _init(new_item: ItemResource = null, new_amount: int = 0) -> void:
 func change_amount(new_amount: int) -> int:
 	amount += new_amount
 	var difference = amount - item.max_stack_size
+	if amount <= 0:
+		difference = amount
 	if !item:
 		return 0
 	elif amount > item.max_stack_size:
