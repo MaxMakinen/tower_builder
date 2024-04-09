@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MaterialResource" load_steps=2 format=3 uid="uid://dgqqpf6qoh3nk"]
+
+[ext_resource type="Script" path="res://Crafting/CraftingMaterials/MaterialResource.gd" id="1_x4usa"]
+
+[resource]
+script = ExtResource("1_x4usa")
+name = "Stone"
+color = Color(0.560784, 0.560784, 0.560784, 1)
+description = "Generic Stone"
+nature = "MINERAL"
+solidity = "SOLID"
+hardness = 6
+magic_conduction = 1
+magic_resistance = 4

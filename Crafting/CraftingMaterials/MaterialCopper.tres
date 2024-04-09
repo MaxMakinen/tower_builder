@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MaterialResource" load_steps=2 format=3 uid="uid://h75ayw4gol4k"]
+
+[ext_resource type="Script" path="res://Crafting/CraftingMaterials/MaterialResource.gd" id="1_v4lys"]
+
+[resource]
+script = ExtResource("1_v4lys")
+name = "Copper"
+color = Color(0.792157, 0.223529, 0.054902, 1)
+description = "Mundane red hued metal"
+nature = "METAL"
+solidity = "SOLID"
+hardness = 4
+magic_conduction = 4
+magic_resistance = 1
