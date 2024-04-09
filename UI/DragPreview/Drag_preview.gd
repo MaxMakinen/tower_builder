@@ -83,6 +83,7 @@ func swap_slot(target: UIItemSlot) -> void:
 # Stack stackable items and empty _draggable if all items fit in one stack
 func stack_slot(target: InventorySlot) -> void:
 	var difference = target.change_amount(_dragged_item.get_amount())
+	print("Stack diff : ", difference)
 	if difference < 0:
 		_dragged_item.set_amount(difference)
 		display_dragged_item()
