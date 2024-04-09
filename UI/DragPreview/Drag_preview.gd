@@ -85,7 +85,7 @@ func stack_slot(target: InventorySlot) -> void:
 	var difference = target.change_amount(_dragged_item.get_amount())
 	print("Stack diff : ", difference)
 	if difference < 0:
-		_dragged_item.set_amount(difference)
+		_dragged_item.set_amount(-difference)
 		display_dragged_item()
 	else:
 		_previous_slot.slot_moved()
