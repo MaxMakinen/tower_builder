@@ -82,11 +82,10 @@ func remove_item(index: int) -> InventorySlot:
 	_signal_change([index])
 	return previous_item
 
+# TODO : This should probably be completely removed
 # Change stack size of inventory slot and remove item if stack size falls below 1
 func change_item_amount(index: int, amount: int) -> void:
-	var leftover = item_slots[index].change_amount(amount)
-	if leftover > 0:
-		insert(item_slots[index].get_item(), leftover)
+	item_slots[index].change_amount(amount)
 	_signal_change([index])
 
 # Attempt to insert new item into inventory. Otherwise return false
@@ -130,7 +129,6 @@ func get_total_amount(target: ItemResource) -> int:
 	var total: int = 0
 	for item in item_slots:
 		if item and item.get_item() == target:
-			print("Item found : ", item.get_item().name)
 			total += item.get_amount()
 	return total
 
@@ -176,7 +174,7 @@ func in_inventory(item: ItemResource) -> InventorySlot:
 
 
 func type_in_inventory(type: String) -> Array[InventorySlot]:
-	var slots : Array[InventorySlot]
+	var slots : Array[InventorySlot] = []
 	for slot in item_slots:
 		if !slot.is_empty() and slot.get_item().type == type:
 			slots.append(slot)
@@ -184,8 +182,10 @@ func type_in_inventory(type: String) -> Array[InventorySlot]:
 
 
 func consume(item: ItemResource, amount: int) -> bool:
+	print("Totes : ", get_total_amount(item))
+	print("Amount : ", amount)
 	if get_total_amount(item) >= amount:
-		var slots : Array[InventorySlot]
+		var slots : Array[InventorySlot] = []
 		amount = -amount
 		for slot in item_slots:
 			if !slot.is_empty() and slot.get_item() == item:
