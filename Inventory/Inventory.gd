@@ -173,3 +173,27 @@ func in_inventory(item: ItemResource) -> InventorySlot:
 		if slot.get_item() == item and !slot.is_empty():
 			return slot
 	return null
+
+
+func type_in_inventory(type: String) -> Array[InventorySlot]:
+	var slots : Array[InventorySlot]
+	for slot in item_slots:
+		if !slot.is_empty() and slot.get_item().type == type:
+			slots.append(slot)
+	return slots
+
+
+func consume(item: ItemResource, amount: int) -> bool:
+	if get_total_amount(item) >= amount:
+		var slots : Array[InventorySlot]
+		for slot in item_slots:
+			if !slot.is_empty() and slot.get_item() == item:
+				slots.append(slot)
+		for slot in slots:
+			var diff = slot.change_amount(amount)
+			if diff < 0:
+				amount = -diff
+			elif diff == 0:
+				return true
+	return false
+
