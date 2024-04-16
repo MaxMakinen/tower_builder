@@ -35,7 +35,6 @@ func _on_option_button_item_selected(index: int) -> void:
 		amount.text = "Amount: " + str(RECIPE_INGOT.required_flags["AMOUNT"])
 
 
-
 func _on_craft_button_pressed() -> void:
 	var slots: Array[InventorySlot]
 	if target == 1:
