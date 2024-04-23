@@ -10,6 +10,7 @@ var _contents: InventorySlot = null
 var _ghost: bool = false
 
 signal selected_changed()
+
 var _selected: bool = false:
 	set(new_selected):
 		selected_changed.emit()
