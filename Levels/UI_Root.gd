@@ -67,11 +67,12 @@ func _follow_mouse(index: int) -> void:
 #	print("Slot manager finds : ", SlotManager.get_slot_under_mouse())
 	#print("target slot = ", target_slot)
 
-func _unhandled_input(event) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("inventory"):
 		_show_inventory()
 	if event.is_action_released("crafting_menu"):
 		_show_crafting_menu()
+
 
 func _show_crafting_menu() -> void:
 	if crafting_menu.visible:
